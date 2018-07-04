@@ -1,0 +1,15 @@
+#                                                               --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+apr:Apre_0545        -          K00002               -            5.4e-66  220.0   0.0   6.2e-66  219.8   0.0   1.0   1   0   0   1   1   1   1 aldo/keto reductase
+apr:Apre_0448        -          K00002               -            3.5e-13   46.6   0.0   4.4e-13   46.3   0.0   1.2   1   0   0   1   1   1   1 aldo/keto reductase
+#
+# Program:         hmmsearch
+# Version:         3.1b2 (February 2015)
+# Pipeline mode:   SEARCH
+# Query file:      /aptmp/aramaki/annotation/db/new/genus/hmm/profile/K00002
+# Target file:     /aptmp/aramaki/annotation/db/new/genus/query/apr.pep
+# Option settings: /usr/appli/freeware/hmmer/3.1b2/binaries/hmmsearch --tblout /aptmp/aramaki/tmp/hmm/apr/hmmsearch_result/K00002 -T 10.6 --cpu 1 /aptmp/aramaki/annotation/db/new/genus/hmm/profile/K00002 /aptmp/aramaki/annotation/db/new/genus/query/apr.pep 
+# Current dir:     /user1/scl1/aramaki/annotation/tools/hmmko
+# Date:            Sat Sep 16 03:31:05 2017
+# [ok]
