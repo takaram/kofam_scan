@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'open3'
 
 class KOHMM
@@ -6,17 +8,9 @@ class KOHMM
       def create(parallel_command = nil)
         if parallel_command
           if parallel_command =~ /\//
-            # parallel_commandをパスで指定した場合
-            command_name = File.basename(parallel_command, '.*')
-            klass = const_get(command_name.capitalize)
-
-            return klass.new(full_path: parallel_command)
+            return create_from_parallel_command_path(parallel_command)
           else
-            # parallel_commandをコマンド名で指定した場合
-            command_name = parallel_command
-            klass = const_get(command_name.capitalize)
-
-            return klass.new
+            return create_from_parallel_command_name(parallel_command)
           end
         end
 
@@ -39,6 +33,17 @@ class KOHMM
 
       def xargs_available?
         Open3.capture2("xargs -P1 </dev/null")[1].success?
+      end
+
+      private
+
+      def create_from_parallel_command_name(command)
+        const_get(command.capitalize).new
+      end
+
+      def create_from_parallel_command_path(path)
+        command_name = File.basename(path, '.*')
+        const_get(command_name.capitalize).new(full_path: path)
       end
     end
 

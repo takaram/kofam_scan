@@ -66,7 +66,7 @@ RSpec.describe KOHMM::ParallelCommand do
 
   def stub_popen_run(command_to_stub)
     allow(Open3).to receive(:popen_run).with(array_including(command_to_stub), any_args)
-                      .and_wrap_original do |method, *args, &block|
+                                       .and_wrap_original do |method, *args, &block|
       status = instance_double(Process::Status)
       allow(status).to receive(:success?).and_return(is_success)
 
@@ -154,8 +154,8 @@ RSpec.shared_examples 'a parallel command object' do |command, cpu_option|
     end
 
     it 'raises error when command is not set' do
-      expect { described_class.new.assemble_command }.
-        to raise_error KOHMM::ParallelCommand::CommandNotSet
+      expect { described_class.new.assemble_command }
+        .to raise_error KOHMM::ParallelCommand::CommandNotSet
     end
   end
 

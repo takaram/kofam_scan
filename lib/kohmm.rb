@@ -26,7 +26,7 @@ class KOHMM
 
   def parse_options(argv = ARGV)
     # display help first if with -h option
-    if ["-h", "--help"].any? {|h| argv.include? h }
+    if ["-h", "--help"].any? { |h| argv.include? h }
       puts OptionParser.usage
       exit 0
     end
@@ -75,7 +75,7 @@ class KOHMM
 
   def ko_list
     profiles_path = File.join(config.profile_dir, "K?????")
-    Dir.glob(profiles_path).map {|path| File.basename(path) }
+    Dir.glob(profiles_path).map { |path| File.basename(path) }
   end
 
   def run_hmmsearch
@@ -127,7 +127,7 @@ class KOHMM
   def output_all_hits
     query_list.each do |q|
       if @hit_genes.has_key?(q)
-        hit_genes_of_q = @hit_genes[q].sort_by {|ary| ary[1] }.reverse
+        hit_genes_of_q = @hit_genes[q].sort_by { |ary| ary[1] }.reverse
         output_file.puts [q, *hit_genes_of_q].join("\t")
       else
         output_file.puts q
@@ -138,7 +138,7 @@ class KOHMM
   def output_only_top_hit
     annotation_result = {}
     @hit_genes.each do |gene, ko_and_val|
-      annotation_result[gene] = ko_and_val.max_by {|ary| ary[1] }
+      annotation_result[gene] = ko_and_val.max_by { |ary| ary[1] }
     end
 
     query_list.each do |q|
@@ -152,6 +152,6 @@ class KOHMM
   end
 
   def null_device
-    ["/dev/null", "NUL"].find {|nul| File.exist?(nul) }
+    ["/dev/null", "NUL"].find { |nul| File.exist?(nul) }
   end
 end

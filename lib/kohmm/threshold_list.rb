@@ -36,6 +36,7 @@ class KOHMM
         unless [:full, :domain].include? full_or_domain
           raise ArgumentError, 'Third column must be "full" or "domain"'
         end
+
         @full_or_domain = full_or_domain
       end
 

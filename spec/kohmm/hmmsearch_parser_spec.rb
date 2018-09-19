@@ -15,7 +15,7 @@ RSpec.describe KOHMM::HmmsearchParser do
 
     context 'with block' do
       it 'yields with HmmsearchParser object' do
-        expect {|b|
+        expect { |b|
           described_class.open(file_name, &b)
         }.to yield_with_args described_class
       end
@@ -44,7 +44,7 @@ RSpec.describe KOHMM::HmmsearchParser do
 
     describe '#each' do
       it "iterates #{count} times" do
-        expect {|b| results.each(&b) }.to yield_control.exactly(count).times
+        expect { |b| results.each(&b) }.to yield_control.exactly(count).times
       end
     end
 

@@ -62,7 +62,7 @@ RSpec.describe KOHMM::Config do
     end
 
     context 'when the argument is a string' do
-      let(:tmp_file) { Tempfile.open {|f| f.puts yaml_str; f } }
+      let(:tmp_file) { Tempfile.open { |f| f.puts yaml_str; f } }
       let(:loaded_config) { described_class.load(tmp_file.path) }
 
       after { tmp_file.close }
@@ -94,10 +94,10 @@ RSpec.describe KOHMM::Config do
       describe "##{attr} and ##{attr}=" do
         it 'can set and get a value' do
           path = "/path/to/file"
-          eval <<~EOS
+          eval <<~CODE, binding, __FILE__, __LINE__ + 1
             config.#{attr} = path
             expect(config.#{attr}).to eq path
-          EOS
+          CODE
         end
       end
     end

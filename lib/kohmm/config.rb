@@ -8,11 +8,11 @@ class KOHMM
     attr_writer   :output_file, :reannotation
 
     def self.load(file)
-      file = File.open(file) if file.is_a? String
-      hash = YAML.load(file)
+      file = File.open(file) if file.kind_of? String
+      hash = YAML.safe_load(file)
       file.close
 
-      self.new(hash)
+      new(hash)
     end
 
     def initialize(initial_values = {})

@@ -55,7 +55,7 @@ class KOHMM
       end
 
       def <<(item)
-        @collection << Item.new(*Item.members.map {|i| item[i] })
+        @collection << Item.new(*Item.members.map { |i| item[i] })
       end
     end
   end

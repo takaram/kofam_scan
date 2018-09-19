@@ -45,13 +45,13 @@ RSpec.describe KOHMM::HitGenes do
 
   describe '#each' do
     it 'iterates with gene names and self[gene_name]' do
-      expect {|b| hit_genes.each(&b) }.to yield_with_args(
+      expect { |b| hit_genes.each(&b) }.to yield_with_args(
         [String, all(match([/\AK\d{5}\z/, Float]))]
       )
     end
 
     it 'does not repeat the same gene' do
-      gene_list = hit_genes.each.map {|name, _info| name }
+      gene_list = hit_genes.each.map { |name, _info| name }
       expect { gene_list.uniq! }.not_to change { gene_list.size }
     end
   end

@@ -3,7 +3,7 @@ class KOHMM
     def initialize(hmmsearch_files, threshold_list)
       @hmmsearch_files = hmmsearch_files
       @threshold_list = threshold_list
-      @hit_list = Hash.new {|h, k| h[k] = [] }
+      @hit_list = Hash.new { |h, k| h[k] = [] }
 
       parse
     end

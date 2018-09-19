@@ -1,0 +1,100 @@
+########## Layout #############
+
+Layout/IndentArray:
+  EnforcedStyle: consistent
+
+########### Lint ##############
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+########## Metrics ############
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 15
+
+########### Naming ############
+
+Naming/PredicateName:
+  NamePrefixBlacklist:
+    - "is_"
+    - "have_"
+
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    - id
+    - io
+    - ko
+
+######### Performance #########
+Performance/RegexpMatch:
+  Enabled: false
+
+########## Security ###########
+
+Security/Eval:
+  Enabled: false
+
+########### Style #############
+
+Style/BlockDelimiters:
+  AutoCorrect: false
+  Exclude:
+    - "spec/**/*"
+
+Style/ClassCheck:
+  EnforcedStyle: kind_of?
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/PreferredHashMethods:
+  Enabled: false
+
+Style/RegexpLiteral:
+  AllowInnerSlashes: true
+
+Style/Semicolon:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/SymbolArray:
+  MinSize: 3
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Style/TrailingUnderscoreVariable:
+  Enabled: false
+
+# These cops should be turned on, but temporarily disabled
+# To be fixed
+Metrics/LineLength:
+  Max: 129
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
