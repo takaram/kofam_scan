@@ -1,4 +1,4 @@
-RSpec.describe KOHMM::OptionParser do
+RSpec.describe KOHMM::CLI::OptionParser do
   let(:parser) { described_class.new(config) }
   let(:config) { KOHMM::Config.new }
 

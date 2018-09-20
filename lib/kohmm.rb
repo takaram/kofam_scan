@@ -9,7 +9,6 @@ module KOHMM
   autoload :Executor,        'kohmm/executor'
   autoload :HitGenes,        'kohmm/hit_genes'
   autoload :HmmsearchParser, 'kohmm/hmmsearch_parser'
-  autoload :OptionParser,    'kohmm/option_parser'
   autoload :ParallelCommand, 'kohmm/parallel_command'
   autoload :ThresholdList,   'kohmm/threshold_list'
 

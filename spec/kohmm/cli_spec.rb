@@ -1,4 +1,4 @@
-RSpec.describe KOHMM::CLI do
+BRSpec.describe KOHMM::CLI do
   describe '.run' do
     context 'with -h or --help option' do
       it 'prints help message' do
@@ -23,7 +23,7 @@ RSpec.describe KOHMM::CLI do
 
     context 'with invalid options' do
       before do
-        allow_any_instance_of(KOHMM::OptionParser).to(
+        allow_any_instance_of(KOHMM::CLI::OptionParser).to(
           receive(:parse!).and_raise(::OptionParser::ParseError)
         )
       end

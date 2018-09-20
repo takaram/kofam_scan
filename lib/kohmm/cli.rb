@@ -1,5 +1,7 @@
 module KOHMM
   module CLI
+    autoload :OptionParser, 'kohmm/cli/option_parser'
+
     class << self
       def run(argv = ARGV)
         # display help first if with -h option
