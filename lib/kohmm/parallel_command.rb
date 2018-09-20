@@ -2,7 +2,7 @@
 
 require 'open3'
 
-class KOHMM
+module KOHMM
   module ParallelCommand
     class << self
       def create(parallel_command = nil)

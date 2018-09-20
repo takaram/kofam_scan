@@ -1,6 +1,6 @@
 autoload :YAML, 'yaml'
 
-class KOHMM
+module KOHMM
   class Config
     attr_accessor :profile_dir, :threshold_list, :e_value, :hmmsearch,
                   :cpu, :tmp_dir, :hmmsearch_result_dir, :parallel, :query

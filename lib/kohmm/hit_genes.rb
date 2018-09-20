@@ -1,4 +1,4 @@
-class KOHMM
+module KOHMM
   class HitGenes
     def initialize(hmmsearch_files, threshold_list)
       @hmmsearch_files = hmmsearch_files

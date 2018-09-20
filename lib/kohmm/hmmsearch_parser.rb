@@ -1,4 +1,4 @@
-class KOHMM
+module KOHMM
   class HmmsearchParser
     FULL_SCORE_POSITION = 5
     DOMAIN_SCORE_POSITION = 8

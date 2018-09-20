@@ -1,4 +1,4 @@
-class KOHMM
+module KOHMM
   class ThresholdList
     def initialize(io)
       @list = {}

@@ -1,6 +1,6 @@
 autoload :OptionParser, 'optparse'
 
-class KOHMM
+module KOHMM
   class OptionParser
     def self.usage
       <<~USAGE
