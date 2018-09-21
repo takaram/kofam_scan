@@ -5,6 +5,7 @@ autoload :FileUtils,  'fileutils'
 autoload :Shellwords, 'shellwords'
 
 module KOHMM
+  autoload :CLI,             'kohmm/cli'
   autoload :Config,          'kohmm/config'
   autoload :Executor,        'kohmm/executor'
   autoload :HitGenes,        'kohmm/hit_genes'
