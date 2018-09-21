@@ -111,5 +111,5 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 end
 
-Dir[File.expand_path("../lib/**/*.rb", __dir__)].each { |f| require f }
+require File.expand_path('../lib/kohmm', __dir__)
 Dir[File.expand_path("support/matchers/**.rb", __dir__)].each { |f| require f }
