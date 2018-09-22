@@ -13,7 +13,6 @@ RSpec.describe KOHMM::Config do
     its(:tmp_dir) { should eq "./tmp" }
     its(:parallel) { should be_nil }
     its(:reannotation?) { should be_falsey }
-    xit { should be_score_mode }
   end
 
   describe 'initial values are passed to #initialize' do
@@ -114,18 +113,6 @@ RSpec.describe KOHMM::Config do
         config.reannotation = true
         expect(config.reannotation?).to be_truthy
       end
-    end
-  end
-
-  xdescribe 'mode' do
-    example '#score_mode sets score_mode' do
-      config.score_mode
-      expect(config).to be_score_mode
-    end
-
-    example '#e_value_mode sets e_value_mode' do
-      config.e_value_mode
-      expect(config).to be_e_value_mode
     end
   end
 end

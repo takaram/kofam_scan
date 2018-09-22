@@ -25,32 +25,6 @@ RSpec.describe KOHMM::CLI::OptionParser do
       expect(config).to receive(:threshold_list=).with file_name
       parser.parse!(["-t", file_name])
     end
-
-    xit 'enables score_mode' do
-      expect(config).to receive(:score_mode)
-      parser.parse!(["-t", file_name])
-    end
-  end
-
-  xdescribe '-E option' do
-    let(:value) { "1e-2" }
-
-    it 'calls config.e_value=' do
-      expect(config).to receive(:e_value=).with value.to_f
-      parser.parse!(["-E", value])
-    end
-
-    it 'enables e_value_mode' do
-      expect(config).to receive(:e_value_mode)
-      parser.parse!(["-E", value])
-    end
-
-    context 'argument is not a number' do
-      it 'fails to parse' do
-        expect { parser.parse!(["-E", "string"]) }
-          .to raise_error OptionParser::InvalidArgument
-      end
-    end
   end
 
   describe '--cpu option' do

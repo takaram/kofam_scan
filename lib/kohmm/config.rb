@@ -37,21 +37,5 @@ module KOHMM
     def reannotation?
       !!@reannotation
     end
-
-    def score_mode
-      @mode = :score
-    end
-
-    def score_mode?
-      @mode && @mode == :score
-    end
-
-    def e_value_mode
-      @mode = :e_value
-    end
-
-    def e_value_mode?
-      @mode && @mode == :e_value
-    end
   end
 end

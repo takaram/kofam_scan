@@ -10,7 +10,6 @@ module KOHMM
         -o <file>                    File to output the result  [stdout]
         -p, --profile <dir>          Directory where profile HMM files exist
         -t, --threshold_list <file>  List of bit score threshold
-        -E <E-value>                 E-value threshold
         -r, --reannotate <dir>       Directory where hmmsearch table files exist
         --cpu <num>                  Number of CPU to use  [1]
         --tmp_dir <dir>              Temporary directory  [./tmp]
@@ -38,23 +37,17 @@ module KOHMM
       private
 
       def set_options_to_parser
-        @parser.on("-o file") { |o| @config.output_file = o }
-        @parser.on("-p dir", "--profile") { |p| @config.profile_dir = p }
-        @parser.on("-t file", "--threshold_list") do |t|
-          @config.score_mode
-          @config.threshold_list = t
-        end
-        # @parser.on("-E val", Float) do |e|
-        #   @config.e_value_mode
-        #   @config.e_value = e
-        # end
-        @parser.on("-r dir", "--reannotate") do |r|
+        @parser.on("-o f")                     { |o| @config.output_file = o }
+        @parser.on("-p d", "--profile")        { |p| @config.profile_dir = p }
+        @parser.on("-t f", "--threshold_list") { |t| @config.threshold_list = t }
+        @parser.on("--cpu n", Integer)         { |c| @config.cpu = c }
+        @parser.on("--tmp_dir d")              { |d| @config.tmp_dir = d }
+        @parser.on("-h", "--help")             { puts usage; exit }
+
+        @parser.on("-r d", "--reannotate") do |r|
           @config.hmmsearch_result_dir = r
           @config.reannotation = true
         end
-        @parser.on("--cpu num", Integer) { |c| @config.cpu = c }
-        @parser.on("--tmp_dir dir") { |d| @config.tmp_dir = d }
-        @parser.on("-h", "--help") { puts usage; exit }
       end
     end
   end
