@@ -1,14 +1,14 @@
 # add ./lib directory to the load path if not included
 $LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
 
-autoload :FileUtils,  'fileutils'
-autoload :Shellwords, 'shellwords'
+autoload :FileUtils, 'fileutils'
 
 module KOHMM
   autoload :CLI,             'kohmm/cli'
   autoload :Config,          'kohmm/config'
   autoload :Executor,        'kohmm/executor'
   autoload :HitGenes,        'kohmm/hit_genes'
+  autoload :HMMSearch,       'kohmm/hmmsearch'
   autoload :HmmsearchParser, 'kohmm/hmmsearch_parser'
   autoload :ParallelCommand, 'kohmm/parallel_command'
   autoload :ThresholdList,   'kohmm/threshold_list'
