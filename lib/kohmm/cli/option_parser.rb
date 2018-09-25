@@ -5,14 +5,14 @@ module KOHMM
     class OptionParser
       def self.usage
         <<~USAGE
-        Usage: #{File.basename($PROGRAM_NAME)} [options] <query>
-          <query>                      FASTA formatted query sequence file
-        -o <file>                    File to output the result  [stdout]
-        -p, --profile <dir>          Directory where profile HMM files exist
-        -t, --threshold_list <file>  List of bit score threshold
-        -r, --reannotate <dir>       Directory where hmmsearch table files exist
-        --cpu <num>                  Number of CPU to use  [1]
-        --tmp_dir <dir>              Temporary directory  [./tmp]
+          Usage: #{File.basename($PROGRAM_NAME)} [options] <query>
+            <query>                      FASTA formatted query sequence file
+            -o <file>                    File to output the result  [stdout]
+            -p, --profile <dir>          Directory where profile HMM files exist
+            -t, --threshold_list <file>  List of bit score threshold
+            -r, --reannotate <dir>       Directory where hmmsearch table files exist
+            --cpu <num>                  Number of CPU to use  [1]
+            --tmp_dir <dir>              Temporary directory  [./tmp]
             -h, --help                   Show this message and exit
         USAGE
       end
