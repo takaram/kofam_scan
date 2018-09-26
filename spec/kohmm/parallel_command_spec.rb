@@ -135,26 +135,28 @@ RSpec.shared_examples 'a parallel command object' do |command, cpu_option|
     end
   end
 
-  describe '#assemble_command' do
-    subject(:assembled_command) {
-      described_class.new(cpu: 2, command: cmd).assemble_command
+  describe '#build_command' do
+    subject(:built_command) {
+      described_class.new(cpu: 2, command: cmd).build_command
     }
     let(:cmd) { "some_command {}" }
 
     it "includes #{cpu_option} n" do
-      expect(assembled_command).to match(/#{cpu_option} ?2/)
+      expect(built_command).to satisfy { |array|
+        array.each_cons(2).any? { |a| a == [cpu_option, "2"] }
+      }
     end
 
     it 'includes the command' do
-      expect(assembled_command).to end_with cmd
+      expect(built_command).to include *cmd.split
     end
 
     it 'starts with parallel_command' do
-      expect(assembled_command).to start_with command
+      expect(built_command.first).to eq command
     end
 
     it 'raises error when command is not set' do
-      expect { described_class.new.assemble_command }
+      expect { described_class.new.build_command }
         .to raise_error KOHMM::ParallelCommand::CommandNotSet
     end
   end

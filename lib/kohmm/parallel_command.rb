@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'open3'
+autoload :Shellwords, 'shellwords'
 
 module KOHMM
   module ParallelCommand
@@ -42,8 +43,8 @@ module KOHMM
       end
 
       def create_from_parallel_command_path(path)
-        command_name = File.basename(path, '.*')
-        const_get(command_name.capitalize).new(full_path: path)
+        command = File.basename(path, '.*')
+        const_get(command.capitalize).new(full_path: path)
       end
     end
 
@@ -57,17 +58,18 @@ module KOHMM
         @full_path = full_path
       end
 
-      def assemble_command
+      def build_command
         raise CommandNotSet unless command
 
-        cpu_option = self.class::CPU_OPTION
-        additional_options = self.class::ADDITIONAL_OPTIONS
-        [parallel_command, cpu_option, cpu, additional_options, command].join(" ")
+        result = [parallel_command, cpu_option, cpu, additional_options]
+        command_arr = command.kind_of?(Array) ? command : Shellwords.split(command)
+        result.concat(command_arr)
+        result.map(&:to_s)
       end
 
       def exec
-        Open3.popen3(assemble_command) do |stdin, out, err, thread|
-          stdin.puts @inputs unless @inputs.nil?
+        Open3.popen3(*build_command) do |stdin, out, err, thread|
+          stdin.puts @inputs if @inputs
           stdin.close
           thread.join
           @success = thread.value.success?
@@ -77,25 +79,55 @@ module KOHMM
       end
 
       def parallel_command
-        @full_path || self.class::PARALLEL_COMMAND
+        @full_path || default_parallel_command
       end
 
       def success?
         @success
       end
+
+      private
+
+      def default_parallel_command
+        raise NotImplementedError
+      end
+
+      def cpu_option
+        raise NotImplementedError
+      end
+
+      def additional_options
+        raise NotImplementedError
+      end
     end
     private_constant :Abstract
 
     class Parallel < Abstract
-      PARALLEL_COMMAND = "parallel"
-      CPU_OPTION = "-j"
-      ADDITIONAL_OPTIONS = ""
+      def default_parallel_command
+        "parallel"
+      end
+
+      def cpu_option
+        "-j"
+      end
+
+      def additional_options
+        "--quote"
+      end
     end
 
     class Xargs < Abstract
-      PARALLEL_COMMAND = "xargs"
-      CPU_OPTION = "-P"
-      ADDITIONAL_OPTIONS = "-I{}"
+      def default_parallel_command
+        "xargs"
+      end
+
+      def cpu_option
+        "-P"
+      end
+
+      def additional_options
+        "-I{}"
+      end
     end
 
     class CommandNotSet < StandardError; end
