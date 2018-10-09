@@ -45,6 +45,41 @@ RSpec.describe KOHMM::ThresholdList do
     end
   end
 
+  describe '#score' do
+    it 'returns correct values' do
+      expect(list.score("K00001")).to eq 325.73
+      expect(list.score("K00005")).to eq 347.00
+    end
+  end
+
+  describe '#full?' do
+    subject { list.full?(ko) }
+
+    context 'when full-sequence score used' do
+      let(:ko) { "K00005" }
+      it { should be_truthy }
+    end
+
+    context 'when domain-sequence score used' do
+      let(:ko) { "K00001" }
+      it { should be_falsey }
+    end
+  end
+
+  describe '#domain?' do
+    subject { list.domain?(ko) }
+
+    context 'when full-sequence score used' do
+      let(:ko) { "K00005" }
+      it { should be_falsey }
+    end
+
+    context 'when domain score used' do
+      let(:ko) { "K00001" }
+      it { should be_truthy }
+    end
+  end
+
   describe "Each row of #{described_class}" do
     let(:row) { list[key] }
 

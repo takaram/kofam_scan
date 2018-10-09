@@ -2,18 +2,16 @@ module KOHMM
   class ThresholdList
     def initialize(io)
       @list = {}
-      io.each_line do |line|
-        ko, score, full_or_domain, _ = line.chomp.split
-        score = score
-        full_or_domain = full_or_domain.to_sym
-        add(ko, score, full_or_domain)
+      io.each do |line|
+        ko, score, score_to_use = line.chomp.split
+        add(ko, score, score_to_use)
       end
     rescue ArgumentError => err
       raise FormatError, err.message + " (at line #{io.lineno})"
     end
 
-    def add(ko, score, full_or_domain)
-      @list[ko] = Item.new(ko, score, full_or_domain)
+    def add(ko, score, score_to_use)
+      @list[ko] = Item.new(ko, score, score_to_use)
     end
 
     def [](ko)
@@ -26,26 +24,39 @@ module KOHMM
 
     alias key? has_key?
 
+    def score(ko)
+      self[ko].score
+    end
+
+    def full?(ko)
+      self[ko].full?
+    end
+
+    def domain?(ko)
+      self[ko].domain?
+    end
+
     class Item
       attr_reader :ko, :score
 
-      def initialize(ko, score, full_or_domain)
+      def initialize(ko, score, score_to_use)
         @ko = ko
+        # Favor `Kernel#Float` over `Object#to_f` because ArgumentError is raised
+        # when the format is invalid
         @score = Float(score)
+        @score_to_use = score_to_use.to_sym
 
-        unless [:full, :domain].include? full_or_domain
+        unless [:full, :domain].include? @score_to_use
           raise ArgumentError, 'Third column must be "full" or "domain"'
         end
-
-        @full_or_domain = full_or_domain
       end
 
       def full?
-        @full_or_domain == :full
+        @score_to_use == :full
       end
 
       def domain?
-        @full_or_domain == :domain
+        @score_to_use == :domain
       end
     end
     private_constant :Item
