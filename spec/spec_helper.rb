@@ -113,3 +113,9 @@ end
 
 require File.expand_path('../lib/kohmm', __dir__)
 Dir[File.expand_path("support/matchers/**.rb", __dir__)].each { |f| require f }
+
+require 'pathname'
+
+def spec_root
+  @spec_root ||= Pathname.new(__dir__)
+end
