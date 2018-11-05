@@ -10,7 +10,9 @@ module KOHMM
   autoload :HitGenes,        'kohmm/hit_genes'
   autoload :HMMSearch,       'kohmm/hmmsearch'
   autoload :HmmsearchParser, 'kohmm/hmmsearch_parser'
+  autoload :KO,              'kohmm/ko'
   autoload :ParallelCommand, 'kohmm/parallel_command'
+  autoload :Result,          'kohmm/result'
   autoload :ThresholdList,   'kohmm/threshold_list'
 
   VERSION = '0.1.2'.freeze
