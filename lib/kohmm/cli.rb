@@ -1,6 +1,8 @@
 module KOHMM
   module CLI
-    autoload :OptionParser, 'kohmm/cli/option_parser'
+    extend Autoload
+
+    autoload :OptionParser
 
     class << self
       def run(argv = ARGV)

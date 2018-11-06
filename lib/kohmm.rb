@@ -3,17 +3,21 @@ $LOAD_PATH.unshift(__dir__) unless $LOAD_PATH.include?(__dir__)
 
 autoload :FileUtils, 'fileutils'
 
+require 'kohmm/autoload'
+
 module KOHMM
-  autoload :CLI,             'kohmm/cli'
-  autoload :Config,          'kohmm/config'
-  autoload :Executor,        'kohmm/executor'
-  autoload :HitGenes,        'kohmm/hit_genes'
-  autoload :HMMSearch,       'kohmm/hmmsearch'
-  autoload :HmmsearchParser, 'kohmm/hmmsearch_parser'
-  autoload :KO,              'kohmm/ko'
-  autoload :ParallelCommand, 'kohmm/parallel_command'
-  autoload :Result,          'kohmm/result'
-  autoload :ThresholdList,   'kohmm/threshold_list'
+  extend KOHMM::Autoload
+
+  autoload :CLI
+  autoload :Config
+  autoload :Executor
+  autoload :HitGenes
+  autoload :HMMSearch, 'kohmm/hmmsearch'
+  autoload :HmmsearchParser
+  autoload :KO
+  autoload :ParallelCommand
+  autoload :Result
+  autoload :ThresholdList
 
   VERSION = '0.1.2'.freeze
   DEFAULT_CONFIG_FILE = File.expand_path("../config.yml", __dir__).freeze

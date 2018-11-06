@@ -3,8 +3,10 @@ require 'set'
 # TODO: alignment
 module KOHMM
   class Result
-    autoload :Hit,    'kohmm/result/hit'
-    autoload :Parser, 'kohmm/result/parser'
+    extend Autoload
+
+    autoload :Hit
+    autoload :Parser
 
     def initialize(tabular_files, ko_file)
       @hits        = Set.new
