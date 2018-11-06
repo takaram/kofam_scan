@@ -23,6 +23,9 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 15
 
+Metrics/ParameterLists:
+  Enabled: false
+
 ########### Naming ############
 
 Naming/PredicateName:
@@ -91,7 +94,7 @@ Style/TrailingUnderscoreVariable:
 # These cops should be turned on, but temporarily disabled
 # To be fixed
 Metrics/LineLength:
-  Max: 129
+  Max: 106
 
 Style/AsciiComments:
   Enabled: false
