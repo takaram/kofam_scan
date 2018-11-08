@@ -34,7 +34,6 @@ module KOHMM
       @re_pos       = re_pos.to_f
       @definition   = definition
     end
-    private_class_method :new
 
     def full?
       @score_type == :full
