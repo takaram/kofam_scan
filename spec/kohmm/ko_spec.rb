@@ -4,13 +4,11 @@ RSpec.describe KOHMM::KO do
   let(:k00001) { KOHMM::KO["K00001"] }
   let(:k00005) { KOHMM::KO["K00005"] }
 
-  ko_file = StringIO.new(<<~KOLIST)
+  before(:all) { KOHMM::KO.parse(StringIO.new(<<~KOLIST)) }
     knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
     K00001	297.73	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
     K00005	344.01	full	whole	0.901895	1381	965	796	365	2.82	0.590	glycerol dehydrogenase [EC:1.1.1.6]
   KOLIST
-
-  KOHMM::KO.parse(ko_file)
 
   describe '#name' do
     it 'returns K number' do
