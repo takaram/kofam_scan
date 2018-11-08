@@ -8,15 +8,14 @@ module KOHMM
       FULL_E_VALUE_POSITION   = 4
       DOMAIN_E_VALUE_POSITION = 7
 
-      def self.parse(tabular_files, ko_file, result)
-        new(tabular_files, ko_file, result).parse
+      def self.parse(tabular_files, result)
+        new(tabular_files, result).parse
       end
 
       # @param [Array] tabular_files Array of IO of result files
       # @param [IO] ko_file
-      def initialize(tabular_files, ko_file, result)
+      def initialize(tabular_files, result)
         @tabular_files = tabular_files
-        @ko_file       = KO.parse(ko_file)
         @result        = result
       end
 
@@ -36,7 +35,7 @@ module KOHMM
               e_value = data[DOMAIN_E_VALUE_POSITION].to_f
             end
 
-            @result << Hit.new(name, ko, score, e_value, score >= ko.threshold)
+            @result << Hit.new(name, ko, score, e_value)
           end
         end
       end
