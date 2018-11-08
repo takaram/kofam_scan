@@ -8,19 +8,18 @@ module KOHMM
     autoload :Hit
     autoload :Parser
 
-    def initialize(tabular_files, ko_file)
+    attr_reader :query_list
+
+    def initialize(query_list)
       @hits        = Set.new
       @genes_index = Hash.new { |h, k| h[k] = Set.new }
       @ko_index    = Hash.new { |h, k| h[k] = Set.new }
+      @query_list  = query_list
+    end
 
-      tabular_files = Array(tabular_files)
-      Parser.parse(tabular_files, ko_file, self)
-
-      # Freeze this after parsing inputs
-      [@hits, @genes_index, @ko_index].each(&:freeze)
-      singleton_class.module_eval do
-        undef_method :<<
-      end
+    def parse(*tabular_files)
+      Parser.parse(tabular_files, self)
+      self
     end
 
     def each(&block)

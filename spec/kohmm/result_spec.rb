@@ -3,12 +3,28 @@ require 'stringio'
 RSpec.describe KOHMM::Result do
   let(:hmmsearch_result1) { spec_root.join('test_data', 'K00001').open }
   let(:hmmsearch_result2) { spec_root.join('test_data', 'K00004').open }
-  let(:ko_file) { StringIO.new(<<~KOLIST) }
+
+  let(:query_list) do
+    [hmmsearch_result1, hmmsearch_result2].flat_map do |f|
+      result = f.each_with_object([]) do |line, arr|
+        arr << line.slice(/^\S+/) unless line.start_with?('#')
+      end
+      f.rewind
+      result
+    end.uniq.sort
+  end
+
+  let(:result) do
+    result = KOHMM::Result.new(query_list)
+    result.parse(hmmsearch_result1, hmmsearch_result2)
+    result
+  end
+
+  before(:all) { KOHMM::KO.parse(StringIO.new(<<~KOLIST)) }
     knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
     K00001	170.20	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
     K00004	277.79	full	whole	0.925732	857	652	781	354	3.38	0.590	(R,R)-butanediol dehydrogenase [EC:1.1.1.4 1.1.1.- 1.1.1.303]
   KOLIST
-  let(:result) { KOHMM::Result.new([hmmsearch_result1, hmmsearch_result2], ko_file) }
 
   after { [hmmsearch_result1, hmmsearch_result2].each(&:close) }
 
