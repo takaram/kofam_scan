@@ -37,6 +37,7 @@ RSpec.shared_context 'multiple hits for one gene' do
   before do
     result << KOHMM::Result::Hit.new("gene1", ko1, 101, 0.7)
     result << KOHMM::Result::Hit.new("gene1", ko2, 180, 0.5)
+    result << KOHMM::Result::Hit.new("gene1", ko3, 20,  0.3)
     result << KOHMM::Result::Hit.new("gene4", ko3, 200, 0.9)
   end
 

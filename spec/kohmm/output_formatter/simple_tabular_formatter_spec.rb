@@ -21,7 +21,7 @@ RSpec.describe KOHMM::OutputFormatter::SimpleTabularFormatter do
       include_context description
 
       it 'takes the KO with highest score' do
-        expect(output).to match(/^gene1\tK00002/)
+        expect(output).to match(/^gene1\tK00002$/)
       end
 
       it 'has only one line for one gene' do
