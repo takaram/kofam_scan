@@ -7,5 +7,6 @@ module KOHMM
     extend Autoload
 
     autoload :SimpleTabularFormatter
+    autoload :MultiHitTabularFormatter
   end
 end
