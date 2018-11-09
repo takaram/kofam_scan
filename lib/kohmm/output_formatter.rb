@@ -8,5 +8,6 @@ module KOHMM
 
     autoload :SimpleTabularFormatter
     autoload :MultiHitTabularFormatter
+    autoload :HitDetailFormatter
   end
 end
