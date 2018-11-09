@@ -25,9 +25,9 @@ end
 
 RSpec.shared_context 'one hit for one gene' do
   before do
-    result << KOHMM::Result::Hit.new("gene1", ko1, 50, 0.7)
-    result << KOHMM::Result::Hit.new("gene2", ko2, 180, 0.5)
-    result << KOHMM::Result::Hit.new("gene4", ko3, 200, 0.9)
+    result << KOHMM::Result::Hit.new("gene1", ko1, 50.1, 0.0009)
+    result << KOHMM::Result::Hit.new("gene2", ko2, 180,  0.00005)
+    result << KOHMM::Result::Hit.new("gene4", ko3, 200,  1.2e-10)
   end
 
   include_context :basic_context
@@ -46,9 +46,9 @@ end
 
 RSpec.shared_context 'multiple hits for one KO' do
   before do
-    result << KOHMM::Result::Hit.new("gene1", ko1, 50, 0.7)
-    result << KOHMM::Result::Hit.new("gene2", ko1, 180, 0.5)
-    result << KOHMM::Result::Hit.new("gene4", ko2, 200, 0.9)
+    result << KOHMM::Result::Hit.new("gene1", ko1, 50.1, 0.0009)
+    result << KOHMM::Result::Hit.new("gene2", ko1, 180,  0.00005)
+    result << KOHMM::Result::Hit.new("gene4", ko2, 200,  1.2e-10)
   end
 
   include_context :basic_context
