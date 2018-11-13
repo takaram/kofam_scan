@@ -1,3 +1,5 @@
+require: rubocop-rspec
+
 ########## Layout #############
 
 Layout/IndentArray:

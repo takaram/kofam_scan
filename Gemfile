@@ -24,5 +24,9 @@ gem 'pry-byebug'
 gem 'rspec', '~> 3.0'
 gem 'rspec-its'
 
+# checks your coding style
+gem 'rubocop', require: false
+gem 'rubocop-rspec', require: false
+
 # measures the coverage of your test code
 gem 'simplecov', require: false
