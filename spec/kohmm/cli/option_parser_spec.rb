@@ -61,13 +61,13 @@ RSpec.describe KOHMM::CLI::OptionParser do
     context 'without arguments' do
       it 'changes ARGV' do
         stub_const("ARGV", opt_array)
-        expect { parser.parse! }.to change { opt_array.size }.from(7).to(0)
+        expect { parser.parse! }.to change(opt_array, :size).from(7).to(0)
       end
     end
 
     context 'with an argument' do
       it 'changes the argument array' do
-        expect { parser.parse!(opt_array) }.to change { opt_array.size }.from(7).to(0)
+        expect { parser.parse!(opt_array) }.to change(opt_array, :size).from(7).to(0)
       end
     end
   end

@@ -1,6 +1,7 @@
 RSpec.describe KOHMM::CLI do
   describe '.run' do
-    subject { KOHMM::CLI.run(options) }
+    subject { described_class.run(options) }
+
     let(:options) { ["query"] }
 
     before do
@@ -10,7 +11,7 @@ RSpec.describe KOHMM::CLI do
     context 'with -h or --help option' do
       it 'prints help message and exit' do
         %w[-h --help].each do |option|
-          expect { KOHMM::CLI.run([option]) }.to output(/\AUsage/i).to_stdout.and exit_script.successfully
+          expect { described_class.run([option]) }.to output(/\AUsage/i).to_stdout.and exit_script.successfully
         end
       end
     end
@@ -19,7 +20,7 @@ RSpec.describe KOHMM::CLI do
       context 'with vaild arguments' do
         it 'invokes KOHMM::Executor.execute' do
           expect(KOHMM::Executor).to receive(:execute)
-          KOHMM::CLI.run(options)
+          described_class.run(options)
         end
       end
 
@@ -27,7 +28,7 @@ RSpec.describe KOHMM::CLI do
         before do
           allow_any_instance_of(KOHMM::CLI::OptionParser).to(
             receive(:parse!).and_raise(::OptionParser::ParseError)
-            )
+          )
         end
 
         it 'shows usage to stderr and exit with error' do

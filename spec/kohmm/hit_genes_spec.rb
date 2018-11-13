@@ -24,22 +24,26 @@ RSpec.describe KOHMM::HitGenes do
 
     context 'when the key exists' do
       let(:key) { "apr:Apre_1614" }
-      it { should be_truthy }
+
+      it { is_expected.to be_truthy }
     end
 
     context 'when the key does not exist' do
       let(:key) { "apr:xxxxx" }
-      it { should be_falsey }
+
+      it { is_expected.to be_falsey }
     end
   end
 
   describe '#has_key?' do
     let(:method) { :has_key? }
+
     it_behaves_like 'an alias of has_key?'
   end
 
   describe '#key?' do
     let(:method) { :key? }
+
     it_behaves_like 'an alias of has_key?'
   end
 

@@ -1,5 +1,6 @@
 RSpec.describe KOHMM::Executor do
-  subject { KOHMM::Executor.new(config) }
+  subject { described_class.new(config) }
+
   let(:config) { KOHMM::Config.new }
 
   describe '#execute' do

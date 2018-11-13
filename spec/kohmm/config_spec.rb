@@ -7,30 +7,30 @@ RSpec.describe KOHMM::Config do
   describe 'default values' do
     subject { config }
 
-    its(:output_file) { should eq 1 }
-    its(:cpu) { should eq 1 }
-    its(:hmmsearch) { should eq "hmmsearch" }
-    its(:tmp_dir) { should eq "./tmp" }
-    its(:parallel) { should be_nil }
-    its(:reannotation?) { should be_falsey }
+    its(:output_file) { is_expected.to eq 1 }
+    its(:cpu) { is_expected.to eq 1 }
+    its(:hmmsearch) { is_expected.to eq "hmmsearch" }
+    its(:tmp_dir) { is_expected.to eq "./tmp" }
+    its(:parallel) { is_expected.to be_nil }
+    its(:reannotation?) { is_expected.to be_falsey }
   end
 
   describe 'initial values are passed to #initialize' do
     init_values = {
-      output_file:    "file",
-      profile_dir:    "dir",
-      threshold_list: "file2",
-      e_value:        0.1,
-      cpu:            5,
-      hmmsearch:      "/usr/local/bin/hmmsearch",
-      tmp_dir:        "/tmp",
+      output_file:          "file",
+      profile_dir:          "dir",
+      threshold_list:       "file2",
+      e_value:              0.1,
+      cpu:                  5,
+      hmmsearch:            "/usr/local/bin/hmmsearch",
+      tmp_dir:              "/tmp",
       hmmsearch_result_dir: "dir2",
-      parallel:       "/usr/local/bin/parallel",
+      parallel:             "/usr/local/bin/parallel",
     }
     subject { described_class.new(init_values) }
 
     init_values.each do |key, val|
-      its(key) { should eq val }
+      its(key) { is_expected.to eq val }
     end
   end
 
@@ -111,7 +111,7 @@ RSpec.describe KOHMM::Config do
     describe '#reannotation? and #reannnotation=' do
       it 'can set and get a boolean' do
         config.reannotation = true
-        expect(config.reannotation?).to be_truthy
+        expect(config).to be_reannotation
       end
     end
   end

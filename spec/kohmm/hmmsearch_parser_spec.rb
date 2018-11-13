@@ -1,7 +1,8 @@
 RSpec.describe KOHMM::HmmsearchParser do
-  let(:parser) { KOHMM::HmmsearchParser.new(file) }
+  let(:parser) { described_class.new(file) }
   let(:file_name) { File.expand_path("../test_data/K00001", __dir__) }
   let(:file) { File.open(file_name) }
+
   count = 6 # number of genes in `file' is 6
 
   describe '.open' do

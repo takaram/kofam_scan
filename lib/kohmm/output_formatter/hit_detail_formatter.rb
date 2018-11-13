@@ -3,9 +3,9 @@ module KOHMM
     class HitDetailFormatter
       COLUMN_WIDTH = {
         gene_name:     19,
-        ko:             6,
-        score:          6,
-        e_value:        9,
+        ko:            6,
+        score:         6,
+        e_value:       9,
         ko_definition: 21
       }.freeze
       private_constant :COLUMN_WIDTH

@@ -2,6 +2,10 @@ require: rubocop-rspec
 
 ########## Layout #############
 
+Layout/AlignHash:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
 Layout/IndentArray:
   EnforcedStyle: consistent
 

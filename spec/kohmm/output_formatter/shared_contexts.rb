@@ -1,6 +1,6 @@
 require 'stringio'
 
-RSpec.shared_context :basic_context do
+RSpec.shared_context 'basic context' do
   let(:result) { KOHMM::Result.new(%w[gene1 gene2 gene3 gene4 gene5]) }
   let(:out_file) { StringIO.new("", "w") }
   let(:ko1) do
@@ -30,7 +30,7 @@ RSpec.shared_context 'one hit for one gene' do
     result << KOHMM::Result::Hit.new("gene4", ko3, 200,  1.2e-10)
   end
 
-  include_context :basic_context
+  include_context 'basic context'
 end
 
 RSpec.shared_context 'multiple hits for one gene' do
@@ -41,7 +41,7 @@ RSpec.shared_context 'multiple hits for one gene' do
     result << KOHMM::Result::Hit.new("gene4", ko3, 200, 0.9)
   end
 
-  include_context :basic_context
+  include_context 'basic context'
 end
 
 RSpec.shared_context 'multiple hits for one KO' do
@@ -51,5 +51,5 @@ RSpec.shared_context 'multiple hits for one KO' do
     result << KOHMM::Result::Hit.new("gene4", ko2, 200,  1.2e-10)
   end
 
-  include_context :basic_context
+  include_context 'basic context'
 end

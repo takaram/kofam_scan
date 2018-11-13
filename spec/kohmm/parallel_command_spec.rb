@@ -53,12 +53,14 @@ RSpec.describe KOHMM::ParallelCommand do
 
         context 'parallel' do
           let(:path) { "/usr/local/bin/parallel" }
-          it { should be_an_instance_of described_class::Parallel }
+
+          it { is_expected.to be_an_instance_of described_class::Parallel }
         end
 
         context 'xargs' do
           let(:path) { "/usr/bin/xargs" }
-          it { should be_an_instance_of described_class::Xargs }
+
+          it { is_expected.to be_an_instance_of described_class::Xargs }
         end
       end
     end
@@ -83,15 +85,17 @@ RSpec.describe KOHMM::ParallelCommand do
 
     context 'when parallel command is available' do
       let(:is_success) { true }
+
       it 'returns true' do
-        expect(described_class.parallel_available?).to be_truthy
+        expect(described_class).to be_parallel_available
       end
     end
 
     context 'when parallel command is not available' do
       let(:is_success) { false }
+
       it 'returns false' do
-        expect(described_class.parallel_available?).to be_falsey
+        expect(described_class).not_to be_parallel_available
       end
     end
   end
@@ -103,15 +107,17 @@ RSpec.describe KOHMM::ParallelCommand do
 
     context 'when xargs command is available' do
       let(:is_success) { true }
+
       it 'returns true' do
-        expect(described_class.xargs_available?).to be_truthy
+        expect(described_class).to be_xargs_available
       end
     end
 
     context 'when xargs command is not available' do
       let(:is_success) { false }
+
       it 'returns false' do
-        expect(described_class.xargs_available?).to be_falsey
+        expect(described_class).not_to be_xargs_available
       end
     end
   end
@@ -139,6 +145,7 @@ RSpec.shared_examples 'a parallel command object' do |command, cpu_option|
     subject(:built_command) {
       described_class.new(cpu: 2, command: cmd).build_command
     }
+
     let(:cmd) { "some_command {}" }
 
     it "includes #{cpu_option} n" do

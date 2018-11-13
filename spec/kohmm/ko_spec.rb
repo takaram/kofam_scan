@@ -1,10 +1,10 @@
 require 'stringio'
 
 RSpec.describe KOHMM::KO do
-  let(:k00001) { KOHMM::KO["K00001"] }
-  let(:k00005) { KOHMM::KO["K00005"] }
+  let(:k00001) { described_class["K00001"] }
+  let(:k00005) { described_class["K00005"] }
 
-  before(:all) { KOHMM::KO.parse(StringIO.new(<<~KOLIST)) }
+  before(:all) { described_class.parse(StringIO.new(<<~KOLIST)) }
     knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
     K00001	297.73	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
     K00005	344.01	full	whole	0.901895	1381	965	796	365	2.82	0.590	glycerol dehydrogenase [EC:1.1.1.6]
@@ -30,11 +30,13 @@ RSpec.describe KOHMM::KO do
 
       context 'if score_type is full' do
         let(:ko) { k00005 }
+
         it { is_expected.to be_truthy }
       end
 
       context 'if score_type is domain' do
         let(:ko) { k00001 }
+
         it { is_expected.to be_falsy }
       end
     end
@@ -44,11 +46,13 @@ RSpec.describe KOHMM::KO do
 
       context 'if score type is full' do
         let(:ko) { k00005 }
+
         it { is_expected.to be_falsy }
       end
 
       context 'if score type is domain' do
         let(:ko) { k00001 }
+
         it { is_expected.to be_truthy }
       end
     end
@@ -60,11 +64,13 @@ RSpec.describe KOHMM::KO do
 
       context 'if profile_type is whole' do
         let(:ko) { k00005 }
+
         it { is_expected.to be_truthy }
       end
 
       context 'if profile_type is trim' do
         let(:ko) { k00001 }
+
         it { is_expected.to be_falsy }
       end
     end
@@ -74,11 +80,13 @@ RSpec.describe KOHMM::KO do
 
       context 'if profile type is whole' do
         let(:ko) { k00005 }
+
         it { is_expected.to be_falsy }
       end
 
       context 'if profile type is trim' do
         let(:ko) { k00001 }
+
         it { is_expected.to be_truthy }
       end
     end

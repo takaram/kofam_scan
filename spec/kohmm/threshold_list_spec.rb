@@ -12,22 +12,26 @@ RSpec.describe KOHMM::ThresholdList do
 
     context 'when the key exists' do
       let(:key) { "K00001" }
-      it { should be_truthy }
+
+      it { is_expected.to be_truthy }
     end
 
     context 'when the key does not exist' do
       let(:key) { "K99999" }
-      it { should be_falsey }
+
+      it { is_expected.to be_falsey }
     end
   end
 
   describe '#has_key?' do
     let(:method) { :has_key? }
+
     it_behaves_like 'an alias of has_key?'
   end
 
   describe '#key?' do
     let(:method) { :key? }
+
     it_behaves_like 'an alias of has_key?'
   end
 
@@ -36,12 +40,14 @@ RSpec.describe KOHMM::ThresholdList do
 
     context 'when the key exists' do
       let(:key) { "K00001" }
-      it { should_not be_nil }
+
+      it { is_expected.not_to be_nil }
     end
 
     context 'when the key does not exist' do
       let(:key) { "K99999" }
-      it { should be_nil }
+
+      it { is_expected.to be_nil }
     end
   end
 
@@ -57,12 +63,14 @@ RSpec.describe KOHMM::ThresholdList do
 
     context 'when full-sequence score used' do
       let(:ko) { "K00005" }
-      it { should be_truthy }
+
+      it { is_expected.to be_truthy }
     end
 
     context 'when domain-sequence score used' do
       let(:ko) { "K00001" }
-      it { should be_falsey }
+
+      it { is_expected.to be_falsey }
     end
   end
 
@@ -71,12 +79,14 @@ RSpec.describe KOHMM::ThresholdList do
 
     context 'when full-sequence score used' do
       let(:ko) { "K00005" }
-      it { should be_falsey }
+
+      it { is_expected.to be_falsey }
     end
 
     context 'when domain score used' do
       let(:ko) { "K00001" }
-      it { should be_truthy }
+
+      it { is_expected.to be_truthy }
     end
   end
 
@@ -88,12 +98,14 @@ RSpec.describe KOHMM::ThresholdList do
 
       context 'when full-sequence score used' do
         let(:key) { "K00005" }
-        it { should be_truthy }
+
+        it { is_expected.to be_truthy }
       end
 
       context 'when domain-sequence score used' do
         let(:key) { "K00001" }
-        it { should be_falsey }
+
+        it { is_expected.to be_falsey }
       end
     end
 
@@ -102,12 +114,14 @@ RSpec.describe KOHMM::ThresholdList do
 
       context 'when full-sequence score used' do
         let(:key) { "K00005" }
-        it { should be_falsey }
+
+        it { is_expected.to be_falsey }
       end
 
       context 'when domain score used' do
         let(:key) { "K00001" }
-        it { should be_truthy }
+
+        it { is_expected.to be_truthy }
       end
     end
 

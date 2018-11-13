@@ -39,7 +39,8 @@ RSpec.describe KOHMM::OutputFormatter::HitDetailFormatter do
       before do
         result << KOHMM::Result::Hit.new("a" * 100, ko1, 200, 1e-10)
       end
-      include_context :basic_context
+
+      include_context 'basic context'
 
       char_len = 19
 

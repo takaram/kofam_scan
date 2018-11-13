@@ -15,7 +15,7 @@ RSpec.describe KOHMM::Result do
   end
 
   let(:result) do
-    result = KOHMM::Result.new(query_list)
+    result = described_class.new(query_list)
     result.parse(hmmsearch_result1, hmmsearch_result2)
     result
   end
@@ -38,7 +38,7 @@ RSpec.describe KOHMM::Result do
     end
 
     it 'includes hits of the designated KO only' do
-      is_expected.to all(satisfy { |hit| hit.ko.name == "K00001" })
+      expect(subject).to all(satisfy { |hit| hit.ko.name == "K00001" })
     end
   end
 
@@ -53,7 +53,7 @@ RSpec.describe KOHMM::Result do
     end
 
     it 'includes hits of the designated gene only' do
-      is_expected.to all(satisfy { |hit| hit.gene_name == "apr:Apre_1614" })
+      expect(subject).to all(satisfy { |hit| hit.gene_name == "apr:Apre_1614" })
     end
   end
 
@@ -98,16 +98,19 @@ RSpec.describe KOHMM::Result do
     describe '#above_threshold?' do
       context 'when the score is equal to the threshold' do
         subject { hit1.above_threshold? }
+
         it { is_expected.to be_truthy }
       end
 
       context 'when the score is above the threshold' do
         subject { hit2.above_threshold? }
+
         it { is_expected.to be_truthy }
       end
 
       context 'when the score is below the threshold' do
         subject { hit3.above_threshold? }
+
         it { is_expected.to be_falsy }
       end
     end
