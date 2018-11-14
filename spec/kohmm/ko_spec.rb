@@ -4,11 +4,27 @@ RSpec.describe KOHMM::KO do
   let(:k00001) { described_class["K00001"] }
   let(:k00005) { described_class["K00005"] }
 
-  before(:all) { described_class.parse(StringIO.new(<<~KOLIST)) }
-    knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
-    K00001	297.73	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
-    K00005	344.01	full	whole	0.901895	1381	965	796	365	2.82	0.590	glycerol dehydrogenase [EC:1.1.1.6]
-  KOLIST
+  before(:all) do
+    described_class.instance_variable_set(:@instances, nil)
+    described_class.parse(StringIO.new(<<~KOLIST))
+      knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
+      K00001	297.73	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
+      K00005	344.01	full	whole	0.901895	1381	965	796	365	2.82	0.590	glycerol dehydrogenase [EC:1.1.1.6]
+      K01977	-	-	-	-	16376	-	-	-	-	-	glycerol dehydrogenase [EC:1.1.1.6]
+    KOLIST
+  end
+
+  describe '.all' do
+    subject(:all_ko) { described_class.all }
+
+    it 'returns an Enumerator' do
+      expect(all_ko).to be_kind_of Enumerator
+    end
+
+    it 'returns an Enumerator which iterates for all KO' do
+      expect(all_ko.map(&:name)).to contain_exactly("K00001", "K00005", "K01977")
+    end
+  end
 
   describe '#name' do
     it 'returns K number' do
@@ -28,13 +44,13 @@ RSpec.describe KOHMM::KO do
     describe '#full?' do
       subject { ko.full? }
 
-      context 'if score_type is full' do
+      context 'when score_type is full' do
         let(:ko) { k00005 }
 
         it { is_expected.to be_truthy }
       end
 
-      context 'if score_type is domain' do
+      context 'when score_type is domain' do
         let(:ko) { k00001 }
 
         it { is_expected.to be_falsy }
@@ -44,13 +60,13 @@ RSpec.describe KOHMM::KO do
     describe '#domain?' do
       subject { ko.domain? }
 
-      context 'if score type is full' do
+      context 'when score type is full' do
         let(:ko) { k00005 }
 
         it { is_expected.to be_falsy }
       end
 
-      context 'if score type is domain' do
+      context 'when score type is domain' do
         let(:ko) { k00001 }
 
         it { is_expected.to be_truthy }
@@ -62,13 +78,13 @@ RSpec.describe KOHMM::KO do
     describe '#whole?' do
       subject { ko.whole? }
 
-      context 'if profile_type is whole' do
+      context 'when profile_type is whole' do
         let(:ko) { k00005 }
 
         it { is_expected.to be_truthy }
       end
 
-      context 'if profile_type is trim' do
+      context 'when profile_type is trim' do
         let(:ko) { k00001 }
 
         it { is_expected.to be_falsy }
@@ -78,13 +94,13 @@ RSpec.describe KOHMM::KO do
     describe '#trim?' do
       subject { ko.trim? }
 
-      context 'if profile type is whole' do
+      context 'when profile type is whole' do
         let(:ko) { k00005 }
 
         it { is_expected.to be_falsy }
       end
 
-      context 'if profile type is trim' do
+      context 'when profile type is trim' do
         let(:ko) { k00001 }
 
         it { is_expected.to be_truthy }
@@ -103,6 +119,22 @@ RSpec.describe KOHMM::KO do
     it 'returns the definition string' do
       expect(k00001.definition).to eq "alcohol dehydrogenase [EC:1.1.1.1]"
       expect(k00005.definition).to eq "glycerol dehydrogenase [EC:1.1.1.6]"
+    end
+  end
+
+  describe '#profile_available?' do
+    subject { ko.profile_available? }
+
+    context 'when profile parameters are available' do
+      let(:ko) { k00001 }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when profile parameters are unavailable' do
+      let(:ko) { described_class["K01977"] }
+
+      it { is_expected.to be_falsy }
     end
   end
 end
