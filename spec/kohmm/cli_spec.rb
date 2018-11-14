@@ -1,6 +1,6 @@
 RSpec.describe KOHMM::CLI do
   describe '.run' do
-    subject { described_class.run(options) }
+    subject(:execute_run) { described_class.run(options) }
 
     let(:options) { ["query"] }
 
@@ -32,7 +32,7 @@ RSpec.describe KOHMM::CLI do
         end
 
         it 'shows usage to stderr and exit with error' do
-          expect { subject }.to output(/Usage/i).to_stderr.and exit_script.unsuccessfully
+          expect { execute_run }.to output(/Usage/i).to_stderr.and exit_script.unsuccessfully
         end
       end
 
@@ -40,7 +40,7 @@ RSpec.describe KOHMM::CLI do
         let(:options) { %w[-o out_file] }
 
         it 'shows an error message to stderr and exit with error' do
-          expect { subject }.to output(/specify a query/i).to_stderr.and exit_script.unsuccessfully
+          expect { execute_run }.to output(/specify a query/i).to_stderr.and exit_script.unsuccessfully
         end
       end
 
@@ -48,7 +48,7 @@ RSpec.describe KOHMM::CLI do
         let(:options) { %w[file_a file_b] }
 
         it 'shows an error message to stderr and exit with error' do
-          expect { subject }.to output(/too many/i).to_stderr.and exit_script.unsuccessfully
+          expect { execute_run }.to output(/too many/i).to_stderr.and exit_script.unsuccessfully
         end
       end
     end

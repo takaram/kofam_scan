@@ -29,31 +29,31 @@ RSpec.describe KOHMM::Result do
   after { [hmmsearch_result1, hmmsearch_result2].each(&:close) }
 
   describe '#for_ko' do
-    subject { result.for_ko("K00001") }
+    subject(:result_for_ko) { result.for_ko("K00001") }
 
     it { is_expected.to be_a_kind_of Enumerable }
 
     it 'has the right number of hits' do
-      expect(subject.count).to eq 6
+      expect(result_for_ko.count).to eq 6
     end
 
     it 'includes hits of the designated KO only' do
-      expect(subject).to all(satisfy { |hit| hit.ko.name == "K00001" })
+      expect(result_for_ko).to all(satisfy { |hit| hit.ko.name == "K00001" })
     end
   end
 
   describe '#for_gene' do
-    subject { result.for_gene("apr:Apre_1614") }
+    subject(:result_for_gene) { result.for_gene("apr:Apre_1614") }
 
     it { is_expected.to be_kind_of Enumerable }
 
     it 'has the right number of hits' do
-      expect(subject.count).to eq 2
+      expect(result_for_gene.count).to eq 2
       expect(result.for_gene("apr:Apre_1060").count).to eq 1
     end
 
     it 'includes hits of the designated gene only' do
-      expect(subject).to all(satisfy { |hit| hit.gene_name == "apr:Apre_1614" })
+      expect(result_for_gene).to all(satisfy { |hit| hit.gene_name == "apr:Apre_1614" })
     end
   end
 

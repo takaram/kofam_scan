@@ -1,5 +1,5 @@
 RSpec.describe KOHMM::Executor do
-  subject { described_class.new(config) }
+  subject(:executor) { described_class.new(config) }
 
   let(:config) { KOHMM::Config.new }
 
@@ -12,16 +12,16 @@ RSpec.describe KOHMM::Executor do
     before do
       config.query = "file"
       methods_to_be_executed.each do |method|
-        allow(subject).to receive(method)
+        allow(executor).to receive(method)
       end
     end
 
     context 'when it is not reannotation' do
       it 'executes other methods with correct order' do
         methods_to_be_executed.each do |method|
-          expect(subject).to receive(method).ordered
+          expect(executor).to receive(method).ordered
         end
-        subject.execute
+        executor.execute
       end
     end
 
@@ -33,14 +33,14 @@ RSpec.describe KOHMM::Executor do
 
       it 'executes other methods with correct order' do
         methods_to_be_executed.grep_v(:run_hmmsearch).each do |method|
-          expect(subject).to receive(method).ordered
+          expect(executor).to receive(method).ordered
         end
-        subject.execute
+        executor.execute
       end
 
       it 'does not execute run_hmmsearch' do
-        expect(subject).not_to receive(:run_hmmsearch)
-        subject.execute
+        expect(executor).not_to receive(:run_hmmsearch)
+        executor.execute
       end
     end
   end
