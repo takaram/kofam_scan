@@ -7,8 +7,13 @@ module KOHMM
     end
 
     def initialize(config = nil)
-      @config = config
-      @config ||= File.exist?(DEFAULT_CONFIG_FILE) ? Config.load(DEFAULT_CONFIG_FILE) : Config.new
+      if config
+        @config = config
+      elsif File.exist?(DEFAULT_CONFIG_FILE)
+        @config = Config.load(DEFAULT_CONFIG_FILE)
+      else
+        @config = Config.new
+      end
     end
 
     def execute

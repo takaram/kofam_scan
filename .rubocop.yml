@@ -64,6 +64,9 @@ Style/BlockDelimiters:
 Style/ClassCheck:
   EnforcedStyle: kind_of?
 
+Style/ConditionalAssignment:
+  EnforcedStyle: assign_inside_condition
+
 Style/DoubleNegation:
   Enabled: false
 
