@@ -10,6 +10,14 @@ RSpec.describe KOHMM::CLI::OptionParser do
     end
   end
 
+  describe '-f option' do
+    it 'calls config.formatter=' do
+      formatter = KOHMM::OutputFormatter::HitDetailFormatter
+      expect(config).to receive(:formatter=).with kind_of(formatter)
+      parser.parse!(["-f", "1"])
+    end
+  end
+
   describe '-p option' do
     it 'calls config.profile_dir=' do
       dir_name = "fuga"
@@ -18,12 +26,12 @@ RSpec.describe KOHMM::CLI::OptionParser do
     end
   end
 
-  describe '-t option' do
+  describe '-k option' do
     let(:file_name) { "foo" }
 
-    it 'calls config.threshold_list=' do
-      expect(config).to receive(:threshold_list=).with file_name
-      parser.parse!(["-t", file_name])
+    it 'calls config.ko_list=' do
+      expect(config).to receive(:ko_list=).with file_name
+      parser.parse!(["-k", file_name])
     end
   end
 

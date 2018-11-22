@@ -7,25 +7,28 @@ RSpec.describe KOHMM::Config do
   describe 'default values' do
     subject { config }
 
-    its(:output_file) { is_expected.to eq 1 }
-    its(:cpu) { is_expected.to eq 1 }
-    its(:hmmsearch) { is_expected.to eq "hmmsearch" }
-    its(:tmp_dir) { is_expected.to eq "./tmp" }
-    its(:parallel) { is_expected.to be_nil }
-    its(:reannotation?) { is_expected.to be_falsey }
+    its(:output_file)   { is_expected.to be_nil }
+    its(:output_io)     { is_expected.to eq STDOUT }
+    its(:cpu)           { is_expected.to eq 1 }
+    its(:hmmsearch)     { is_expected.to eq "hmmsearch" }
+    its(:tmp_dir)       { is_expected.to eq "./tmp" }
+    its(:parallel)      { is_expected.to be_nil }
+    its(:reannotation?) { is_expected.to be_falsy }
+    its(:formatter)     { is_expected.to be_kind_of KOHMM::OutputFormatter::HitDetailFormatter }
   end
 
   describe 'initial values are passed to #initialize' do
     init_values = {
       output_file:          "file",
       profile_dir:          "dir",
-      threshold_list:       "file2",
+      ko_list:              "file2",
       e_value:              0.1,
       cpu:                  5,
       hmmsearch:            "/usr/local/bin/hmmsearch",
       tmp_dir:              "/tmp",
       hmmsearch_result_dir: "dir2",
       parallel:             "/usr/local/bin/parallel",
+      formatter:            KOHMM::OutputFormatter::SimpleTabularFormatter.new
     }
     subject { described_class.new(init_values) }
 
@@ -37,7 +40,7 @@ RSpec.describe KOHMM::Config do
   describe '.load' do
     let(:yaml_str) {
       "profile_dir: dir
-       threshold_list: file
+       ko_list: file
        cpu: 10
        hmmsearch: /usr/local/bin/hmmsearch".gsub(/^\s+/, "")
     }
@@ -46,7 +49,7 @@ RSpec.describe KOHMM::Config do
       it 'loads configuration from the argument' do
         aggregate_failures do
           expect(loaded_config.profile_dir).to eq "dir"
-          expect(loaded_config.threshold_list).to eq "file"
+          expect(loaded_config.ko_list).to eq "file"
           expect(loaded_config.cpu).to eq 10
           expect(loaded_config.hmmsearch).to eq "/usr/local/bin/hmmsearch"
         end
@@ -72,23 +75,16 @@ RSpec.describe KOHMM::Config do
 
   describe 'attributes' do
     describe '#output_file' do
-      context 'when output_file = "-"' do
-        it 'returns 1' do
-          config.output_file = "-"
-          expect(config.output_file).to eq 1
-        end
-      end
+      subject(:output_file) { config.output_file }
 
-      context 'when output_file is specified by a file name' do
-        it 'returns the file name' do
-          file = "foo"
-          config.output_file = file
-          expect(config.output_file).to eq file
-        end
+      it 'returns the file name' do
+        file = "foo"
+        config.output_file = file
+        expect(output_file).to eq file
       end
     end
 
-    %i[profile_dir threshold_list hmmsearch
+    %i[profile_dir ko_list hmmsearch
        tmp_dir hmmsearch_result_dir parallel query].each do |attr|
       describe "##{attr} and ##{attr}=" do
         it 'can set and get a value' do
@@ -112,6 +108,33 @@ RSpec.describe KOHMM::Config do
       it 'can set and get a boolean' do
         config.reannotation = true
         expect(config).to be_reannotation
+      end
+    end
+  end
+
+  describe '#output_io' do
+    subject(:output_io) { config.output_io }
+
+    after { output_io.close unless output_io == $stdout }
+
+    context 'when output_file is nil' do
+      it 'returns stdout' do
+        config.output_file = nil
+        expect(output_io).to eq STDOUT
+      end
+    end
+
+    context 'when output_file is specified by a file name' do
+      let(:tempfile) { Tempfile.new }
+      let(:path)     { tempfile.path }
+
+      after { tempfile.close! }
+
+      it 'returns the file IO' do
+        config.output_file = path
+        output_io.write "test"
+        output_io.flush
+        expect(IO.read(path)).to eq "test"
       end
     end
   end

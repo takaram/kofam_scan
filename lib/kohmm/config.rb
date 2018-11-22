@@ -2,10 +2,9 @@ autoload :YAML, 'yaml'
 
 module KOHMM
   class Config
-    attr_accessor :profile_dir, :threshold_list, :e_value, :hmmsearch,
-                  :cpu, :tmp_dir, :hmmsearch_result_dir, :parallel, :query
-    # reader for these two attributes are defined later
-    attr_writer   :output_file, :reannotation
+    attr_accessor :output_file, :profile_dir, :ko_list, :e_value, :hmmsearch, :cpu,
+                  :tmp_dir, :hmmsearch_result_dir, :parallel, :formatter, :query
+    attr_writer   :reannotation
 
     def self.load(file)
       file = File.open(file) if file.kind_of? String
@@ -16,22 +15,21 @@ module KOHMM
     end
 
     def initialize(initial_values = {})
-      @output_file = "-"
+      @output_file = nil
       @cpu = 1
       @tmp_dir = "./tmp"
       @hmmsearch = "hmmsearch"
       @mode = :score
       @reannotation = false
+      @formatter = OutputFormatter::HitDetailFormatter.new
 
       initial_values.each do |k, v|
         public_send(:"#{k}=", v)
       end
     end
 
-    # when @output_file == "-", this method returns 1 (stdout file descriptor)
-    # so that you can give it to Kernel#open as an argument
-    def output_file
-      @output_file == "-" ? 1 : @output_file
+    def output_io
+      @output_file ? File.open(@output_file, "w") : STDOUT
     end
 
     def reannotation?

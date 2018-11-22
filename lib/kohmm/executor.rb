@@ -17,21 +17,15 @@ module KOHMM
     end
 
     def execute
-      read_thresholds
+      parse_ko
       setup_directories
       run_hmmsearch unless config.reannotation?
       search_hit_genes
       output_hits
     end
 
-    def read_thresholds(path = nil)
-      path ||= config.threshold_list
-      list_file = File.open(path)
-      begin
-        @threshold_list = ThresholdList.new(list_file)
-      ensure
-        list_file.close
-      end
+    def parse_ko
+      File.open(config.ko_list) { |file| KO.parse(file) }
     end
 
     def output_file
@@ -52,8 +46,7 @@ module KOHMM
     end
 
     def ko_list
-      profiles_path = File.join(config.profile_dir, "K?????")
-      Dir.glob(profiles_path).map { |path| File.basename(path) }
+      KO.all.select(&:profile_available?)
     end
 
     def run_hmmsearch
@@ -85,41 +78,15 @@ module KOHMM
     def search_hit_genes
       result_files_path = File.join(@hmmsearch_result_dir, "K?????")
       files = Dir.glob(result_files_path)
-      @hit_genes = HitGenes.new(files, @threshold_list)
+      @result = Result.new(query_list)
+      @result.parse(*files)
     end
 
-    def output_hits(all = true)
-      all ? output_all_hits : output_only_top_hit
+    def output_hits
+      config.formatter.format(@result, output_file)
     end
 
     private
-
-    def output_all_hits
-      query_list.each do |q|
-        if @hit_genes.has_key?(q)
-          hit_genes_of_q = @hit_genes[q].sort_by { |ary| ary[1] }.reverse
-          output_file.puts [q, *hit_genes_of_q].join("\t")
-        else
-          output_file.puts q
-        end
-      end
-    end
-
-    def output_only_top_hit
-      annotation_result = {}
-      @hit_genes.each do |gene, ko_and_val|
-        annotation_result[gene] = ko_and_val.max_by { |ary| ary[1] }
-      end
-
-      query_list.each do |q|
-        if annotation_result.has_key?(q)
-          ko = annotation_result[q][0]
-          output_file.puts "#{q}\t#{ko}"
-        else
-          output_file.puts q
-        end
-      end
-    end
 
     def null_device
       ["/dev/null", "NUL"].find { |nul| File.exist?(nul) }

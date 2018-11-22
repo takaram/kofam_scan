@@ -21,21 +21,23 @@ module KOHMM
 
       def parse
         @tabular_files.each do |result_file|
-          result_file.grep_v(/^#/).map do |line|
-            data = line.split
+          File.open(result_file) do |f|
+            f.grep_v(/^#/).map do |line|
+              data = line.split
 
-            name    = data[NAME_POSITION]
-            ko      = KO[data[KO_POSITION]]
+              name    = data[NAME_POSITION]
+              ko      = KO[data[KO_POSITION]]
 
-            if ko.full?
-              score   = data[FULL_SCORE_POSITION].to_f
-              e_value = data[FULL_E_VALUE_POSITION].to_f
-            else
-              score   = data[DOMAIN_SCORE_POSITION].to_f
-              e_value = data[DOMAIN_E_VALUE_POSITION].to_f
+              if ko.full?
+                score   = data[FULL_SCORE_POSITION].to_f
+                e_value = data[FULL_E_VALUE_POSITION].to_f
+              else
+                score   = data[DOMAIN_SCORE_POSITION].to_f
+                e_value = data[DOMAIN_E_VALUE_POSITION].to_f
+              end
+
+              @result << Hit.new(name, ko, score, e_value)
             end
-
-            @result << Hit.new(name, ko, score, e_value)
           end
         end
       end

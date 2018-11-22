@@ -5,7 +5,7 @@ RSpec.describe KOHMM::Executor do
 
   describe '#execute' do
     let(:methods_to_be_executed) {
-      %i[read_thresholds setup_directories
+      %i[parse_ko setup_directories
          run_hmmsearch search_hit_genes output_hits]
     }
 
