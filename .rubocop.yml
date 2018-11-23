@@ -73,6 +73,7 @@ Style/ClassCheck:
 
 Style/ConditionalAssignment:
   EnforcedStyle: assign_inside_condition
+  IncludeTernaryExpressions: false
 
 Style/DoubleNegation:
   Enabled: false
