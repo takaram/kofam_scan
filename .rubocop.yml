@@ -49,6 +49,13 @@ Naming/UncommunicativeMethodParamName:
 Performance/RegexpMatch:
   Enabled: false
 
+############ RSpec ############
+RSpec/MultipleExpectations:
+  Max: 2
+
+RSpec/NestedGroups:
+  Max: 4
+
 ########## Security ###########
 
 Security/Eval:
