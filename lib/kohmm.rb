@@ -11,14 +11,11 @@ module KOHMM
   autoload :CLI
   autoload :Config
   autoload :Executor
-  autoload :HitGenes
   autoload :HMMSearch, 'kohmm/hmmsearch'
-  autoload :HmmsearchParser
   autoload :KO
   autoload :OutputFormatter
   autoload :ParallelCommand
   autoload :Result
-  autoload :ThresholdList
 
   VERSION = '0.1.2'.freeze
   DEFAULT_CONFIG_FILE = File.expand_path("../config.yml", __dir__).freeze
