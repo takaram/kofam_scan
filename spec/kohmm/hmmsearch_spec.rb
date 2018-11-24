@@ -20,9 +20,9 @@ RSpec.describe KOHMM::HMMSearch do
   describe '.command_path' do
     let(:path) { "/usr/bin/hmmsearch" }
 
-    before do
-      described_class.command_path = path
-    end
+    before { described_class.command_path = path }
+
+    after  { described_class.command_path = nil }
 
     it 'alternates the command' do
       expect(obj.to_a.first).to eq path
