@@ -1,6 +1,0 @@
-profile_dir: /aptmp/aramaki/annotation/db/new/genus/hmm/profile/best
-threshold_list: /aptmp/aramaki/annotation/db/new/genus/hmm/threshold/Fmax_best
-hmmsearch: /usr/appli/freeware/hmmer/3.1b2/binaries/hmmsearch
-cpu: 8
-parallel: /usr/appli/freeware/bin/parallel
-#parallel: /usr/bin/xargs

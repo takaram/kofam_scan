@@ -11,3 +11,6 @@
 # history files
 .byebug_history
 .tramp_history
+
+# config file
+/config.yml
