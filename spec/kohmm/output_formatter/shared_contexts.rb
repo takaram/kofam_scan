@@ -4,7 +4,7 @@ RSpec.shared_context 'basic context' do
   let(:result) { KOHMM::Result.new(%w[gene1 gene2 gene3 gene4 gene5]) }
   let(:out_file) { StringIO.new("", "w") }
   let(:ko1) do
-    KOHMM::KO.new("K00001", 100, :full, :whole, 0.8, 100, 100, 200, 100,
+    KOHMM::KO.new("K00001", 100, :full, :all, 0.8, 100, 100, 200, 100,
                   10, 0.5, "alcohol dehydrogenase [EC:1.1.1.1]")
   end
   let(:ko2) do
@@ -12,7 +12,7 @@ RSpec.shared_context 'basic context' do
                   12, 0.5, "alcohol dehydrogenase (NADP+) [EC:1.1.1.2]")
   end
   let(:ko3) do
-    KOHMM::KO.new("K00003", 200, :domain, :whole, 0.9, 100, 100, 200, 150,
+    KOHMM::KO.new("K00003", 200, :domain, :all, 0.9, 100, 100, 200, 150,
                   20, 0.5, "homoserine dehydrogenase [EC:1.1.1.3]")
   end
 

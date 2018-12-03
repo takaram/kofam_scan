@@ -54,8 +54,8 @@ module KOHMM
       @score_type == :domain
     end
 
-    def whole?
-      @profile_type == :whole
+    def all?
+      @profile_type == :all
     end
 
     def trim?

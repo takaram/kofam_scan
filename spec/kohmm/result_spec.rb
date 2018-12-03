@@ -23,7 +23,7 @@ RSpec.describe KOHMM::Result do
   before(:all) { KOHMM::KO.parse(StringIO.new(<<~KOLIST)) }
     knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
     K00001	170.20	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
-    K00004	277.79	full	whole	0.925732	857	652	781	354	3.38	0.590	(R,R)-butanediol dehydrogenase [EC:1.1.1.4 1.1.1.- 1.1.1.303]
+    K00004	277.79	full	all	0.925732	857	652	781	354	3.38	0.590	(R,R)-butanediol dehydrogenase [EC:1.1.1.4 1.1.1.- 1.1.1.303]
   KOLIST
 
   after { [hmmsearch_result1, hmmsearch_result2].each(&:close) }

@@ -9,7 +9,7 @@ RSpec.describe KOHMM::KO do
     described_class.parse(StringIO.new(<<~KOLIST))
       knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
       K00001	297.73	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
-      K00005	344.01	full	whole	0.901895	1381	965	796	365	2.82	0.590	glycerol dehydrogenase [EC:1.1.1.6]
+      K00005	344.01	full	all	0.901895	1381	965	796	365	2.82	0.590	glycerol dehydrogenase [EC:1.1.1.6]
       K01977	-	-	-	-	16376	-	-	-	-	-	glycerol dehydrogenase [EC:1.1.1.6]
     KOLIST
   end
@@ -75,10 +75,10 @@ RSpec.describe KOHMM::KO do
   end
 
   describe 'profile type predicator' do
-    describe '#whole?' do
-      subject { ko.whole? }
+    describe '#all?' do
+      subject { ko.all? }
 
-      context 'when profile_type is whole' do
+      context 'when profile_type is all' do
         let(:ko) { k00005 }
 
         it { is_expected.to be_truthy }
@@ -94,7 +94,7 @@ RSpec.describe KOHMM::KO do
     describe '#trim?' do
       subject { ko.trim? }
 
-      context 'when profile type is whole' do
+      context 'when profile type is all' do
         let(:ko) { k00005 }
 
         it { is_expected.to be_falsy }
