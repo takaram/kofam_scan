@@ -12,8 +12,10 @@ module KOHMM
 
       def format(result, output)
         output << header
-        result.each do |hit|
-          output << format_hit(hit) << "\n"
+        result.query_list.each do |query|
+          result.for_gene(query).sort_by(&:score).reverse_each do |hit|
+            output << format_hit(hit) << "\n"
+          end
         end
       end
 

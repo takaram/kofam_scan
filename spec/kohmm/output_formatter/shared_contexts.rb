@@ -16,9 +16,8 @@ RSpec.shared_context 'basic context' do
                   20, 0.5, "homoserine dehydrogenase [EC:1.1.1.3]")
   end
 
-  before { described_class.new.format(result, out_file) }
-
   def output
+    described_class.new.format(result, out_file) if out_file.string.empty?
     out_file.string.dup
   end
 end
@@ -37,8 +36,8 @@ RSpec.shared_context 'multiple hits for one gene' do
   before do
     result << KOHMM::Result::Hit.new("gene1", ko1, 101, 0.7)
     result << KOHMM::Result::Hit.new("gene1", ko2, 180, 0.5)
+    result << KOHMM::Result::Hit.new("gene4", ko2, 200, 0.9)
     result << KOHMM::Result::Hit.new("gene1", ko3, 20,  0.3)
-    result << KOHMM::Result::Hit.new("gene4", ko3, 200, 0.9)
   end
 
   include_context 'basic context'

@@ -1,6 +1,14 @@
 require_relative 'shared_contexts'
 
 RSpec.describe KOHMM::OutputFormatter::HitDetailFormatter do
+  def output_array
+    output_lines = output.split(/\n/).grep_v(/^#/)
+    output_lines.map do |line|
+      mark = line.slice!(0, 1)
+      [mark, *line.split(nil, 5)]
+    end
+  end
+
   describe '#format' do
     context 'the simplest context' do
       include_context 'one hit for one gene'
@@ -24,6 +32,16 @@ RSpec.describe KOHMM::OutputFormatter::HitDetailFormatter do
         gene1_lines = output.split(/\n/).grep(/gene1/)
         expect(gene1_lines.size).to eq 3
       end
+
+      it 'gives result in the order of gene name and score' do
+        gene_ko_pair = output_array.map { |line| line.values_at(1, 2) }
+        expect(gene_ko_pair).to match [
+          %w[gene1 K00002],
+          %w[gene1 K00001],
+          %w[gene1 K00003],
+          %w[gene4 K00002]
+        ]
+      end
     end
 
     context 'multiple hits for one KO' do
@@ -36,11 +54,14 @@ RSpec.describe KOHMM::OutputFormatter::HitDetailFormatter do
     end
 
     context 'with very long gene name' do
-      before do
-        result << KOHMM::Result::Hit.new("a" * 100, ko1, 200, 1e-10)
-      end
-
       include_context 'basic context'
+
+      let(:result) { KOHMM::Result.new([long_name]) }
+      let(:long_name) { "a" * 100 }
+
+      before do
+        result << KOHMM::Result::Hit.new(long_name, ko1, 200, 1e-10)
+      end
 
       char_len = 19
 
