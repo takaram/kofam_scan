@@ -8,10 +8,10 @@ module KOHMM
           Usage: #{File.basename($PROGRAM_NAME)} [options] <query>
             <query>                      FASTA formatted query sequence file
             -o <file>                    File to output the result  [stdout]
-            -f, --format <num>           Format of the output [1]
-              1: Detail for each hits (including hits below threshold)
-              2: TSV format with gene name and the top hit KO
-              3: TSV format with gene name and all hit KOs
+            -f, --format <format>        Format of the output [detail]
+              detail:     Detail for each hits (including hits below threshold)
+              mapper:     KEGG Mapper compatible format
+              mapper-all: Similar to mapper, but all hit KO are listed
             -p, --profile <dir>          Directory where profile HMM files exist
             -k, --ko_list <file>         KO information file
             -r, --reannotate <dir>       Directory where hmmsearch table files exist
@@ -21,11 +21,12 @@ module KOHMM
         USAGE
       end
 
-      OUTPUT_FORMATTER_LIST = [
-        OutputFormatter::HitDetailFormatter,
-        OutputFormatter::SimpleTabularFormatter,
-        OutputFormatter::MultiHitTabularFormatter
-      ].freeze
+      OUTPUT_FORMATTER_MAP = {
+        "detail"     => OutputFormatter::HitDetailFormatter,
+        "mapper"     => OutputFormatter::SimpleTabularFormatter,
+        "mapper-all" => OutputFormatter::MultiHitTabularFormatter
+      }.freeze
+      OUTPUT_FORMATTER_MAP.each_key(&:freeze)
 
       def initialize(config, parser = ::OptionParser.new)
         @parser = parser
@@ -54,8 +55,8 @@ module KOHMM
         @parser.on("--tmp_dir d")       { |d| @config.tmp_dir = d }
         @parser.on("-h", "--help")      { puts usage; exit }
 
-        @parser.on("-f n", "--format", Integer) do |n|
-          @config.formatter = OUTPUT_FORMATTER_LIST[n - 1].new
+        @parser.on("-f n", "--format") do |f|
+          @config.formatter = OUTPUT_FORMATTER_MAP[f].new
         end
 
         @parser.on("-r d", "--reannotate") do |r|

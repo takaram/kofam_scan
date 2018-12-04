@@ -14,7 +14,7 @@ RSpec.describe KOHMM::CLI::OptionParser do
     it 'calls config.formatter=' do
       formatter = KOHMM::OutputFormatter::HitDetailFormatter
       expect(config).to receive(:formatter=).with kind_of(formatter)
-      parser.parse!(["-f", "1"])
+      parser.parse!(["-f", "detail"])
     end
   end
 
