@@ -46,7 +46,7 @@ module KOHMM
     end
 
     def ko_list
-      KO.all.select(&:profile_available?)
+      KO.all.select(&:profile_available?).map(&:name)
     end
 
     def run_hmmsearch
@@ -66,13 +66,11 @@ module KOHMM
     end
 
     def hmmsearch_command
-      result  = File.join(Shellwords.escape(@hmmsearch_result_dir), "{}")
-      profile = File.join(Shellwords.escape(config.profile_dir), "{}")
-      hmmsearch = Shellwords.escape(config.hmmsearch)
-      query = Shellwords.escape(config.query)
+      result  = File.join(@hmmsearch_result_dir, "{}")
+      profile = File.join(config.profile_dir, "{}.hmm")
+      HMMSearch.command_path = config.hmmsearch
 
-      "#{hmmsearch} --cpu=1 -T0 --tblout=#{result}" \
-      " #{profile} #{query} > #{null_device}"
+      HMMSearch.new(profile, config.query, cpu: 1, o: null_device, T: 0, tblout: result).to_a
     end
 
     def search_hit_genes
