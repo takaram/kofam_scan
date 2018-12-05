@@ -70,5 +70,17 @@ RSpec.describe KOHMM::OutputFormatter::HitDetailFormatter do
         expect(line).to match(/\ba{#{char_len}}\b/)
       end
     end
+
+    context 'when report_unannotated is true' do
+      include_examples description, <<~RESULT
+        # gene name           KO      score   E-value KO definition
+        #-------------------- ------ ------ --------- ---------------------
+          gene1               K00001   50.1    0.0009 alcohol dehydrogenase [EC:1.1.1.1]
+        * gene2               K00002  180.0     5e-05 alcohol dehydrogenase (NADP+) [EC:1.1.1.2]
+          gene3               -           -         - -
+        * gene4               K00003  200.0   1.2e-10 homoserine dehydrogenase [EC:1.1.1.3]
+          gene5               -           -         - -
+      RESULT
+    end
   end
 end

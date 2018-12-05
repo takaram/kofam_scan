@@ -12,6 +12,9 @@ module KOHMM
               detail:     Detail for each hits (including hits below threshold)
               mapper:     KEGG Mapper compatible format
               mapper-all: Similar to mapper, but all hit KO are listed
+            --[no-]report-unannotated    Sequence name will be shown even if no KOs are assigned
+                                         Default is true when format=mapper or mapper-all,
+                                         false when format=detail
             -p, --profile <dir>          Directory where profile HMM files exist
             -k, --ko_list <file>         KO information file
             -r, --reannotate <dir>       Directory where hmmsearch table files exist
@@ -31,6 +34,7 @@ module KOHMM
       def initialize(config, parser = ::OptionParser.new)
         @parser = parser
         @config = config
+        @after_hook = []
 
         set_options_to_parser
 
@@ -39,6 +43,7 @@ module KOHMM
 
       def parse!(argv = nil)
         argv ? @parser.parse!(argv) : @parser.parse!
+        @after_hook.each(&:call)
       end
 
       def usage
@@ -57,6 +62,12 @@ module KOHMM
 
         @parser.on("-f n", "--format") do |f|
           @config.formatter = OUTPUT_FORMATTER_MAP[f].new
+        end
+
+        # This is done as an after hook because formatter can be changed
+        # during the option parse
+        @parser.on("--[no-]report-unannotated") do |b|
+          @after_hook << -> { @config.formatter.report_unannotated = b }
         end
 
         @parser.on("-r d", "--reannotate") do |r|

@@ -63,6 +63,33 @@ RSpec.describe KOHMM::CLI::OptionParser do
     end
   end
 
+  describe '--[no-]report-unannotated' do
+    context 'without no- prefix' do
+      it 'calls formatter.report_unannotated= with true' do
+        config.formatter = object_double(config.formatter, 'report_unannotated=': true)
+        parser.parse!(["--report-unannotated"])
+
+        expect(config.formatter).to have_received(:report_unannotated=).with true
+      end
+    end
+
+    context 'with no- prefix' do
+      it 'calls formatter.report_unannotated= with false' do
+        config.formatter = object_double(config.formatter, 'report_unannotated=': false)
+        parser.parse!(["--no-report-unannotated"])
+
+        expect(config.formatter).to have_received(:report_unannotated=).with false
+      end
+    end
+
+    context 'with -f option' do
+      it 'correctly sets report_unannotated' do
+        parser.parse!(["--no-report-unannotated", "-f", "mapper"])
+        expect(config.formatter.report_unannotated).to be_falsey
+      end
+    end
+  end
+
   describe '#parse!' do
     let(:opt_array) { %w[-o file1 -p dir1 -t file2 --cpu=1] }
 

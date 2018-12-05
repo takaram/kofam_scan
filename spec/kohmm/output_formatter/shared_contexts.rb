@@ -1,6 +1,8 @@
 require 'stringio'
 
 RSpec.shared_context 'basic context' do
+  subject(:formatter) { described_class.new }
+
   let(:result) { KOHMM::Result.new(%w[gene1 gene2 gene3 gene4 gene5]) }
   let(:out_file) { StringIO.new("", "w") }
   let(:ko1) do
@@ -17,7 +19,7 @@ RSpec.shared_context 'basic context' do
   end
 
   def output
-    described_class.new.format(result, out_file) if out_file.string.empty?
+    formatter.format(result, out_file) if out_file.string.empty?
     out_file.string.dup
   end
 end
@@ -51,4 +53,22 @@ RSpec.shared_context 'multiple hits for one KO' do
   end
 
   include_context 'basic context'
+end
+
+RSpec.shared_examples 'when report_unannotated is false' do |expected|
+  include_context 'one hit for one gene'
+  before { formatter.report_unannotated = false }
+
+  it 'reports annotated genes only' do
+    expect(output).to eq expected
+  end
+end
+
+RSpec.shared_examples 'when report_unannotated is true' do |expected|
+  include_context 'one hit for one gene'
+  before { formatter.report_unannotated = true }
+
+  it 'reports all the queries' do
+    expect(output).to eq expected
+  end
 end

@@ -1,6 +1,6 @@
 module KOHMM
-  module OutputFormatter
-    class HitDetailFormatter
+  class OutputFormatter
+    class HitDetailFormatter < OutputFormatter
       COLUMN_WIDTH = {
         gene_name:     19,
         ko:            6,
@@ -10,10 +10,20 @@ module KOHMM
       }.freeze
       private_constant :COLUMN_WIDTH
 
+      def initialize
+        @report_unannotated = false
+      end
+
       def format(result, output)
         output << header
         result.query_list.each do |query|
-          result.for_gene(query).sort_by(&:score).reverse_each do |hit|
+          hits = result.for_gene(query)
+          if hits.empty?
+            output << format_empty_hit(query) << "\n" if @report_unannotated
+            next
+          end
+
+          hits.sort_by(&:score).reverse_each do |hit|
             output << format_hit(hit) << "\n"
           end
         end
@@ -45,6 +55,12 @@ module KOHMM
         mark = hit.above_threshold? ? '*' : ' '
         truncated_gene_name = hit.gene_name[0, COLUMN_WIDTH[:gene_name]]
         template % [mark, truncated_gene_name, hit.ko.name, hit.score, hit.e_value, hit.ko.definition]
+      end
+
+      def format_empty_hit(query)
+        "  %-#{COLUMN_WIDTH[:gene_name]}s -#{' ' * (COLUMN_WIDTH[:ko] - 1)}" \
+        "#{' ' * COLUMN_WIDTH[:score]}-#{' ' * COLUMN_WIDTH[:e_value]}- -" %
+          query[0, COLUMN_WIDTH[:gene_name]]
       end
     end
   end

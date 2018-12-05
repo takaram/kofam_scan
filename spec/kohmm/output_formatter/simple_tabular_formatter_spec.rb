@@ -29,5 +29,12 @@ RSpec.describe KOHMM::OutputFormatter::SimpleTabularFormatter do
         expect(gene1_lines.size).to eq 1
       end
     end
+
+    context 'when report_unannotated is false' do
+      include_examples description, <<~RESULT
+        gene2\tK00002
+        gene4\tK00003
+      RESULT
+    end
   end
 end
