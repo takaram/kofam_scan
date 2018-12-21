@@ -1,0 +1,191 @@
+# hmmsearch :: search profile(s) against a sequence database
+# HMMER 3.1b2 (February 2015); http://hmmer.org/
+# Copyright (C) 2015 Howard Hughes Medical Institute.
+# Freely distributed under the GNU General Public License (GPLv3).
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# query HMM file:                  /user1/scl1/aramaki/new_db/genus/hmm/profile/K00001
+# target sequence database:        /user1/scl1/aramaki/new_db/genus/query/apr.pep
+# output directed to file:         output
+# MSA of all hits saved to file:   alignment
+# per-seq hits tabular output:     tblout
+# per-dom hits tabular output:     domtblout
+# pfam-style tabular hit output:   pfamtblout
+# number of worker threads:        10
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query:       K00001  [M=320]
+Scores for complete sequences (score includes all domains):
+   --- full sequence ---   --- best 1 domain ---    -#dom-
+    E-value  score  bias    E-value  score  bias    exp  N  Sequence      Description
+    ------- ------ -----    ------- ------ -----   ---- --  --------      -----------
+    7.7e-51  170.5   0.1    9.5e-51  170.2   0.1    1.0  1  apr:Apre_1614  Alcohol dehydrogenase GroES domain protein
+    4.6e-17   59.5   0.0    2.1e-16   57.3   0.0    1.8  1  apr:Apre_1060  iron-containing alcohol dehydrogenase
+    8.3e-06   22.5   0.6    1.4e-05   21.8   0.6    1.4  1  apr:Apre_1404  alanine dehydrogenase
+     0.0011   15.5   0.0     0.0012   15.5   0.0    1.1  1  apr:Apre_1633  thiamine biosynthesis protein ThiF
+     0.0017   14.9   0.0     0.0022   14.6   0.0    1.1  1  apr:Apre_1498  FAD-dependent pyridine nucleotide-disulphide o
+  ------ inclusion threshold ------
+      0.014   11.9   3.2       0.78    6.2   0.1    2.5  2  apr:Apre_0550  glutamate synthase (NADPH), homotetrameric
+       0.49    6.8   8.8       0.34    7.4   6.1    2.1  2  apr:Apre_0378  flavocytochrome c
+
+
+Domain annotation for each sequence (and alignments):
+>> apr:Apre_1614  Alcohol dehydrogenase GroES domain protein
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !  170.2   0.1   3.7e-53   9.5e-51      34     310 ..      26     325 ..       2     336 .. 0.86
+
+  Alignments for each domain:
+  == domain 1  score: 170.2 bits;  conditional E-value: 3.7e-53
+         K00001  34 svl.vkviatglchsdlsawqGan.pr.lPlipGhEaagvvtevgegvtdlkvgdkv.ivpf........r.................lpggfaey 100
+                    + + +kv+ +g+c+sd+ +++G+n +  +P+i+GhE++gvv+evg++v++lkvgd+v + p+                           +ggf e 
+  apr:Apre_1614  26 DDIkIKVKSVGICGSDIGIYNGTNpMAeYPRIIGHEMTGVVEEVGNKVKGLKVGDHVaVDPVincgecknCkkgrvnicenlkvrgvhVDGGFQEK 121
+                    34559*******************5559*****************************66555777666550556667777777888889******* PP
+
+         K00001 101 avvdpallvkvppdltaedaallscpvltalgalendgdleagetvavaglGgvGlaaleharaaGasvviavdfvnpeklelarelGatavin.a 195
+                    +vv +  + k++p+++  +   l +p++ +++a + ++++++g++v v g+G++G  +  +a  +Ga +v + d ++p+kle a ++G+ a i+ +
+  apr:Apre_1614 122 IVVKESQAYKLDPSMPWNKS-VLVEPFSIGFQANR-RANVSEGDAVFVMGAGSIGQTVGRVAQYLGA-KVFTSD-MDPKKLERASKYGMIA-IDaS 212
+                    *****************654.56699*88**9776.6889***************998888888***.788889.99***********987.8945 PP
+
+         K00001 196 kddvaeaireltkg.gadvvleavgsaavlrealralrrgGltvtvGlppgpsaslp..elvakeltltGsvlgsvakedlpeladalaagklnpa 288
+                    k+d ae+ire  +g  advv++a+ +++++++a++  +  G++v++G++++ps ++   +++ kel++ Gs l +   +++pe++da+++gkl++ 
+  apr:Apre_1614 213 KEDPAEVIRENNNGrLADVVVDAICTPKTFEQAVKLAASAGTVVNLGFSTKPS-EICsvDITSKELDIVGSRLSN---RRFPEVIDAYNSGKLSF- 303
+                    59**********9999*********************************9998.444568**********87666...88***************. PP
+
+         K00001 289 drlvthelpledineal.ealek 310
+                    d lv+he+++e++++a+   + +
+  apr:Apre_1614 304 DDLVSHEMKFEEAEKAIkMIM-D 325
+                    9***************94444.3 PP
+
+>> apr:Apre_1060  iron-containing alcohol dehydrogenase
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   57.3   0.0   8.1e-19   2.1e-16       7     208 ..      29     319 ..      16     382 .. 0.77
+
+  Alignments for each domain:
+  == domain 1  score: 57.3 bits;  conditional E-value: 8.1e-19
+         K00001   7 kaavvtdp..........gaplnlee........deveapep.......................gggsvl.v.kviatgl.......chsdlsaw 52 
+                    ka++vt+            a+++le+        d+ve p+p                       gggs++ + k+    +       + + l  +
+  apr:Apre_1060  29 KAVLVTGGssmkrfgfldEAKAQLEKagievdiiDGVE-PDPsvktcleggkrmekfgpdwiiaiGGGSAMdAaKAMW--VfyeypgyDFTKLADF 121
+                    677777776666665555323455556667777999*9.99999***************************8878888..6778855533333322 PP
+
+         K00001  53 qGanpr....lPl..ip.....GhEaa..gvvtevgegvtdlkvgdkv.ivpfrlpggfaeyavvdpallvkvppdlta...eda......alls. 124
+                    +  np       l  ip     ++E++  +v+t+++++        k+ +   ++p  ++e+a++d++   k+p+++ta   +d+      a++s 
+  apr:Apre_1060 122 D--NPAlknkARLicIPstsgtASEITafSVITDTEKEI-------KYpL---VHPDFVPEVAILDTRIPAKMPEKVTAatgMDVmthaveAYVSt 205
+                    2..22244453334577999999**99999****95553.......4444...79************************99977678889999997 PP
+
+         K00001 125 ..cpvlt...algale..........ndgd.leagetvavagl..G......gvGla.aleharaa......Gasvvia....vdf..vnpekl.e 182
+                      + + t   a++a+e          ++g+ + a+e++  a++  G      ++G++ +++h  ++      G +++i+    +d+   + +k+ +
+  apr:Apre_1060 206 saDDF-TdpyAIRAIElvfenlekayKNGSdMDAREKMHTASTiaGmaftnaSLGIVhSMAHKIGGvfhlthGEANAIMlpyiIDYnrKSCDKYeK 300
+                    77444.5777999999999*******77777************99777888899*************************99998877666669956 PP
+
+         K00001 183 larelGatavinakddvaeaireltk 208
+                    l + lG++       d+ae+ir+l +
+  apr:Apre_1060 301 LEKILGID-------DLAEEIRKLNA 319
+                    67778996.......57787777762 PP
+
+>> apr:Apre_1404  alanine dehydrogenase
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   21.8   0.6   5.3e-08   1.4e-05     143     221 ..     167     274 ..     119     359 .. 0.66
+
+  Alignments for each domain:
+  == domain 1  score: 21.8 bits;  conditional E-value: 5.3e-08
+         K00001 143 getvavaglGgvGlaaleharaaGasvviavdf..........vnpeklel..arelGatavinakd...................dvaeairelt 207
+                     ++v+++g+G vG+aa  +a+++Ga +v+++d           + p+k+e   +  l ++++++++d                   d+++   +++
+  apr:Apre_1404 167 PANVVIVGAGTVGTAATRIAVGMGA-RVTVLDVniealtqlhnIFPDKIETlySNPLNIEDAVKNADlvistvlipgarapqlikeDMVK---QMK 258
+                    579**********************.6666662223344445555555532234444555555544456666666666666666655555...444 PP
+
+         K00001 208 kg..gadvvleavgsa 221
+                    +g   +dv+++  gs+
+  apr:Apre_1404 259 EGsvIVDVAIDQGGST 274
+                    4444677777776632 PP
+
+>> apr:Apre_1633  thiamine biosynthesis protein ThiF
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   15.5   0.0   4.5e-06    0.0012     142     201 ..      20      85 ..       7     171 .. 0.74
+
+  Alignments for each domain:
+  == domain 1  score: 15.5 bits;  conditional E-value: 4.5e-06
+         K00001 142 agetvavaglGgvGla.aleharaaGasvviavdf.......vnpeklelarelGatavinakddvae 201
+                    + ++v++ g+Gg+G+  a+ +ar  G++++++ d+        n + +++a +lG ++v ++k +++e
+  apr:Apre_1633  20 KKSSVSILGCGGLGSNiAMSLAR-CGVGNIYIYDYdkveysnLNRQNYDMA-DLGKSKVMQTKKKIEE 85 
+                    5789**********997888877.8999****6666666688888888878.99*9999987753444 PP
+
+>> apr:Apre_1498  FAD-dependent pyridine nucleotide-disulphide oxidoreductase
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   14.6   0.0   8.4e-06    0.0022     129     211 ..     116     216 ..      64     278 .. 0.62
+
+  Alignments for each domain:
+  == domain 1  score: 14.6 bits;  conditional E-value: 8.4e-06
+         K00001 129 t.....algalendgdle.......agetvavaglGgvGlaaleharaaGasvvia...vdf........vnpekl.elarelGatavin.akddv 199
+                    t     ++ a++   dl+         + v+v+g+G +Gl a+  a  +G+ ++++    d+          +ekl e   ++G+t++   + +  
+  apr:Apre_1498 116 TnvdskGVFAIRTVDDLRsfkeyvaDKKEVVVIGGGILGLEAAFSAQKLGL-NITViesFDYllarqldrELSEKLeENLNNMGITTYTGkNTQ-- 208
+                    23333433344433333333356635999**********************.7887788444655444435556998999999****9884446.. PP
+
+         K00001 200 aeaireltkgga 211
+                     e    ltk ga
+  apr:Apre_1498 209 -E---ILTKDGA 216
+                    .5...2332222 PP
+
+>> apr:Apre_0550  glutamate synthase (NADPH), homotetrameric
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 ?    5.4   0.4    0.0051       1.3     143     172 ..     142     171 ..     123     213 .. 0.74
+   2 ?    6.2   0.1     0.003      0.78     140     181 ..     279     323 ..     230     355 .. 0.74
+
+  Alignments for each domain:
+  == domain 1  score: 5.4 bits;  conditional E-value: 0.0051
+         K00001 143 getvavaglGgvGlaaleharaaGasvvia 172
+                     ++vav+g+G  Gl+a++  + +G svv+ 
+  apr:Apre_0550 142 NKKVAVVGAGPSGLSAAADLAKRGYSVVMF 171
+                    578*******99*99666666688876665 PP
+
+  == domain 2  score: 6.2 bits;  conditional E-value: 0.003
+         K00001 140 leagetvavaglGgvGlaaleharaaGasvviavdf...vnpekl 181
+                    +  g++v v+g+G v + a+  a+ +Ga v+++ ++     p+++
+  apr:Apre_0550 279 VHIGKKVCVVGGGNVAMDAARSAKRMGADVTVVYRRsfeEMPARI 323
+                    466999********9888**********99988552333333343 PP
+
+>> apr:Apre_0378  flavocytochrome c
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 ?    7.4   6.1    0.0013      0.34     125     201 ..     107     214 ..      83     354 .. 0.70
+   2 ?   -1.9   0.0      0.86   2.2e+02     228     270 ..     547     587 ..     497     589 .. 0.74
+
+  Alignments for each domain:
+  == domain 1  score: 7.4 bits;  conditional E-value: 0.0013
+         K00001 125 cpvltalgale...................ndgd..le.agetvavaglGgvGlaaleharaaGasvviavdf.........vnpekl.elarelG 188
+                    +++   ++a++                   +  +   e +  +v+v+g+Gg G aa+  a+ aGa +v++++          ++   + + a el 
+  apr:Apre_0378 107 TAL---IEAVKaaieesgrdlklyekesdeA--NkeTEtKDYDVVVVGGGGAGFAAAVTAKEAGA-NVLLLEKlgqvggntlISGGEYaAPANELQ 196
+                    333...3333344477777777777777442..3223336889999999999*************.777755333333344433233323344454 PP
+
+         K00001 189 atavin.akd....dvae 201
+                     ++ i  +k+    dv+e
+  apr:Apre_0378 197 EKEGIEdSKElfakDVEE 214
+                    333333233433333333 PP
+
+  == domain 2  score: -1.9 bits;  conditional E-value: 0.86
+         K00001 228 lralrrgGltvtvGlppgpsaslpelvakeltltGsvlgs.vak 270
+                    ++ l + G +   G++ g++ +l ++ + ++t+ G ++g+ +ak
+  apr:Apre_0378 547 IEGLYAAGEVT-GGIH-GKN-RLGSVAMADITVYGRIAGEnAAK 587
+                    45555556554.4555.777.78888888999999988887765 PP
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query model(s):                              1  (320 nodes)
+Target sequences:                         1806  (589184 residues searched)
+Passed MSV filter:                        81  (0.0448505); expected 36.1 (0.02)
+Passed bias filter:                       71  (0.0393134); expected 36.1 (0.02)
+Passed Vit filter:                        15  (0.00830565); expected 1.8 (0.001)
+Passed Fwd filter:                         7  (0.00387597); expected 0.0 (1e-05)
+Initial search space (Z):               1806  [actual number of targets]
+Domain search space  (domZ):               7  [number of targets reported over threshold]
+# CPU time: 0.06u 0.01s 00:00:00.06 Elapsed: 00:00:00.03
+# Mc/sec: 6284.63
+//
+# Alignment of 5 hits satisfying inclusion thresholds saved to: alignment
+[ok]

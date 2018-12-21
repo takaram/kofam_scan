@@ -1,0 +1,209 @@
+# hmmsearch :: search profile(s) against a sequence database
+# HMMER 3.1b2 (February 2015); http://hmmer.org/
+# Copyright (C) 2015 Howard Hughes Medical Institute.
+# Freely distributed under the GNU General Public License (GPLv3).
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# query HMM file:                  /aptmp/aramaki/annotation/db/170823/genus/hmm/profile/K00004
+# target sequence database:        /aptmp/aramaki/annotation/db/170823/genus/query/apr.pep
+# output directed to file:         output3
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query:       K00004  [M=354]
+Scores for complete sequences (score includes all domains):
+   --- full sequence ---   --- best 1 domain ---    -#dom-
+    E-value  score  bias    E-value  score  bias    exp  N  Sequence      Description
+    ------- ------ -----    ------- ------ -----   ---- --  --------      -----------
+    1.2e-83  277.8   2.5    1.3e-83  277.7   2.5    1.0  1  apr:Apre_1614  Alcohol dehydrogenase GroES domain protein
+    2.5e-07   26.8   0.2     0.0041   12.9   0.1    2.1  2  apr:Apre_1489  FAD-dependent pyridine nucleotide-disulphide o
+    1.7e-06   24.0   0.4    0.00048   16.0   0.0    3.1  3  apr:Apre_1399  TrkA-N domain protein
+    2.5e-05   20.2   0.8      0.018   10.8   0.2    2.1  2  apr:Apre_0122  TrkA-N domain protein
+    0.00028   16.7   0.4       0.24    7.1   0.1    2.8  3  apr:Apre_0550  glutamate synthase (NADPH), homotetrameric
+     0.0004   16.2   0.0    0.00063   15.6   0.0    1.2  1  apr:Apre_1079  FAD dependent oxidoreductase
+     0.0011   14.8   0.0     0.0025   13.6   0.0    1.5  1  apr:Apre_0229  Malate dehydrogenase (oxaloacetate-decarboxyla
+     0.0035   13.1   0.0     0.0054   12.5   0.0    1.2  1  apr:Apre_1428  selenate reductase YgfK
+  ------ inclusion threshold ------
+       0.01   11.6   2.5      0.018   10.8   2.5    1.4  1  apr:Apre_1404  alanine dehydrogenase
+
+
+Domain annotation for each sequence (and alignments):
+>> apr:Apre_1614  Alcohol dehydrogenase GroES domain protein
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !  277.7   2.5   6.5e-86   1.3e-83       1     349 [.       1     334 [.       1     338 [] 0.96
+
+  Alignments for each domain:
+  == domain 1  score: 277.7 bits;  conditional E-value: 6.5e-86
+         K00004   1 Mkaavfygkkdirvedvpepe.papgevkvkvawcGICgsDlheyldgpifipvdephpisgekapvvlGHEfsGvvvevGegvtglkvGdrVvve 95 
+                    Mka+++ + + ++++d++e +  +++++k+kv+  GICgsD+  y  g+         p+  ++ p ++GHE++Gvv+evG++v+glkvGd+V+v+
+  apr:Apre_1614   1 MKAVRINKVEYLEIVDLEEIQiEEDDDIKIKVKSVGICGSDIGIYN-GTN--------PM--AEYPRIIGHEMTGVVEEVGNKVKGLKVGDHVAVD 85 
+                    9*****************999899*********************6.444........22..367******************************* PP
+
+         K00004  96 pvvacgecaacksgkynlceklgfiGlggagGGfaeyvvvkarlvhklpdevsleeaalvEPlavavhavrrsglkegdtvlVlGaGpIGlltila 191
+                    pv++cgec+ ck+g+ n+ce+l++ G+++ +GGf e++vvk+++ +kl+++++ ++  lvEP++++++a rr+++ egd v+V+GaG IG ++  +
+  apr:Apre_1614  86 PVINCGECKNCKKGRVNICENLKVRGVHV-DGGFQEKIVVKESQAYKLDPSMPWNKSVLVEPFSIGFQANRRANVSEGDAVFVMGAGSIGQTVGRV 180
+                    *****************************.****************************************************************** PP
+
+         K00004 192 lkaagaskvvvsepseaRrelAeelgadevldpaeedvvaevreltdglgadvvfecsgvqatletaldalrkgGtvvvvaiwekpasfdvaklvl 287
+                    ++  ga kv+ s++++++ e A++ g   ++d+++ed ++ +re  +g+ advv++++  ++t+e+a+++++  Gtvv++++ +kp+++   ++++
+  apr:Apre_1614 181 AQYLGA-KVFTSDMDPKKLERASKYG-MIAIDASKEDPAEVIRENNNGRLADVVVDAICTPKTFEQAVKLAASAGTVVNLGFSTKPSEICSVDITS 274
+                    ******.*******************.89******************************************************************* PP
+
+         K00004 288 kelkltgsiaytkedfeevikllaegkidleklitkkiklddiveegfeeLinnkekavKiL 349
+                    kel++ gs   + + f+evi++ ++gk++ ++l+++++k ++ +e++++  ++++  + K++
+  apr:Apre_1614 275 KELDIVGSRLSN-RRFPEVIDAYNSGKLSFDDLVSHEMKFEE-AEKAIKMIMDKDIYTEKVI 334
+                    *********999.78***************************.9****99998776666666 PP
+
+>> apr:Apre_1489  FAD-dependent pyridine nucleotide-disulphide oxidoreductase
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   11.9   0.0   4.2e-05    0.0085     175     213 ..       5      43 ..       2     115 .. 0.77
+   2 !   12.9   0.1     2e-05    0.0041     161     202 ..     142     183 ..     127     189 .. 0.82
+
+  Alignments for each domain:
+  == domain 1  score: 11.9 bits;  conditional E-value: 4.2e-05
+         K00004 175 tvlVlGaGpIGlltilalkaagaskvvvsepseaRrelA 213
+                     ++V+G+Gp Gl++++ +   g+++++v+e +e    + 
+  apr:Apre_1489   5 DLVVVGGGPAGLAAAAKAYDLGVKNILVVERDEMLGGIL 43 
+                    579***************************988655555 PP
+
+  == domain 2  score: 12.9 bits;  conditional E-value: 2e-05
+         K00004 161 avhavrrsglkegdtvlVlGaGpIGlltilalkaagaskvvv 202
+                    a ++++  g  +g++v++lG G IGl+++  +  +ga+   v
+  apr:Apre_1489 142 AQRMINLEGYMPGKKVVILGSGDIGLIMARRMTLEGAEVQCV 183
+                    56777888889******************9999999954444 PP
+
+>> apr:Apre_1399  TrkA-N domain protein
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 ?    1.9   0.0     0.044       8.8     175     208 ..       2      34 ..       1      57 [. 0.86
+   2 ?    2.5   0.0     0.029       5.8     183     228 ..      77     129 ..      69     154 .. 0.75
+   3 !   16.0   0.0   2.4e-06   0.00048     174     237 ..     230     295 ..     222     373 .. 0.80
+
+  Alignments for each domain:
+  == domain 1  score: 1.9 bits;  conditional E-value: 0.044
+         K00004 175 tvlVlGaGpIGlltilalkaagaskvvvsepsea 208
+                    ++++lGaG +G  ++  l ++g  +++v++ +++
+  apr:Apre_1399   2 NIIILGAGKVGSYLTSDLAEEGH-DILVIDHDKD 34 
+                    689*******************9.9999998775 PP
+
+  == domain 2  score: 2.5 bits;  conditional E-value: 0.029
+         K00004 183 pIGlltilalkaagaskvvvsepsea...RrelAeelg.adevldpaee...d 228
+                     + l++  ++k+ ga+++++   +++   ++el+ee+  a+++++p++    d
+  apr:Apre_1399  77 DVNLIASTMAKKLGAKNIIIRLRDPQymkQKELVEEITsATRIVNPESIaakD 129
+                    57899999**********999887753337899999999*******7653322 PP
+
+  == domain 3  score: 16.0 bits;  conditional E-value: 2.4e-06
+         K00004 174 dtvlVlGaGpIGlltilalkaagaskvvvsepseaRrelAeelg.adevldpaee..dvvaevrelt 237
+                    ++vl++GaG I   ++ +l ++g  +v+++e++++++e+ +e    ++v+++     dv++evr  t
+  apr:Apre_1399 230 KNVLIIGAGSISAHLTGLLLERGF-NVTLVEIDKEKAEAFSEKYsDAVVINADGSdpDVLEEVRVNT 295
+                    69**********************.************999888845555665433779999988765 PP
+
+>> apr:Apre_0122  TrkA-N domain protein
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   10.8   0.2   9.2e-05     0.018     174     252 ..       3      77 ..       1      88 [. 0.80
+   2 !    8.8   0.0   0.00036     0.072     188     229 ..      84     124 ..      80     141 .. 0.82
+
+  Alignments for each domain:
+  == domain 1  score: 10.8 bits;  conditional E-value: 9.2e-05
+         K00004 174 dtvlVlGaGpIGlltilalkaagaskvvvsepseaRrelAeelgadevldpaeedvvaevrelt.dglgadvvfecsgvq 252
+                    ++v+VlG G  G +++  l ++g+  v++++ + ++ e++++       ++a+ d+ +ev+  + + +++dv++ ++g +
+  apr:Apre_0122   3 KNVIVLGLGRFGYAVATKLFEKGI-YVTAVDSNYNKIEKIANSV----SSAAQGDITEEVAMKSlGINNYDVAIIATGTD 77 
+                    79**********************.9****99998888776655....67777788888876666777899999999985 PP
+
+  == domain 2  score: 8.8 bits;  conditional E-value: 0.00036
+         K00004 188 tilalkaagaskvvvsepseaRrelAeelgadevldpaeedv 229
+                    ++l++k +g++kv++   s++ +++ +++gad+++ p+  d+
+  apr:Apre_0122  84 ATLICKDSGVDKVIAKATSQSHARILKKIGADQIVYPEL-DT 124
+                    57899*****************************99943.33 PP
+
+>> apr:Apre_0550  glutamate synthase (NADPH), homotetrameric
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !    7.1   0.1    0.0012      0.24     173     203 ..     142     171 ..     136     175 .. 0.86
+   2 ?   -1.1   0.0      0.38        76     315     338 ..     209     232 ..     202     236 .. 0.86
+   3 !    6.2   0.0    0.0022      0.44     170     203 ..     279     311 ..     275     328 .. 0.87
+
+  Alignments for each domain:
+  == domain 1  score: 7.1 bits;  conditional E-value: 0.0012
+         K00004 173 gdtvlVlGaGpIGlltilalkaagaskvvvs 203
+                    +++v+V+GaGp Gl +++ l ++g  +vv+ 
+  apr:Apre_0550 142 NKKVAVVGAGPSGLSAAADLAKRGY-SVVMF 171
+                    679******************9999.66655 PP
+
+  == domain 2  score: -1.1 bits;  conditional E-value: 0.38
+         K00004 315 idleklitkkiklddiveegfeeL 338
+                    ++++ ++ ++i+++d++++gfe+ 
+  apr:Apre_0550 209 LQTNTIVGRTISIKDLFDQGFEAI 232
+                    566779999************986 PP
+
+  == domain 3  score: 6.2 bits;  conditional E-value: 0.0022
+         K00004 170 lkegdtvlVlGaGpIGlltilalkaagaskvvvs 203
+                    ++ g++v V+G+G + + ++  +k++ga +v+v+
+  apr:Apre_0550 279 VHIGKKVCVVGGGNVAMDAARSAKRMGA-DVTVV 311
+                    6789************************.77776 PP
+
+>> apr:Apre_1079  FAD dependent oxidoreductase
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   15.6   0.0   3.1e-06   0.00063     172     215 ..      85     127 ..      77     143 .. 0.86
+
+  Alignments for each domain:
+  == domain 1  score: 15.6 bits;  conditional E-value: 3.1e-06
+         K00004 172 egdtvlVlGaGpIGlltilalkaagaskvvvsepseaRrelAee 215
+                    + ++++++GaGp Gl+++  l ++g+ kv+++e+ e+ +e ++ 
+  apr:Apre_1079  85 KVKSAIIVGAGPAGLFAAYTLAKRGV-KVTIIEQGEKIEERVKT 127
+                    56799*********************.******99987777665 PP
+
+>> apr:Apre_0229  Malate dehydrogenase (oxaloacetate-decarboxylating)
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   13.6   0.0   1.2e-05    0.0025     153     205 ..     163     216 ..     140     225 .. 0.83
+
+  Alignments for each domain:
+  == domain 1  score: 13.6 bits;  conditional E-value: 1.2e-05
+         K00004 153 alvEPlavavhavrrsglk.egdtvlVlGaGpIGlltilalkaagaskvvvsep 205
+                      +  la  ++a++  g + e+ +v++ GaG  G  ++ +l+  g+++++v++ 
+  apr:Apre_0229 163 TAIVTLAALINALKIVGKNkEDIKVVISGAGAAGFSIAKLLRDYGVGHIIVCDS 216
+                    555557788888877776648889***************************986 PP
+
+>> apr:Apre_1428  selenate reductase YgfK
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   12.5   0.0   2.7e-05    0.0054     166     225 ..     537     595 ..     533     690 .. 0.84
+
+  Alignments for each domain:
+  == domain 1  score: 12.5 bits;  conditional E-value: 2.7e-05
+         K00004 166 rrsglkegdtvlVlGaGpIGlltilalkaagaskvvvsepseaRrelAeelgadevldpa 225
+                    + s +k  +++l++G+Gp Gl++   l+++g  +  v+e s++    A+el  de+++  
+  apr:Apre_1428 537 EVSPIKTSAKALIIGGGPGGLAAGIFLRRNGL-EAKVIEKSDRLYGYANELVSDEAIEKD 595
+                    678999**************************.999999999999999999988888764 PP
+
+>> apr:Apre_1404  alanine dehydrogenase
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 ?   10.8   2.5   9.1e-05     0.018     174     208 ..     168     201 ..     161     268 .. 0.90
+
+  Alignments for each domain:
+  == domain 1  score: 10.8 bits;  conditional E-value: 9.1e-05
+         K00004 174 dtvlVlGaGpIGlltilalkaagaskvvvsepsea 208
+                    ++v+++GaG++G +++ ++ ++ga +v+v++++ +
+  apr:Apre_1404 168 ANVVIVGAGTVGTAATRIAVGMGA-RVTVLDVNIE 201
+                    68**********************.****998755 PP
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query model(s):                              1  (354 nodes)
+Target sequences:                         1806  (589184 residues searched)
+Passed MSV filter:                        92  (0.0509413); expected 36.1 (0.02)
+Passed bias filter:                       78  (0.0431894); expected 36.1 (0.02)
+Passed Vit filter:                        21  (0.0116279); expected 1.8 (0.001)
+Passed Fwd filter:                         9  (0.00498339); expected 0.0 (1e-05)
+Initial search space (Z):               1806  [actual number of targets]
+Domain search space  (domZ):               9  [number of targets reported over threshold]
+# CPU time: 0.04u 0.01s 00:00:00.05 Elapsed: 00:00:00.03
+# Mc/sec: 6952.37
+//
+[ok]

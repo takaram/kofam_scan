@@ -14,6 +14,7 @@ module KOHMM
   autoload :HMMSearch, 'kohmm/hmmsearch'
   autoload :KO
   autoload :OutputFormatter
+  autoload :OutputRearranger
   autoload :ParallelCommand
   autoload :Result
 

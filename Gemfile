@@ -23,6 +23,7 @@ gem 'pry-byebug'
 # testing framework
 gem 'rspec', '~> 3.0'
 gem 'rspec-its'
+gem 'rspec-temp_dir'
 
 # checks your coding style
 gem 'rubocop', require: false

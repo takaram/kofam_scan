@@ -22,6 +22,7 @@ module KOHMM
       run_hmmsearch unless config.reannotation?
       search_hit_genes
       output_hits
+      rearrange_alignments if config.create_domain_alignment?
     end
 
     def parse_ko
@@ -40,9 +41,14 @@ module KOHMM
 
     def setup_directories
       @hmmsearch_result_dir = config.hmmsearch_result_dir ||
-                              File.join(config.tmp_dir, "hmmsearch_result")
+                              File.join(config.tmp_dir, "tabular")
       dir = @hmmsearch_result_dir
       FileUtils.mkdir_p(dir) unless Dir.exist?(dir)
+
+      if config.create_domain_alignment?
+        FileUtils.mkdir_p(File.join(config.tmp_dir, "output"))
+        FileUtils.mkdir_p(File.join(config.tmp_dir, "alignment"))
+      end
     end
 
     def ko_list
@@ -68,9 +74,14 @@ module KOHMM
     def hmmsearch_command
       result  = File.join(@hmmsearch_result_dir, "{}")
       profile = File.join(config.profile_dir, "{}.hmm")
-      HMMSearch.command_path = config.hmmsearch
+      if config.create_domain_alignment?
+        out = File.join(config.tmp_dir, "output", "{}")
+      else
+        out = null_device
+      end
 
-      HMMSearch.new(profile, config.query, cpu: 1, o: null_device, T: 0, tblout: result).to_a
+      HMMSearch.command_path = config.hmmsearch
+      HMMSearch.new(profile, config.query, cpu: 1, o: out, T: 0, tblout: result).to_a
     end
 
     def search_hit_genes
@@ -82,6 +93,12 @@ module KOHMM
 
     def output_hits
       config.formatter.format(@result, output_file)
+    end
+
+    def rearrange_alignments
+      from_dir = File.join(config.tmp_dir, "output")
+      to_dir = File.join(config.tmp_dir, "alignment")
+      AlignmentRearranger.new(from_dir, to_dir).rearrange
     end
 
     private

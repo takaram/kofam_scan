@@ -1,8 +1,8 @@
 require 'stringio'
 
 RSpec.describe KOHMM::Result do
-  let(:hmmsearch_result1) { spec_root.join('test_data', 'K00001').open }
-  let(:hmmsearch_result2) { spec_root.join('test_data', 'K00004').open }
+  let(:hmmsearch_result1) { spec_root.join('test_data', 'tabular', 'K00001').open }
+  let(:hmmsearch_result2) { spec_root.join('test_data', 'tabular', 'K00004').open }
 
   let(:query_list) do
     [hmmsearch_result1, hmmsearch_result2].flat_map do |f|

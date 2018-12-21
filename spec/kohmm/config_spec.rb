@@ -15,6 +15,7 @@ RSpec.describe KOHMM::Config do
     its(:parallel)      { is_expected.to be_nil }
     its(:reannotation?) { is_expected.to be_falsy }
     its(:formatter)     { is_expected.to be_kind_of KOHMM::OutputFormatter::HitDetailFormatter }
+    its(:create_domain_alignment?) { is_expected.to be_falsy }
   end
 
   describe 'initial values are passed to #initialize' do
@@ -108,6 +109,13 @@ RSpec.describe KOHMM::Config do
       it 'can set and get a boolean' do
         config.reannotation = true
         expect(config).to be_reannotation
+      end
+    end
+
+    describe '#create_domain_alignment? and #create_domain_alignment=' do
+      it 'can set and get a boolean' do
+        config.create_domain_alignment = true
+        expect(config).to be_create_domain_alignment
       end
     end
   end

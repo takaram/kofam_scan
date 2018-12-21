@@ -36,6 +36,8 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
+    rspec-temp_dir (1.1.0)
+      rspec (>= 3.0)
     rubocop (0.60.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -62,6 +64,7 @@ DEPENDENCIES
   pry-byebug
   rspec (~> 3.0)
   rspec-its
+  rspec-temp_dir
   rubocop
   rubocop-rspec
   simplecov

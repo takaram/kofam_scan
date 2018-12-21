@@ -4,7 +4,7 @@ module KOHMM
   class Config
     attr_accessor :output_file, :profile_dir, :ko_list, :e_value, :hmmsearch, :cpu,
                   :tmp_dir, :hmmsearch_result_dir, :parallel, :formatter, :query
-    attr_writer   :reannotation
+    attr_writer   :reannotation, :create_domain_alignment
 
     def self.load(file)
       file = File.open(file) if file.kind_of? String
@@ -22,6 +22,7 @@ module KOHMM
       @mode = :score
       @reannotation = false
       @formatter = OutputFormatter::HitDetailFormatter.new
+      @create_domain_alignment = false
 
       initial_values.each do |k, v|
         public_send(:"#{k}=", v)
@@ -34,6 +35,10 @@ module KOHMM
 
     def reannotation?
       !!@reannotation
+    end
+
+    def create_domain_alignment?
+      !!@create_domain_alignment
     end
   end
 end

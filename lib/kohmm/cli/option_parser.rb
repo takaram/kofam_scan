@@ -20,6 +20,8 @@ module KOHMM
             -r, --reannotate <dir>       Directory where hmmsearch table files exist
             --cpu <num>                  Number of CPU to use  [1]
             --tmp_dir <dir>              Temporary directory  [./tmp]
+            --create-domain-alignment    Create domain annotation files for each sequence
+                                         They will be located in the tmp directory
             -h, --help                   Show this message and exit
         USAGE
       end
@@ -68,6 +70,10 @@ module KOHMM
         # during the option parse
         @parser.on("--[no-]report-unannotated") do |b|
           @after_hook << -> { @config.formatter.report_unannotated = b }
+        end
+
+        @parser.on("--create-domain-alignment") do |b|
+          @config.create_domain_alignment = b
         end
 
         @parser.on("-r d", "--reannotate") do |r|
