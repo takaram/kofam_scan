@@ -98,7 +98,7 @@ module KOHMM
     def rearrange_alignments
       from_dir = File.join(config.tmp_dir, "output")
       to_dir = File.join(config.tmp_dir, "alignment")
-      AlignmentRearranger.new(from_dir, to_dir).rearrange
+      OutputRearranger.new(from_dir, to_dir).rearrange
     end
 
     private

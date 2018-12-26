@@ -33,7 +33,7 @@ module KOHMM
           @current_gene = Regexp.last_match[1]
           @current_alignment = ">> #{@current_ko.name} #{@current_ko.definition}\n"
         when "Internal pipeline statistics summary:\n"
-          @current_alignment.chomp
+          2.times { @current_alignment.chomp! }
           push_alignment
         when /\[No hits detected that satisfy reporting thresholds\]/
           break
