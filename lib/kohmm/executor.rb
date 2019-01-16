@@ -51,15 +51,11 @@ module KOHMM
       end
     end
 
-    def ko_list
-      KO.all.select(&:profile_available?).map(&:name)
-    end
-
     def run_hmmsearch
-      parallel = ParallelCommand.create(config.parallel)
+      parallel = Parallel.new(full_path: config.parallel)
 
       parallel.command = hmmsearch_command
-      parallel.inputs = ko_list
+      parallel.inputs = lookup_profiles(config.profile)
       parallel.cpu = config.cpu
 
       _out, err = parallel.exec
@@ -72,21 +68,20 @@ module KOHMM
     end
 
     def hmmsearch_command
-      result  = File.join(@hmmsearch_result_dir, "{}")
-      profile = File.join(config.profile_dir, "{}.hmm")
+      result = File.join(@hmmsearch_result_dir, "{/.}")
       if config.create_domain_alignment?
-        out = File.join(config.tmp_dir, "output", "{}")
+        out = File.join(config.tmp_dir, "output", "{/.}")
       else
         out = null_device
       end
 
       HMMSearch.command_path = config.hmmsearch
-      HMMSearch.new(profile, config.query, cpu: 1, o: out, T: 0, tblout: result).to_a
+      HMMSearch.new("{}", config.query, cpu: 1, o: out, T: 0, tblout: result).to_a
     end
 
     def search_hit_genes
-      result_files_path = File.join(@hmmsearch_result_dir, "K?????")
-      files = Dir.glob(result_files_path)
+      files = Dir.entries(@hmmsearch_result_dir).grep_v(/\A\./)
+      files.map! { |f| File.join(@hmmsearch_result_dir, f) }
       @result = Result.new(query_list)
       @result.parse(*files)
     end
@@ -101,10 +96,33 @@ module KOHMM
       OutputRearranger.new(from_dir, to_dir).rearrange
     end
 
+    def lookup_profiles(db)
+      if db.end_with?(".hal")
+        parse_hal(db)
+      elsif db.end_with?(".hmm")
+        [File.expand_path(db)]
+      elsif File.directory?(db)
+        Dir.glob(File.expand_path("*.hmm", db))
+      elsif File.exist?("#{db}.hal")
+        parse_hal("#{db}.hal")
+      elsif File.exist?("#{db}.hmm")
+        [File.expand_path("#{db}.hmm")]
+      else
+        raise "Database not found: #{db}"
+      end
+    end
+
     private
 
     def null_device
       ["/dev/null", "NUL"].find { |nul| File.exist?(nul) }
+    end
+
+    def parse_hal(hal)
+      base_dir = File.dirname(hal)
+      IO.foreach(hal).with_object([]) do |line, ary|
+        ary << File.expand_path(line.chomp, base_dir) unless line.start_with?("#")
+      end
     end
   end
 end

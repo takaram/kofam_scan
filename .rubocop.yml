@@ -41,6 +41,7 @@ Naming/PredicateName:
 
 Naming/UncommunicativeMethodParamName:
   AllowedNames:
+    - db
     - id
     - io
     - ko

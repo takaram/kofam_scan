@@ -21,7 +21,7 @@ RSpec.describe KOHMM::Config do
   describe 'initial values are passed to #initialize' do
     init_values = {
       output_file:          "file",
-      profile_dir:          "dir",
+      profile:              "dir",
       ko_list:              "file2",
       e_value:              0.1,
       cpu:                  5,
@@ -40,7 +40,7 @@ RSpec.describe KOHMM::Config do
 
   describe '.load' do
     let(:yaml_str) {
-      "profile_dir: dir
+      "profile: dir
        ko_list: file
        cpu: 10
        hmmsearch: /usr/local/bin/hmmsearch".gsub(/^\s+/, "")
@@ -49,7 +49,7 @@ RSpec.describe KOHMM::Config do
     shared_examples 'test attributes of loaded config' do
       it 'loads configuration from the argument' do
         aggregate_failures do
-          expect(loaded_config.profile_dir).to eq "dir"
+          expect(loaded_config.profile).to eq "dir"
           expect(loaded_config.ko_list).to eq "file"
           expect(loaded_config.cpu).to eq 10
           expect(loaded_config.hmmsearch).to eq "/usr/local/bin/hmmsearch"
@@ -85,7 +85,7 @@ RSpec.describe KOHMM::Config do
       end
     end
 
-    %i[profile_dir ko_list hmmsearch
+    %i[profile ko_list hmmsearch
        tmp_dir hmmsearch_result_dir parallel query].each do |attr|
       describe "##{attr} and ##{attr}=" do
         it 'can set and get a value' do

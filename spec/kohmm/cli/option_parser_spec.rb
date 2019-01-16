@@ -19,9 +19,9 @@ RSpec.describe KOHMM::CLI::OptionParser do
   end
 
   describe '-p option' do
-    it 'calls config.profile_dir=' do
+    it 'calls config.profile=' do
       dir_name = "fuga"
-      expect(config).to receive(:profile_dir=).with dir_name
+      expect(config).to receive(:profile=).with dir_name
       parser.parse!(["-p", dir_name])
     end
   end

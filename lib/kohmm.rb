@@ -15,7 +15,7 @@ module KOHMM
   autoload :KO
   autoload :OutputFormatter
   autoload :OutputRearranger
-  autoload :ParallelCommand
+  autoload :Parallel
   autoload :Result
 
   VERSION = '0.1.2'.freeze

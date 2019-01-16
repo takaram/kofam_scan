@@ -1,5 +1,7 @@
-# Path to the directory where KO-HMM profiles are
-# profile_dir: /path/to/your/profile/directory
+# Path to your KO-HMM database
+# A database can be a .hmm file, a .hal file or a directory in which
+# .hmm files are. Omit the extension if it is .hal or .hmm file
+# profile: /path/to/your/profile/db
 
 # Path to the KO list file
 # ko_list: /path/to/your/kolist/file
@@ -8,7 +10,7 @@
 # You do not have to set this if it is in your $PATH
 # hmmsearch: /usr/local/bin/hmmsearch
 
-# Path to an executable file of GNU parallel or xargs
+# Path to an executable file of GNU parallel
 # You do not have to set this if it is in your $PATH
 # parallel: /usr/local/bin/parallel
 

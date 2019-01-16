@@ -18,9 +18,36 @@ RSpec.describe KOHMM::CLI do
 
     context 'without help option' do
       context 'with vaild arguments' do
-        it 'invokes KOHMM::Executor.execute' do
-          expect(KOHMM::Executor).to receive(:execute)
-          described_class.run(options)
+        context 'with config file' do
+          unless File.exist?(KOHMM::DEFAULT_CONFIG_FILE)
+            around do |example|
+              IO.write(KOHMM::DEFAULT_CONFIG_FILE, "cpu: 1\n")
+              example.run
+              File.delete(KOHMM::DEFAULT_CONFIG_FILE)
+            end
+          end
+
+          it 'invokes KOHMM::Executor.execute' do
+            expect(KOHMM::Executor).to receive(:execute)
+            described_class.run(options)
+          end
+        end
+
+        context 'without config file' do
+          if File.exist?(KOHMM::DEFAULT_CONFIG_FILE)
+            include_context 'uses temp dir'
+            around do |example|
+              tmp_file = File.expand_path("tmp", temp_dir)
+              File.rename(KOHMM::DEFAULT_CONFIG_FILE, tmp_file)
+              example.run
+              File.rename(tmp_file, KOHMM::DEFAULT_CONFIG_FILE)
+            end
+          end
+
+          it 'invokes KOHMM::Executor.execute' do
+            expect(KOHMM::Executor).to receive(:execute)
+            described_class.run(options)
+          end
         end
       end
 

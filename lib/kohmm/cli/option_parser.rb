@@ -15,7 +15,7 @@ module KOHMM
             --[no-]report-unannotated    Sequence name will be shown even if no KOs are assigned
                                          Default is true when format=mapper or mapper-all,
                                          false when format=detail
-            -p, --profile <dir>          Directory where profile HMM files exist
+            -p, --profile <dir>          Profile HMM database
             -k, --ko_list <file>         KO information file
             -r, --reannotate <dir>       Directory where hmmsearch table files exist
             --cpu <num>                  Number of CPU to use  [1]
@@ -56,7 +56,7 @@ module KOHMM
 
       def set_options_to_parser
         @parser.on("-o f")              { |o| @config.output_file = o }
-        @parser.on("-p d", "--profile") { |p| @config.profile_dir = p }
+        @parser.on("-p d", "--profile") { |p| @config.profile = p }
         @parser.on("-k f", "--ko_list") { |t| @config.ko_list = t }
         @parser.on("--cpu n", Integer)  { |c| @config.cpu = c }
         @parser.on("--tmp_dir d")       { |d| @config.tmp_dir = d }

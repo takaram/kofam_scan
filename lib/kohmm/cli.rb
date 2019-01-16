@@ -12,7 +12,8 @@ module KOHMM
           exit 0
         end
 
-        config = Config.load(DEFAULT_CONFIG_FILE)
+        config_file = DEFAULT_CONFIG_FILE
+        config = File.exist?(config_file) ? Config.load(config_file) : Config.new
         parse_options(argv, config)
         check_argv_length(argv)
         config.query = argv[0]
