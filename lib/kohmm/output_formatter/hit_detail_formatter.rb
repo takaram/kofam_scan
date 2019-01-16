@@ -1,15 +1,6 @@
 module KOHMM
   class OutputFormatter
     class HitDetailFormatter < OutputFormatter
-      COLUMN_WIDTH = {
-        gene_name:     19,
-        ko:            6,
-        score:         6,
-        e_value:       9,
-        ko_definition: 21
-      }.freeze
-      private_constant :COLUMN_WIDTH
-
       def initialize
         @report_unannotated = false
       end
@@ -31,36 +22,38 @@ module KOHMM
 
       private
 
+      def template
+        "%1s %-19.19s %-6s %7.2f %6.1f %9.2g %s"
+      end
+
+      def template_for_string
+        template.gsub(/\.\d+[fg]/, "s")
+      end
+
       def header
         "#{header_first_line}\n#{header_delimiter_line}\n"
       end
 
       def header_first_line
-        template = "# %-#{COLUMN_WIDTH[:gene_name]}s %-#{COLUMN_WIDTH[:ko]}s " \
-                   "%#{COLUMN_WIDTH[:score]}s %#{COLUMN_WIDTH[:e_value]}s %-s"
-        template % %w[gene\ name KO score E-value KO\ definition]
+        template_for_string % %w[# gene\ name KO thrshld score E-value KO\ definition]
       end
 
       def header_delimiter_line
-        "#-" +
-          COLUMN_WIDTH.values_at(:gene_name, :ko, :score, :e_value, :ko_definition)
-                      .map { |i| '-' * i }.join(' ')
+        lengths = template.scan(/%-?(\d+)(?:\.\d+)?[sfg]/).map { |(len)| len.to_i }
+        lengths.shift
+        lengths << 21
+
+        "#-" + lengths.map { |i| '-' * i }.join(' ')
       end
 
       def format_hit(hit)
-        template = "%1s %-#{COLUMN_WIDTH[:gene_name]}s " \
-                   "%-#{COLUMN_WIDTH[:ko]}s " \
-                   "%#{COLUMN_WIDTH[:score]}.1f " \
-                   "%#{COLUMN_WIDTH[:e_value]}.2g %s"
-        mark = hit.above_threshold? ? '*' : ' '
-        truncated_gene_name = hit.gene_name[0, COLUMN_WIDTH[:gene_name]]
-        template % [mark, truncated_gene_name, hit.ko.name, hit.score, hit.e_value, hit.ko.definition]
+        mark = hit.above_threshold? ? '*' : nil
+        template % [mark, hit.gene_name, hit.ko.name, hit.ko.threshold,
+                    hit.score, hit.e_value, hit.ko.definition]
       end
 
       def format_empty_hit(query)
-        "  %-#{COLUMN_WIDTH[:gene_name]}s -#{' ' * (COLUMN_WIDTH[:ko] - 1)}" \
-        "#{' ' * COLUMN_WIDTH[:score]}-#{' ' * COLUMN_WIDTH[:e_value]}- -" %
-          query[0, COLUMN_WIDTH[:gene_name]]
+        template_for_string % ([nil, query] + ['-'] * 5)
       end
     end
   end
