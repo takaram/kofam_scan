@@ -29,10 +29,6 @@ module KOHMM
       File.open(config.ko_list) { |file| KO.parse(file) }
     end
 
-    def output_file
-      @output_file ||= File.open(config.output_file, "w")
-    end
-
     def query_list
       @query_list ||= File.open(config.query) do |f|
         f.grep(/^>(\S+)/) { $1 }
@@ -87,7 +83,9 @@ module KOHMM
     end
 
     def output_hits
-      config.formatter.format(@result, output_file)
+      out = config.output_io
+      config.formatter.format(@result, out)
+      out.close
     end
 
     def rearrange_alignments
