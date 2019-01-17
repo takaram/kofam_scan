@@ -17,7 +17,7 @@ module KOHMM
                                          false when format=detail
             -p, --profile <dir>          Profile HMM database
             -k, --ko_list <file>         KO information file
-            -r, --reannotate <dir>       Directory where hmmsearch table files exist
+            -r, --reannotate             Skip hmmsearch
             --cpu <num>                  Number of CPU to use  [1]
             --tmp_dir <dir>              Temporary directory  [./tmp]
             --create-domain-alignment    Create domain annotation files for each sequence
@@ -55,12 +55,13 @@ module KOHMM
       private
 
       def set_options_to_parser
-        @parser.on("-o f")              { |o| @config.output_file = o }
-        @parser.on("-p d", "--profile") { |p| @config.profile = p }
-        @parser.on("-k f", "--ko_list") { |t| @config.ko_list = t }
-        @parser.on("--cpu n", Integer)  { |c| @config.cpu = c }
-        @parser.on("--tmp_dir d")       { |d| @config.tmp_dir = d }
-        @parser.on("-h", "--help")      { puts usage; exit }
+        @parser.on("-o f")               { |o| @config.output_file = o }
+        @parser.on("-p d", "--profile")  { |p| @config.profile = p }
+        @parser.on("-k f", "--ko_list")  { |t| @config.ko_list = t }
+        @parser.on("--cpu n", Integer)   { |c| @config.cpu = c }
+        @parser.on("--tmp_dir d")        { |d| @config.tmp_dir = d }
+        @parser.on("-r", "--reannotate") { |r| @config.reannotation = r }
+        @parser.on("-h", "--help")       { puts usage; exit }
 
         @parser.on("-f n", "--format") do |f|
           @config.formatter = OUTPUT_FORMATTER_MAP[f].new
@@ -74,11 +75,6 @@ module KOHMM
 
         @parser.on("--create-domain-alignment") do |b|
           @config.create_domain_alignment = b
-        end
-
-        @parser.on("-r d", "--reannotate") do |r|
-          @config.hmmsearch_result_dir = r
-          @config.reannotation = true
         end
       end
     end

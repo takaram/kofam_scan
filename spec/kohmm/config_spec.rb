@@ -20,16 +20,15 @@ RSpec.describe KOHMM::Config do
 
   describe 'initial values are passed to #initialize' do
     init_values = {
-      output_file:          "file",
-      profile:              "dir",
-      ko_list:              "file2",
-      e_value:              0.1,
-      cpu:                  5,
-      hmmsearch:            "/usr/local/bin/hmmsearch",
-      tmp_dir:              "/tmp",
-      hmmsearch_result_dir: "dir2",
-      parallel:             "/usr/local/bin/parallel",
-      formatter:            KOHMM::OutputFormatter::SimpleTabularFormatter.new
+      output_file: "file",
+      profile:     "dir",
+      ko_list:     "file2",
+      e_value:     0.1,
+      cpu:         5,
+      hmmsearch:   "/usr/local/bin/hmmsearch",
+      tmp_dir:     "/tmp",
+      parallel:    "/usr/local/bin/parallel",
+      formatter:   KOHMM::OutputFormatter::SimpleTabularFormatter.new
     }
     subject { described_class.new(init_values) }
 
@@ -85,8 +84,7 @@ RSpec.describe KOHMM::Config do
       end
     end
 
-    %i[profile ko_list hmmsearch
-       tmp_dir hmmsearch_result_dir parallel query].each do |attr|
+    %i[profile ko_list hmmsearch tmp_dir parallel query].each do |attr|
       describe "##{attr} and ##{attr}=" do
         it 'can set and get a value' do
           path = "/path/to/file"

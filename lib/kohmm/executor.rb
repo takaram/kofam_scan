@@ -36,14 +36,11 @@ module KOHMM
     end
 
     def setup_directories
-      @hmmsearch_result_dir = config.hmmsearch_result_dir ||
-                              File.join(config.tmp_dir, "tabular")
-      dir = @hmmsearch_result_dir
-      FileUtils.mkdir_p(dir) unless Dir.exist?(dir)
+      dirs_to_make = ["tabular"]
+      dirs_to_make.push("output", "alignment") if config.create_domain_alignment?
 
-      if config.create_domain_alignment?
-        FileUtils.mkdir_p(File.join(config.tmp_dir, "output"))
-        FileUtils.mkdir_p(File.join(config.tmp_dir, "alignment"))
+      dirs_to_make.each do |dir|
+        FileUtils.mkdir_p(File.join(config.tmp_dir, dir))
       end
     end
 
@@ -64,7 +61,7 @@ module KOHMM
     end
 
     def hmmsearch_command
-      result = File.join(@hmmsearch_result_dir, "{/.}")
+      result = File.join(config.tmp_dir, "tabular", "{/.}")
       if config.create_domain_alignment?
         out = File.join(config.tmp_dir, "output", "{/.}")
       else
@@ -76,8 +73,9 @@ module KOHMM
     end
 
     def search_hit_genes
-      files = Dir.entries(@hmmsearch_result_dir).grep_v(/\A\./)
-      files.map! { |f| File.join(@hmmsearch_result_dir, f) }
+      tabular_dir = File.join(config.tmp_dir, "tabular")
+      files = Dir.entries(tabular_dir).grep_v(/\A\./)
+      files.map! { |f| File.join(tabular_dir, f) }
       @result = Result.new(query_list)
       @result.parse(*files)
     end

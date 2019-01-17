@@ -51,12 +51,6 @@ RSpec.describe KOHMM::CLI::OptionParser do
   end
 
   describe '-r option' do
-    it 'calls config.hmmsearch_result_dir=' do
-      dir = "bar"
-      expect(config).to receive(:hmmsearch_result_dir=).with dir
-      parser.parse!(["-r", dir])
-    end
-
     it 'calls config.reannotation = true' do
       expect(config).to receive(:reannotation=).with true
       parser.parse!(["-r", "bar"])

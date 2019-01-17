@@ -3,7 +3,7 @@ autoload :YAML, 'yaml'
 module KOHMM
   class Config
     attr_accessor :output_file, :profile, :ko_list, :e_value, :hmmsearch, :cpu,
-                  :tmp_dir, :hmmsearch_result_dir, :parallel, :formatter, :query
+                  :tmp_dir, :parallel, :formatter, :query
     attr_writer   :reannotation, :create_domain_alignment
 
     def self.load(file)

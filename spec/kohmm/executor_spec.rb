@@ -28,10 +28,7 @@ RSpec.describe KOHMM::Executor do
     end
 
     context 'when it is reannotation' do
-      before do
-        config.reannotation = true
-        config.hmmsearch_result_dir = "tmp/hmmsearch_result"
-      end
+      before { config.reannotation = true }
 
       it 'executes other methods with correct order' do
         methods_to_be_executed.grep_v(:run_hmmsearch).each do |method|
