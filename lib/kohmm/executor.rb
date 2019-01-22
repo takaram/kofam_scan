@@ -65,7 +65,7 @@ module KOHMM
       if config.create_domain_alignment?
         out = File.join(config.tmp_dir, "output", "{/.}")
       else
-        out = null_device
+        out = File::NULL
       end
 
       HMMSearch.command_path = config.hmmsearch
@@ -109,10 +109,6 @@ module KOHMM
     end
 
     private
-
-    def null_device
-      ["/dev/null", "NUL"].find { |nul| File.exist?(nul) }
-    end
 
     def parse_hal(hal)
       base_dir = File.dirname(hal)
