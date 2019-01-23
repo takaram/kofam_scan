@@ -9,6 +9,7 @@ module KOHMM
     autoload :SimpleTabularFormatter
     autoload :MultiHitTabularFormatter
     autoload :HitDetailFormatter
+    autoload :TabularAllHitFormatter
 
     attr_accessor :report_unannotated
   end
