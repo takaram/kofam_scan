@@ -111,7 +111,7 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 end
 
-require File.expand_path('../lib/kohmm', __dir__)
+require File.expand_path('../lib/kofam_scan', __dir__)
 Dir[File.expand_path("support/matchers/**.rb", __dir__)].each { |f| require f }
 
 require 'pathname'

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative 'lib/kohmm'
+require_relative 'lib/kofam_scan'
 
-KOHMM::CLI.run(ARGV)
+KofamScan::CLI.run(ARGV)
