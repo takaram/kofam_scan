@@ -5,7 +5,7 @@ RSpec.describe KOHMM::OutputFormatter::HitDetailFormatter do
     output_lines = output.split(/\n/).grep_v(/^#/)
     output_lines.map do |line|
       mark = line.slice!(0, 1)
-      [mark, *line.split(nil, 5)]
+      [mark, *line.split(nil, 6)]
     end
   end
 
@@ -81,6 +81,27 @@ RSpec.describe KOHMM::OutputFormatter::HitDetailFormatter do
         * gene4               K00003  200.00  200.0   1.2e-10 homoserine dehydrogenase [EC:1.1.1.3]
           gene5               -            -      -         - -
       RESULT
+    end
+
+    context 'when a threshold is nil' do
+      include_context 'basic context'
+
+      let(:ko_without_threshold) do
+        KOHMM::KO.new("K00001", nil, nil, nil, nil, 100, 100, 200, 100,
+                      10, 0.5, "alcohol dehydrogenase [EC:1.1.1.1]")
+      end
+
+      before do
+        result << KOHMM::Result::Hit.new("gene1", ko_without_threshold, 1000, 0.0009)
+      end
+
+      it 'gives the output with threshold "-"' do
+        expect(output_array[0][3]).to eq '-'
+      end
+
+      it 'does not mark the hit with asterisk' do
+        expect(output_array[0][0]).to eq ' '
+      end
     end
   end
 end

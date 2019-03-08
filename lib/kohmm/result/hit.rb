@@ -14,7 +14,8 @@ module KOHMM
       end
 
       def above_threshold?
-        @score >= @ko.threshold
+        threshold = @ko.threshold
+        threshold && @score >= threshold
       end
     end
   end

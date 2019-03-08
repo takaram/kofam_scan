@@ -24,6 +24,7 @@ RSpec.describe KOHMM::Result do
     knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
     K00001	170.20	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
     K00004	277.79	full	all	0.925732	857	652	781	354	3.38	0.590	(R,R)-butanediol dehydrogenase [EC:1.1.1.4 1.1.1.- 1.1.1.303]
+    K01977	-	-	-	-	16376	-	-	-	-	-	glycerol dehydrogenase [EC:1.1.1.6]
   KOLIST
 
   after { [hmmsearch_result1, hmmsearch_result2].each(&:close) }
@@ -62,6 +63,7 @@ RSpec.describe KOHMM::Result do
     let(:hit1) { hits.find { |hit| hit.ko.name == "K00001" } }
     let(:hit2) { hits.find { |hit| hit.ko.name == "K00004" } }
     let(:hit3) { result.for_gene("apr:Apre_1060").first }
+    let(:hit4) { described_class::Hit.new("gene", "K01977", 100, 1) }
 
     describe '#gene_name' do
       it 'returns the right name' do
@@ -110,6 +112,12 @@ RSpec.describe KOHMM::Result do
 
       context 'when the score is below the threshold' do
         subject { hit3.above_threshold? }
+
+        it { is_expected.to be_falsy }
+      end
+
+      context 'when the threshold of the KO is unavailable' do
+        subject { hit4.above_threshold? }
 
         it { is_expected.to be_falsy }
       end

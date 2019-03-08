@@ -47,9 +47,20 @@ module KOHMM
       end
 
       def format_hit(hit)
-        mark = hit.above_threshold? ? '*' : nil
-        template % [mark, hit.gene_name, hit.ko.name, hit.ko.threshold,
-                    hit.score, hit.e_value, hit.ko.definition]
+        if (threshold = hit.ko.threshold)
+          mark = hit.above_threshold? ? '*' : nil
+          tmpl = template
+        else
+          mark = nil
+          threshold = "-"
+
+          template_array = template.split(" ")
+          template_array[3] = "%7s"
+          tmpl = template_array.join(" ")
+        end
+
+        tmpl % [mark, hit.gene_name, hit.ko.name, threshold,
+                hit.score, hit.e_value, hit.ko.definition]
       end
 
       def format_empty_hit(query)

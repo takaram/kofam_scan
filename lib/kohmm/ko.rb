@@ -62,7 +62,7 @@ module KOHMM
       @profile_type == :trim
     end
 
-    def profile_available?
+    def threshold_available?
       !!@threshold
     end
   end

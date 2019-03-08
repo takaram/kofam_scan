@@ -3,6 +3,7 @@ require 'stringio'
 RSpec.describe KOHMM::KO do
   let(:k00001) { described_class["K00001"] }
   let(:k00005) { described_class["K00005"] }
+  let(:k01977) { described_class["K01977"] }
 
   before(:all) do
     described_class.instance_variable_set(:@instances, nil)
@@ -38,6 +39,12 @@ RSpec.describe KOHMM::KO do
       expect(k00001.threshold).to eq 297.73
       expect(k00005.threshold).to eq 344.01
     end
+
+    context 'when threshold is not available' do
+      subject { k01977.threshold }
+
+      it { is_expected.to be_nil }
+    end
   end
 
   describe 'score type predicator' do
@@ -52,6 +59,12 @@ RSpec.describe KOHMM::KO do
 
       context 'when score_type is domain' do
         let(:ko) { k00001 }
+
+        it { is_expected.to be_falsy }
+      end
+
+      context 'when score_type is not available' do
+        let(:ko) { k01977 }
 
         it { is_expected.to be_falsy }
       end
@@ -71,6 +84,12 @@ RSpec.describe KOHMM::KO do
 
         it { is_expected.to be_truthy }
       end
+
+      context 'when score_type is not available' do
+        let(:ko) { k01977 }
+
+        it { is_expected.to be_falsy }
+      end
     end
   end
 
@@ -86,6 +105,12 @@ RSpec.describe KOHMM::KO do
 
       context 'when profile_type is trim' do
         let(:ko) { k00001 }
+
+        it { is_expected.to be_falsy }
+      end
+
+      context 'when profile_type is not available' do
+        let(:ko) { k01977 }
 
         it { is_expected.to be_falsy }
       end
@@ -105,6 +130,12 @@ RSpec.describe KOHMM::KO do
 
         it { is_expected.to be_truthy }
       end
+
+      context 'when profile_type is not available' do
+        let(:ko) { k01977 }
+
+        it { is_expected.to be_falsy }
+      end
     end
   end
 
@@ -112,6 +143,12 @@ RSpec.describe KOHMM::KO do
     it 'returns the value of F-measure' do
       expect(k00001.f_measure).to eq 0.244676
       expect(k00005.f_measure).to eq 0.901895
+    end
+
+    context 'when F-measure is not available' do
+      subject { k01977.f_measure }
+
+      it { is_expected.to be_nil }
     end
   end
 
@@ -122,17 +159,17 @@ RSpec.describe KOHMM::KO do
     end
   end
 
-  describe '#profile_available?' do
-    subject { ko.profile_available? }
+  describe '#threshold_available?' do
+    subject { ko.threshold_available? }
 
-    context 'when profile parameters are available' do
+    context 'when a threshold is available' do
       let(:ko) { k00001 }
 
       it { is_expected.to be_truthy }
     end
 
-    context 'when profile parameters are unavailable' do
-      let(:ko) { described_class["K01977"] }
+    context 'when a threshold is unavailable' do
+      let(:ko) { k01977 }
 
       it { is_expected.to be_falsy }
     end
