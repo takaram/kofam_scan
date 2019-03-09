@@ -1,3 +1,6 @@
+require 'rspec/temp_dir'
+require 'fileutils'
+
 RSpec.describe KofamScan::CLI do
   describe '.run' do
     subject(:execute_run) { described_class.run(options) }
@@ -38,9 +41,9 @@ RSpec.describe KofamScan::CLI do
             include_context 'uses temp dir'
             around do |example|
               tmp_file = File.expand_path("tmp", temp_dir)
-              File.rename(KofamScan::DEFAULT_CONFIG_FILE, tmp_file)
+              FileUtils.mv(KofamScan::DEFAULT_CONFIG_FILE, tmp_file)
               example.run
-              File.rename(tmp_file, KofamScan::DEFAULT_CONFIG_FILE)
+              FileUtils.mv(tmp_file, KofamScan::DEFAULT_CONFIG_FILE)
             end
           end
 
