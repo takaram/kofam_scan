@@ -4,7 +4,7 @@ module KofamScan
   class Config
     attr_accessor :output_file, :profile, :ko_list, :e_value, :hmmsearch, :cpu,
                   :tmp_dir, :parallel, :formatter, :query
-    attr_writer   :reannotation, :create_domain_alignment
+    attr_writer   :reannotation, :create_alignment
 
     def self.load(file)
       file = File.open(file) if file.kind_of? String
@@ -22,7 +22,7 @@ module KofamScan
       @mode = :score
       @reannotation = false
       @formatter = OutputFormatter::HitDetailFormatter.new
-      @create_domain_alignment = false
+      @create_alignment = false
 
       initial_values.each do |k, v|
         public_send(:"#{k}=", v)
@@ -37,8 +37,8 @@ module KofamScan
       !!@reannotation
     end
 
-    def create_domain_alignment?
-      !!@create_domain_alignment
+    def create_alignment?
+      !!@create_alignment
     end
   end
 end

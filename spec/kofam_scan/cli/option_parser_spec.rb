@@ -44,11 +44,11 @@ RSpec.describe KofamScan::CLI::OptionParser do
     end
   end
 
-  describe '--tmp_dir option' do
+  describe '--tmp-dir option' do
     it 'calls config.tmp_dir=' do
       dir = "foo"
       expect(config).to receive(:tmp_dir=).with dir
-      parser.parse!(["--tmp_dir", dir])
+      parser.parse!(["--tmp-dir", dir])
     end
   end
 
@@ -86,10 +86,10 @@ RSpec.describe KofamScan::CLI::OptionParser do
     end
   end
 
-  describe '--create-domain-alignment option' do
-    it 'calls config.create_domain_alignment=' do
-      expect(config).to receive(:create_domain_alignment=).with true
-      parser.parse!(["--create-domain-alignment"])
+  describe '--create-alignment option' do
+    it 'calls config.create_alignment=' do
+      expect(config).to receive(:create_alignment=).with true
+      parser.parse!(["--create-alignment"])
     end
   end
 

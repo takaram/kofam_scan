@@ -22,7 +22,7 @@ module KofamScan
       run_hmmsearch unless config.reannotation?
       search_hit_genes
       output_hits
-      rearrange_alignments if config.create_domain_alignment?
+      rearrange_alignments if config.create_alignment?
     end
 
     def parse_ko
@@ -39,7 +39,7 @@ module KofamScan
       require 'fileutils'
 
       dirs_to_make = ["tabular"]
-      dirs_to_make.push("output", "alignment") if config.create_domain_alignment?
+      dirs_to_make.push("output", "alignment") if config.create_alignment?
 
       dirs_to_make.each do |dir|
         FileUtils.mkdir_p(File.join(config.tmp_dir, dir))
@@ -64,7 +64,7 @@ module KofamScan
 
     def hmmsearch_command
       result = File.join(config.tmp_dir, "tabular", "{/.}")
-      if config.create_domain_alignment?
+      if config.create_alignment?
         out = File.join(config.tmp_dir, "output", "{/.}")
       else
         out = File::NULL

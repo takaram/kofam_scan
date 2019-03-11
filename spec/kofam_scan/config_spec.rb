@@ -15,7 +15,7 @@ RSpec.describe KofamScan::Config do
     its(:parallel)      { is_expected.to be_nil }
     its(:reannotation?) { is_expected.to be_falsy }
     its(:formatter)     { is_expected.to be_kind_of KofamScan::OutputFormatter::HitDetailFormatter }
-    its(:create_domain_alignment?) { is_expected.to be_falsy }
+    its(:create_alignment?) { is_expected.to be_falsy }
   end
 
   describe 'initial values are passed to #initialize' do
@@ -110,10 +110,10 @@ RSpec.describe KofamScan::Config do
       end
     end
 
-    describe '#create_domain_alignment? and #create_domain_alignment=' do
+    describe '#create_alignment? and #create_alignment=' do
       it 'can set and get a boolean' do
-        config.create_domain_alignment = true
-        expect(config).to be_create_domain_alignment
+        config.create_alignment = true
+        expect(config).to be_create_alignment
       end
     end
   end

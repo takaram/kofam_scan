@@ -71,9 +71,9 @@ RSpec.describe KofamScan::Executor do
       include_examples 'making tabular', -> { new_dir }
     end
 
-    context 'when create_domain_alignment is true' do
+    context 'when create_alignment is true' do
       before do
-        config.create_domain_alignment = true
+        config.create_alignment = true
         config.tmp_dir = temp_dir
       end
 
@@ -90,7 +90,7 @@ RSpec.describe KofamScan::Executor do
       include_examples 'making tabular', -> { temp_dir_path }
     end
 
-    context 'when create_domain_alignment is false' do
+    context 'when create_alignment is false' do
       it 'does not make tmp_dir/output' do
         executor.setup_directories
         expect(temp_dir_path + "output").not_to be_exist
