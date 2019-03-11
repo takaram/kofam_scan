@@ -29,9 +29,9 @@ module KofamScan
       end
 
       OUTPUT_FORMATTER_MAP = {
-        "detail"          => OutputFormatter::HitDetailFormatter,
-        "mapper"          => OutputFormatter::TabularAllHitFormatter,
-        "mapper-one-line" => OutputFormatter::MultiHitTabularFormatter
+        "detail"          => -> { OutputFormatter::HitDetailFormatter },
+        "mapper"          => -> { OutputFormatter::TabularAllHitFormatter },
+        "mapper-one-line" => -> { OutputFormatter::MultiHitTabularFormatter }
       }.freeze
       OUTPUT_FORMATTER_MAP.each_key(&:freeze)
 
@@ -65,8 +65,8 @@ module KofamScan
         @parser.on("-r", "--reannotate") { |r| @config.reannotation = r }
         @parser.on("-h", "--help")       { puts usage; exit }
 
-        @parser.on("-f n", "--format") do |f|
-          @config.formatter = OUTPUT_FORMATTER_MAP[f].new
+        @parser.on("-f n", "--format", OUTPUT_FORMATTER_MAP) do |f|
+          @config.formatter = f.call.new
         end
 
         # This is done as an after hook because formatter can be changed
