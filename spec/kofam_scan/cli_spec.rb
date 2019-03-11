@@ -1,5 +1,6 @@
 require 'rspec/temp_dir'
 require 'fileutils'
+require 'kofam_scan/cli'
 
 RSpec.describe KofamScan::CLI do
   describe '.run' do

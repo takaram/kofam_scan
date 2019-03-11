@@ -1,4 +1,5 @@
 require 'rspec/temp_dir'
+require 'kofam_scan/output_rearranger'
 
 RSpec.describe KofamScan::OutputRearranger do
   include_context 'uses temp dir'

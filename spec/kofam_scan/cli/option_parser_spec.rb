@@ -1,3 +1,5 @@
+require 'kofam_scan/cli'
+
 RSpec.describe KofamScan::CLI::OptionParser do
   let(:parser) { described_class.new(config) }
   let(:config) { KofamScan::Config.new }

@@ -1,9 +1,7 @@
+require 'kofam_scan/cli/option_parser'
+
 module KofamScan
   module CLI
-    extend Autoload
-
-    autoload :OptionParser
-
     class << self
       def run(argv = ARGV)
         # display help first if with -h option

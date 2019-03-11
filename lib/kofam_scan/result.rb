@@ -1,5 +1,8 @@
 require 'set'
 
+require 'kofam_scan/result/hit'
+require 'kofam_scan/result/parser'
+
 # TODO: alignment
 module KofamScan
   class Result

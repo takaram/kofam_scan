@@ -36,6 +36,8 @@ module KofamScan
     end
 
     def setup_directories
+      require 'fileutils'
+
       dirs_to_make = ["tabular"]
       dirs_to_make.push("output", "alignment") if config.create_domain_alignment?
 
@@ -87,6 +89,8 @@ module KofamScan
     end
 
     def rearrange_alignments
+      require 'kofam_scan/output_rearranger'
+
       from_dir = File.join(config.tmp_dir, "output")
       to_dir = File.join(config.tmp_dir, "alignment")
       OutputRearranger.new(from_dir, to_dir).rearrange
