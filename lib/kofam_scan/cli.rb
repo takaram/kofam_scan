@@ -24,13 +24,18 @@ module KofamScan
       def parse_options(argv, config)
         OptionParser.new(config).parse!(argv)
       rescue ::OptionParser::ParseError => e
-        warn "Error: #{e.message}", OptionParser.usage
-        exit 1
+        abort_with_usage "Error: #{e.message}"
       end
 
       def check_argv_length(argv)
-        abort "Specify a query file"            if argv.empty?
-        abort "Too many command line arguments" if argv.size > 1
+        abort_with_usage "Error: Specify a query file" if argv.empty?
+        abort_with_usage "Error: Too many arguments"   if argv.size > 1
+      end
+
+      def abort_with_usage(message = nil)
+        message = message ? "#{message}\n" : ""
+        message << OptionParser.usage
+        abort message
       end
     end
   end
