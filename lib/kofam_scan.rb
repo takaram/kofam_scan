@@ -16,4 +16,6 @@ module KofamScan
 
   VERSION = '0.1.2'.freeze
   DEFAULT_CONFIG_FILE = File.expand_path("../config.yml", __dir__).freeze
+
+  class Error < StandardError; end
 end
