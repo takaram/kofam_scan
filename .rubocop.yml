@@ -76,6 +76,9 @@ Style/ConditionalAssignment:
   EnforcedStyle: assign_inside_condition
   IncludeTernaryExpressions: false
 
+Style/Documentation:
+  Enabled: false
+
 Style/DoubleNegation:
   Enabled: false
 
@@ -84,6 +87,11 @@ Style/FormatString:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/NestedParenthesizedCalls:
+  Whitelist:
+    - and
+    - and_raise
 
 Style/PerlBackrefs:
   Enabled: false
@@ -110,15 +118,4 @@ Style/TrailingCommaInHashLiteral:
   Enabled: false
 
 Style/TrailingUnderscoreVariable:
-  Enabled: false
-
-# These cops should be turned on, but temporarily disabled
-# To be fixed
-Metrics/LineLength:
-  Max: 106
-
-Style/AsciiComments:
-  Enabled: false
-
-Style/Documentation:
   Enabled: false
