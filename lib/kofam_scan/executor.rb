@@ -18,8 +18,20 @@ module KofamScan
 
     def execute
       parse_ko
-      setup_directories
-      run_hmmsearch unless config.reannotation?
+
+      if config.reannotation?
+        tabular_dir = File.join(config.tmp_dir, "tabular")
+        unless File.exist?(tabular_dir)
+          raise Error, <<~ERROR
+            Could not find hmmsearch tabular output files.
+            They must be in #{tabular_dir}.
+          ERROR
+        end
+      else
+        setup_directories
+        run_hmmsearch
+      end
+
       search_hit_genes
       output_hits
       rearrange_alignments if config.create_alignment?
