@@ -5,45 +5,6 @@ RSpec.describe KofamScan::Executor do
 
   let(:config) { KofamScan::Config.new }
 
-  describe '#execute' do
-    let(:methods_to_be_executed) {
-      %i[parse_ko setup_directories
-         run_hmmsearch search_hit_genes output_hits]
-    }
-
-    before do
-      config.query = "file"
-      methods_to_be_executed.each do |method|
-        allow(executor).to receive(method)
-      end
-    end
-
-    context 'when it is not reannotation' do
-      it 'executes other methods with correct order' do
-        methods_to_be_executed.each do |method|
-          expect(executor).to receive(method).ordered
-        end
-        executor.execute
-      end
-    end
-
-    context 'when it is reannotation' do
-      before { config.reannotation = true }
-
-      it 'executes other methods with correct order' do
-        methods_to_be_executed.grep_v(:run_hmmsearch).each do |method|
-          expect(executor).to receive(method).ordered
-        end
-        executor.execute
-      end
-
-      it 'does not execute run_hmmsearch' do
-        expect(executor).not_to receive(:run_hmmsearch)
-        executor.execute
-      end
-    end
-  end
-
   describe '#setup_directories' do
     include_context 'uses temp dir'
 
