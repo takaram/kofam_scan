@@ -20,14 +20,17 @@ RSpec.describe KofamScan::Result do
     result
   end
 
-  before(:all) { KofamScan::KO.parse(StringIO.new(<<~KOLIST)) }
+  before { KofamScan::KO.parse(StringIO.new(<<~KOLIST)) }
     knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
     K00001	170.20	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
     K00004	277.79	full	all	0.925732	857	652	781	354	3.38	0.590	(R,R)-butanediol dehydrogenase [EC:1.1.1.4 1.1.1.- 1.1.1.303]
     K01977	-	-	-	-	16376	-	-	-	-	-	glycerol dehydrogenase [EC:1.1.1.6]
   KOLIST
 
-  after { [hmmsearch_result1, hmmsearch_result2].each(&:close) }
+  after do
+    [hmmsearch_result1, hmmsearch_result2].each(&:close)
+    KofamScan::KO.instance_variable_set(:@instances, nil)
+  end
 
   describe '#for_ko' do
     subject(:result_for_ko) { result.for_ko("K00001") }

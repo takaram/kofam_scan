@@ -5,15 +5,14 @@ RSpec.describe KofamScan::KO do
   let(:k00005) { described_class["K00005"] }
   let(:k01977) { described_class["K01977"] }
 
-  before(:all) do
-    described_class.instance_variable_set(:@instances, nil)
-    described_class.parse(StringIO.new(<<~KOLIST))
-      knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
-      K00001	297.73	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
-      K00005	344.01	full	all	0.901895	1381	965	796	365	2.82	0.590	glycerol dehydrogenase [EC:1.1.1.6]
-      K01977	-	-	-	-	16376	-	-	-	-	-	glycerol dehydrogenase [EC:1.1.1.6]
-    KOLIST
-  end
+  before { described_class.parse(StringIO.new(<<~KOLIST)) }
+    knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
+    K00001	297.73	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
+    K00005	344.01	full	all	0.901895	1381	965	796	365	2.82	0.590	glycerol dehydrogenase [EC:1.1.1.6]
+    K01977	-	-	-	-	16376	-	-	-	-	-	glycerol dehydrogenase [EC:1.1.1.6]
+  KOLIST
+
+  after { described_class.instance_variable_set(:@instances, nil) }
 
   describe '.all' do
     subject(:all_ko) { described_class.all }
