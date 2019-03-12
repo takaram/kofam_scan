@@ -17,6 +17,8 @@ module KofamScan
         config.query = argv[0]
 
         Executor.execute(config)
+      rescue Error => e
+        abort "Error: #{e.message}"
       end
 
       private

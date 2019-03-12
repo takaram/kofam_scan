@@ -18,6 +18,7 @@ module KofamScan
 
     def execute
       parse_ko
+      check_query_names
 
       if config.reannotation?
         tabular_dir = File.join(config.tmp_dir, "tabular")
@@ -38,12 +39,15 @@ module KofamScan
     end
 
     def parse_ko
+      raise Error, "KO list not given" unless config.ko_list
+      raise Error, "KO list not exist: #{config.ko_list}" unless File.exist?(config.ko_list)
+
       File.open(config.ko_list) { |file| KO.parse(file) }
     end
 
     def query_list
       @query_list ||= File.open(config.query) do |f|
-        f.grep(/^>(\S+)/) { $1 }
+        f.grep(/^>(\S*)/) { $1 }
       end
     end
 
@@ -125,6 +129,15 @@ module KofamScan
     end
 
     private
+
+    def check_query_names
+      if query_list.find(&:empty?)
+        raise Error, "Unnamed query found. Each query must have a unique name."
+      elsif (dup_name, _ = query_list.group_by(&:itself).find { |_, v| v.size > 1 })
+        raise Error, "Non-unique query name found: #{dup_name}. " \
+                     "Each query must have a unique name."
+      end
+    end
 
     def parse_hal(hal)
       base_dir = File.dirname(hal)

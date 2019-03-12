@@ -24,9 +24,10 @@ module KofamScan
           File.open(result_file) do |f|
             f.grep_v(/^#/).map do |line|
               data = line.split
+              name = data[NAME_POSITION]
+              ko   = KO[data[KO_POSITION]]
 
-              name    = data[NAME_POSITION]
-              ko      = KO[data[KO_POSITION]]
+              raise Error, "Unknown KO: #{data[KO_POSITION]}" unless ko
 
               if ko.full?
                 score   = data[FULL_SCORE_POSITION].to_f

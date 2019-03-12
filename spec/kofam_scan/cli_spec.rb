@@ -89,5 +89,27 @@ RSpec.describe KofamScan::CLI do
         )
       end
     end
+
+    context 'when Executor.execute raises an error' do
+      before { allow(KofamScan::Executor).to receive(:execute).and_raise exception }
+
+      context 'when the error is KofamScan::Error' do
+        let(:exception) { KofamScan::Error }
+
+        it 'shows an error message to stderr and exit with error' do
+          expect { execute_run }.to(
+            output.to_stderr.and exit_script.unsuccessfully
+          )
+        end
+      end
+
+      context 'when the error is not KofamScan::Error' do
+        let(:exception) { ArgumentError }
+
+        it 'lets the error go through' do
+          expect { execute_run }.to raise_error exception
+        end
+      end
+    end
   end
 end

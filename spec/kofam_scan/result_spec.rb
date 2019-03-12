@@ -126,4 +126,17 @@ RSpec.describe KofamScan::Result do
       end
     end
   end
+
+  describe '#parse' do
+    context 'when a hit ko is unknown' do
+      before { KofamScan::KO.instance_variable_get(:@instances).delete("K00001") }
+
+      it 'raises KofamScan::Error' do
+        result = described_class.new(query_list)
+        expect {
+          result.parse(hmmsearch_result1, hmmsearch_result2)
+        }.to raise_error KofamScan::Error
+      end
+    end
+  end
 end
