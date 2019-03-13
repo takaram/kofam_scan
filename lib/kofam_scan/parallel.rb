@@ -15,7 +15,7 @@ module KofamScan
     end
 
     def build_command
-      raise CommandNotSet unless command
+      raise Error, "Command not set" unless command
 
       result = [parallel_command, "-j", cpu, "--quote"]
       command_arr = command.kind_of?(Array) ? command : Shellwords.split(command)
@@ -41,7 +41,5 @@ module KofamScan
     def success?
       @success
     end
-
-    class CommandNotSet < StandardError; end
   end
 end
