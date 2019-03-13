@@ -6,11 +6,6 @@ require 'kofam_scan/result/parser'
 # TODO: alignment
 module KofamScan
   class Result
-    extend Autoload
-
-    autoload :Hit
-    autoload :Parser
-
     attr_reader :query_list
 
     def initialize(query_list)
