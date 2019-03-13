@@ -37,5 +37,14 @@ RSpec.describe KofamScan::OutputFormatter::SimpleTabularFormatter do
         gene4\tK00003
       RESULT
     end
+
+    context 'with a long gene name' do
+      include_context description
+
+      it 'does not truncate the gene name' do
+        gene_name_out = output.split.first
+        expect(gene_name_out).to eq long_name
+      end
+    end
   end
 end

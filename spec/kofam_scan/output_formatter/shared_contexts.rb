@@ -7,15 +7,15 @@ RSpec.shared_context 'basic context' do
   let(:out_file) { StringIO.new("", "w") }
   let(:ko1) do
     KofamScan::KO.new("K00001", 99.52, :full, :all, 0.8, 100, 100, 200, 100,
-                  10, 0.5, "alcohol dehydrogenase [EC:1.1.1.1]")
+                      10, 0.5, "alcohol dehydrogenase [EC:1.1.1.1]")
   end
   let(:ko2) do
     KofamScan::KO.new("K00002", 150, :domain, :trim, 0.7, 100, 100, 300, 200,
-                  12, 0.5, "alcohol dehydrogenase (NADP+) [EC:1.1.1.2]")
+                      12, 0.5, "alcohol dehydrogenase (NADP+) [EC:1.1.1.2]")
   end
   let(:ko3) do
     KofamScan::KO.new("K00003", 200, :domain, :all, 0.9, 100, 100, 200, 150,
-                  20, 0.5, "homoserine dehydrogenase [EC:1.1.1.3]")
+                      20, 0.5, "homoserine dehydrogenase [EC:1.1.1.3]")
   end
 
   def output
@@ -53,6 +53,18 @@ RSpec.shared_context 'multiple hits for one KO' do
   end
 
   include_context 'basic context'
+end
+
+RSpec.shared_context 'with a long gene name' do
+  include_context 'basic context'
+
+  let(:result) { KofamScan::Result.new([long_name]) }
+  let(:name_length) { 100 }
+  let(:long_name) { "a" * name_length }
+
+  before do
+    result << KofamScan::Result::Hit.new(long_name, ko1, 200, 1e-10)
+  end
 end
 
 RSpec.shared_examples 'when report_unannotated is false' do |expected|

@@ -6,6 +6,8 @@ module KofamScan
       end
 
       def format(result, output)
+        @max_query_name_length = result.query_list.map(&:size).max
+
         output << header
         result.query_list.each do |query|
           hits = result.for_gene(query)
@@ -23,7 +25,8 @@ module KofamScan
       private
 
       def template
-        "%1s %-19.19s %-6s %7.2f %6.1f %9.2g %s"
+        name_col_width = [@max_query_name_length, 19].max
+        @template ||= "%1s %-#{name_col_width}s %-6s %7.2f %6.1f %9.2g %s"
       end
 
       def template_for_string

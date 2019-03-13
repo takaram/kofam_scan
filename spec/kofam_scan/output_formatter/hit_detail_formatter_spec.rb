@@ -53,21 +53,26 @@ RSpec.describe KofamScan::OutputFormatter::HitDetailFormatter do
       end
     end
 
-    context 'with very long gene name' do
-      include_context 'basic context'
+    context 'with a long gene name' do
+      include_context description
 
-      let(:result) { KofamScan::Result.new([long_name]) }
-      let(:long_name) { "a" * 100 }
-
-      before do
-        result << KofamScan::Result::Hit.new(long_name, ko1, 200, 1e-10)
+      it "does not truncate the gene name" do
+        gene_name_out = output_array.first[1]
+        expect(gene_name_out).to eq long_name
       end
 
-      char_len = 19
+      it 'outputs the header with appropreate margin' do
+        header1 = output.split(/\n/).first
+        gene_name_column = header1.slice(/gene name\s+/).chop
 
-      it "truncates the gene name to #{char_len} characters" do
-        line = output.split(/\n/)[-1]
-        expect(line).to match(/\ba{#{char_len}}\b/)
+        expect(gene_name_column.size).to eq name_length
+      end
+
+      it 'outputs the header delimiter with appropreate margin' do
+        header2 = output.split(/\n/)[1]
+        first_column = header2.split.first
+
+        expect(first_column).to eq('#-' + '-' * name_length)
       end
     end
 
@@ -88,7 +93,7 @@ RSpec.describe KofamScan::OutputFormatter::HitDetailFormatter do
 
       let(:ko_without_threshold) do
         KofamScan::KO.new("K00001", nil, nil, nil, nil, 100, 100, 200, 100,
-                      10, 0.5, "alcohol dehydrogenase [EC:1.1.1.1]")
+                          10, 0.5, "alcohol dehydrogenase [EC:1.1.1.1]")
       end
 
       before do
