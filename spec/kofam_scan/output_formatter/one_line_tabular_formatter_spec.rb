@@ -1,6 +1,6 @@
 require_relative 'shared_contexts'
 
-RSpec.describe KofamScan::OutputFormatter::TabularAllHitFormatter do
+RSpec.describe KofamScan::OutputFormatter::OneLineTabularFormatter do
   describe '#format' do
     context 'the simplest context' do
       include_context 'one hit for one gene'
@@ -21,13 +21,12 @@ RSpec.describe KofamScan::OutputFormatter::TabularAllHitFormatter do
       include_context description
 
       it 'takes all the KO in the order of score' do
-        gene1_kos = output.split(/\n/).grep(/^gene1\t/).map { |l| l.split.last }
-        expect(gene1_kos).to match(%w[K00002 K00001])
+        expect(output).to match(/^gene1\tK00002\tK00001$/)
       end
 
-      it 'has the same number of lines as hits for one gene' do
+      it 'has only one line for one gene' do
         gene1_lines = output.split(/\n/).grep(/^gene1/)
-        expect(gene1_lines.size).to eq 2
+        expect(gene1_lines.size).to eq 1
       end
     end
 

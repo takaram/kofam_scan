@@ -1,6 +1,6 @@
 module KofamScan
   class OutputFormatter
-    class MultiHitTabularFormatter < OutputFormatter
+    class OneLineTabularFormatter < OutputFormatter
       def initialize
         @report_unannotated = true
       end

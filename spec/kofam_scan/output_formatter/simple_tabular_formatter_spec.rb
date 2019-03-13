@@ -20,13 +20,14 @@ RSpec.describe KofamScan::OutputFormatter::SimpleTabularFormatter do
     context 'multiple hits for one gene' do
       include_context description
 
-      it 'takes the KO with highest score' do
-        expect(output).to match(/^gene1\tK00002$/)
+      it 'takes all the KO in the order of score' do
+        gene1_kos = output.split(/\n/).grep(/^gene1\t/).map { |l| l.split.last }
+        expect(gene1_kos).to match(%w[K00002 K00001])
       end
 
-      it 'has only one line for one gene' do
+      it 'has the same number of lines as hits for one gene' do
         gene1_lines = output.split(/\n/).grep(/^gene1/)
-        expect(gene1_lines.size).to eq 1
+        expect(gene1_lines.size).to eq 2
       end
     end
 

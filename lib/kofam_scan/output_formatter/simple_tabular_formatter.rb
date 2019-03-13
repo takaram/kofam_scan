@@ -7,12 +7,11 @@ module KofamScan
 
       def format(result, output)
         result.query_list.each do |query|
-          hit = result.for_gene(query).select(&:above_threshold?).max_by(&:score)
-          if hit
-            output << "#{query}\t#{hit.ko.name}\n"
-          elsif @report_unannotated
-            output << query << "\n"
-          end
+          ko_list = result.for_gene(query).select(&:above_threshold?)
+                          .sort_by(&:score).reverse.map { |hit| hit.ko.name }
+
+          output << query << "\n" if ko_list.empty? && @report_unannotated
+          ko_list.each { |ko| output << "#{query}\t#{ko}\n" }
         end
       end
     end

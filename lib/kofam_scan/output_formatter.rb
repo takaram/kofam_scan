@@ -6,10 +6,9 @@ module KofamScan
   class OutputFormatter
     extend Autoload
 
-    autoload :SimpleTabularFormatter
-    autoload :MultiHitTabularFormatter
     autoload :HitDetailFormatter
-    autoload :TabularAllHitFormatter
+    autoload :OneLineTabularFormatter
+    autoload :SimpleTabularFormatter
 
     attr_accessor :report_unannotated
   end

@@ -30,8 +30,8 @@ module KofamScan
 
       OUTPUT_FORMATTER_MAP = {
         "detail"          => -> { OutputFormatter::HitDetailFormatter },
-        "mapper"          => -> { OutputFormatter::TabularAllHitFormatter },
-        "mapper-one-line" => -> { OutputFormatter::MultiHitTabularFormatter }
+        "mapper"          => -> { OutputFormatter::SimpleTabularFormatter },
+        "mapper-one-line" => -> { OutputFormatter::OneLineTabularFormatter }
       }.freeze
       OUTPUT_FORMATTER_MAP.each_key(&:freeze)
 
