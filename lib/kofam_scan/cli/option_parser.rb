@@ -15,7 +15,7 @@ module KofamScan
             --[no-]report-unannotated  Sequence name will be shown even if no KOs are assigned
                                        Default is true when format=mapper or mapper-all,
                                        false when format=detail
-            -p, --profile <dir>        Profile HMM database
+            -p, --profile <path>       Profile HMM database
             -k, --ko-list <file>       KO information file
             -r, --reannotate           Skip hmmsearch
                                        Incompatible with --create-alignment
