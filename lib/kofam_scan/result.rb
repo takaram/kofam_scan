@@ -1,5 +1,3 @@
-require 'set'
-
 require 'kofam_scan/result/hit'
 require 'kofam_scan/result/parser'
 
@@ -9,9 +7,9 @@ module KofamScan
     attr_reader :query_list
 
     def initialize(query_list)
-      @hits        = Set.new
-      @genes_index = Hash.new { |h, k| h[k] = Set.new }
-      @ko_index    = Hash.new { |h, k| h[k] = Set.new }
+      @hits        = []
+      @genes_index = Hash.new { |h, k| h[k] = [] }
+      @ko_index    = Hash.new { |h, k| h[k] = [] }
       @query_list  = query_list
     end
 
