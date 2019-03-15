@@ -38,8 +38,7 @@ RSpec.describe KofamScan::Parallel do
     end
 
     it 'raises error when command is not set' do
-      expect { described_class.new.build_command }
-        .to raise_error KofamScan::Parallel::CommandNotSet
+      expect { described_class.new.build_command }.to raise_error KofamScan::Error
     end
   end
 
