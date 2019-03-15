@@ -53,12 +53,12 @@ If you are interested in only several KOs, you can make your original .hal file 
   - `mapper-oneline`
     - Similar to `mapper`, but when more than one KO are assigned to a gene, all assigned KO are shown in one line separated by tabs.
 - `--[no-]report-unannotated`
-  - With `--report-unannotated` option, gene names are shown even when no KO is assigned. With `--no-report-unannotated` such genes are not shown at all.
+  - With `--report-unannotated` option, gene names are shown even when no KO is assigned (default when `--format=mapper(-oneline)`). With `--no-report-unannotated` such genes are not shown at all (default when `--format=detail`).
 - `--create-alignment`
   - `hmmsearch`'s normal outputs per profile are stored in the temporary directory. In addition, domain information and alignments in the outputs will be rearranged per query.
   - Not compatible with `--reannotation`
 - `-r`, `--reannotation`
-  - Skip `hmmsearch` and assume that `hmmseach` outputs are already in the temporary directory. This will help you to make an output in a different format or redo annotation changing thresholds.
+  - Skip `hmmsearch` and assume that `hmmsearch` outputs are already in the temporary directory. This will help you to make an output in a different format or redo annotation changing thresholds.
   - Not compatible with `--create-alignment`
 - `-h`, `--help`
   - Show brief help message.
