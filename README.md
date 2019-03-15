@@ -78,3 +78,6 @@ These thing can be set by `config.yml`.
   - Path to `hmmsearch` executable. If not given, it will be searched for PATH.
 - parallel
   - Path to `parallel` executable. If not given, it will be searched for PATH.
+
+## License
+This software is released under the MIT License.
