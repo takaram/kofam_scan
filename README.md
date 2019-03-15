@@ -18,11 +18,11 @@ Online version is available on https://www.genome.jp/tools/kofamkoala/ .
 $ ./exec_annotation -o result.txt query.fasta
 ```
 
-### Query file
+## Query file
 A query file is a FASTA file with one or more amino acid sequences. You cannot use nucleotide sequences.
 Each sequence must have a unique name. A name of a sequence is a string between the header symbol (">") and the first blank character (whitespace, tab, line break, etc.). Do not put a whitespace right after ">".
 
-### Profiles
+## Profiles
 Specify the path of the profile database you downloaded by giving `--profile` option to the command or writing it to `config.yml`. The path can be a directory, .hmm file, or .hal file.
 If it is a directory, .hmm files below it will be used.
 If a .hmm file, only the file will be used.
@@ -31,7 +31,7 @@ If a .hal file, files listed in the .hal file will be used. File paths in a .hal
 KOfam has `prokaryote.hal` and `eukaryote.hal` in `profiles` directory. They are lists of profiles excluding eukaryote- and prokaryote-specific KOs respectively.
 If you are interested in only several KOs, you can make your original .hal file and use it as a database. It will reduce computation time.
 
-### Options
+## Options
 - `-o FILE`
   - The result are output to `FILE`. It defaults to `stdout`.
 - `-p`, `--profile=PROFILE`
@@ -49,7 +49,7 @@ If you are interested in only several KOs, you can make your original .hal file 
   - `detail`
     - Default format. Gene name, assigned K number, threshold of the KO, hmmsearch score and E-value, and the definition of KO are shown. In addition, an asterisk '*' is added to the head of the line if the score is higher than the threshold.
   - `mapper`
-    - Format compatible to [KEGG Mapper](https://www.genome.jp/kegg/mapper.html). It includes a gene name and an assigned K number separated by a tab.
+    - Format which can be used for [KEGG Mapper](https://www.genome.jp/kegg/mapper.html) input. It includes a gene name and an assigned K number separated by a tab.
   - `mapper-oneline`
     - Similar to `mapper`, but when more than one KO are assigned to a gene, all assigned KO are shown in one line separated by tabs.
 - `--[no-]report-unannotated`
@@ -63,7 +63,7 @@ If you are interested in only several KOs, you can make your original .hal file 
 - `-h`, `--help`
   - Show brief help message.
 
-### config.yml
+## config.yml
 These thing can be set by `config.yml`.
 - profile
   - Path to KOfam profiles.
