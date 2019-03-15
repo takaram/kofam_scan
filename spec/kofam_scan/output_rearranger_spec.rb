@@ -19,6 +19,8 @@ RSpec.describe KofamScan::OutputRearranger do
     rearranger.rearrange
   end
 
+  after { KofamScan::KO.instance_variable_set(:@instances, nil) }
+
   describe '#rearrange' do
     it 'creates the same number of files as unique sequences' do
       file_list = to_dir.children
