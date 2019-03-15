@@ -1,11 +1,9 @@
 autoload :YAML, 'yaml'
 
 module KofamScan
-  class Config
-    attr_accessor :output_file, :profile, :ko_list, :e_value, :hmmsearch, :cpu,
-                  :tmp_dir, :parallel, :formatter, :query
-    attr_writer   :reannotation, :create_alignment
-
+  Config = Struct.new(:output_file, :profile, :ko_list, :e_value, :hmmsearch,
+                      :cpu, :tmp_dir, :parallel, :formatter, :reannotation,
+                      :create_alignment, :query) do
     def self.load(file)
       file = File.open(file) if file.kind_of? String
       hash = YAML.safe_load(file)
@@ -15,29 +13,24 @@ module KofamScan
     end
 
     def initialize(initial_values = {})
-      @output_file = nil
-      @cpu = 1
-      @tmp_dir = "./tmp"
-      @hmmsearch = "hmmsearch"
-      @reannotation = false
-      @formatter = OutputFormatter::HitDetailFormatter.new
-      @create_alignment = false
+      initial_values = {
+        cpu:              1,
+        tmp_dir:          "./tmp",
+        hmmsearch:        "hmmsearch",
+        reannotation:     false,
+        formatter:        OutputFormatter::HitDetailFormatter.new,
+        create_alignment: false
+      }.merge(initial_values.map { |k, v| [k.intern, v] }.to_h)
 
-      initial_values.each do |k, v|
-        public_send(:"#{k}=", v)
-      end
+      super(*members.map { |k| initial_values[k] })
     end
 
     def output_io
-      @output_file ? File.open(@output_file, "w") : STDOUT
+      output_file ? File.open(output_file, "w") : STDOUT
     end
 
-    def reannotation?
-      !!@reannotation
-    end
+    alias reannotation? reannotation
 
-    def create_alignment?
-      !!@create_alignment
-    end
+    alias create_alignment? create_alignment
   end
 end
