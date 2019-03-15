@@ -19,7 +19,6 @@ module KofamScan
       @cpu = 1
       @tmp_dir = "./tmp"
       @hmmsearch = "hmmsearch"
-      @mode = :score
       @reannotation = false
       @formatter = OutputFormatter::HitDetailFormatter.new
       @create_alignment = false
