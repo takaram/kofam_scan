@@ -39,9 +39,11 @@ If you are interested in only several KOs, you can make your original .hal file 
 - `-k`, `--ko-list=FILE`
   - Use `FILE` as a KO list.
 - `--cpu=N`
-  - Set the number of `hmmsearch` processes started simultaneously to `N`. It defaults to 1 unless it is set in `config.yml`
+  - Set the number of `hmmsearch` processes started simultaneously to `N`. It defaults to 1 unless it is set in `config.yml`.
+- `-c FILE`
+  - Use `FILE` as a config file instead of `config.yml` in the same directory as `exec_annotation`.
 - `--tmp-dir=DIR`
-  - Use `DIR` as a temporary directory where hmmsearch results are. It will be created if not exist. It defaults to `./tmp`
+  - Use `DIR` as a temporary directory where hmmsearch results are. It will be created if not exist. It defaults to `./tmp`.
 - `-f`, `--format=FORMAT`
   - Set the format of the output to `FORMAT`. Three formats below are available.
   - `detail`
@@ -76,4 +78,3 @@ These thing can be set by `config.yml`.
   - Path to `hmmsearch` executable. If not given, it will be searched for PATH.
 - parallel
   - Path to `parallel` executable. If not given, it will be searched for PATH.
-
