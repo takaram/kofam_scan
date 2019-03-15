@@ -8,6 +8,11 @@ module KofamScan
           Usage: #{File.basename($PROGRAM_NAME)} [options] <query>
             <query>                    FASTA formatted query sequence file
             -o <file>                  File to output the result  [stdout]
+            -p, --profile <path>       Profile HMM database
+            -k, --ko-list <file>       KO information file
+            --cpu <num>                Number of CPU to use  [1]
+            -c <file>                  Config file
+            --tmp-dir <dir>            Temporary directory  [./tmp]
             -f, --format <format>      Format of the output [detail]
                 detail:          Detail for each hits (including hits below threshold)
                 mapper:          KEGG Mapper compatible format
@@ -15,16 +20,11 @@ module KofamScan
             --[no-]report-unannotated  Sequence name will be shown even if no KOs are assigned
                                        Default is true when format=mapper or mapper-all,
                                        false when format=detail
-            -p, --profile <path>       Profile HMM database
-            -k, --ko-list <file>       KO information file
-            -c <file>                  Config file
-            -r, --reannotate           Skip hmmsearch
-                                       Incompatible with --create-alignment
-            --cpu <num>                Number of CPU to use  [1]
-            --tmp-dir <dir>            Temporary directory  [./tmp]
             --create-alignment         Create domain annotation files for each sequence
                                        They will be located in the tmp directory
                                        Incompatible with -r
+            -r, --reannotate           Skip hmmsearch
+                                       Incompatible with --create-alignment
             -h, --help                 Show this message and exit
         USAGE
       end
