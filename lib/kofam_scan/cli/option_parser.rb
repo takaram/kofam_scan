@@ -17,6 +17,7 @@ module KofamScan
                                        false when format=detail
             -p, --profile <path>       Profile HMM database
             -k, --ko-list <file>       KO information file
+            -c <file>                  Config file
             -r, --reannotate           Skip hmmsearch
                                        Incompatible with --create-alignment
             --cpu <num>                Number of CPU to use  [1]

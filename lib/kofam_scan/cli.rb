@@ -10,7 +10,7 @@ module KofamScan
           exit 0
         end
 
-        config_file = DEFAULT_CONFIG_FILE
+        config_file = config_option(argv) || DEFAULT_CONFIG_FILE
         config = File.exist?(config_file) ? Config.load(config_file) : Config.new
         parse_options(argv, config)
         check_argv_length(argv)
@@ -22,6 +22,20 @@ module KofamScan
       end
 
       private
+
+      def config_option(argv)
+        index = argv.index { |i| i.match(/\A-c(.*)/) }
+        return nil unless index
+
+        if (conf_file = Regexp.last_match(1)).empty?
+          _c, conf_file = argv.slice!(index, 2)
+        else
+          argv.delete_at(index)
+        end
+        abort "File not found: #{conf_file}" unless File.exist?(conf_file)
+
+        conf_file
+      end
 
       def parse_options(argv, config)
         OptionParser.new(config).parse!(argv)

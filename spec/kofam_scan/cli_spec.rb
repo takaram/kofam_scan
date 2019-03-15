@@ -111,5 +111,31 @@ RSpec.describe KofamScan::CLI do
         end
       end
     end
+
+    context 'with -c option' do
+      include_context 'uses temp dir'
+
+      let(:config_file) { temp_dir_path.join("config.yml").to_s }
+      let(:options) { ["-c", config_file, "query"] }
+
+      it 'uses the given config file' do
+        IO.write(config_file, "cpu: 123")
+
+        execute_run
+        expect(KofamScan::Executor).to(
+          have_received(:execute).with(an_object_having_attributes(cpu: 123))
+        )
+      end
+
+      context 'when config file does not exist' do
+        let(:config_file) { "/foo/bar/baz" }
+
+        it 'shows an error message and exits with error' do
+          expect { execute_run }.to(
+            output(/not found/i).to_stderr.and exit_script.unsuccessfully
+          )
+        end
+      end
+    end
   end
 end
