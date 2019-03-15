@@ -16,7 +16,6 @@ module KofamScan
       initial_values = {
         cpu:              1,
         tmp_dir:          "./tmp",
-        hmmsearch:        "hmmsearch",
         reannotation:     false,
         formatter:        OutputFormatter::HitDetailFormatter.new,
         create_alignment: false

@@ -10,7 +10,6 @@ RSpec.describe KofamScan::Config do
     its(:output_file)   { is_expected.to be_nil }
     its(:output_io)     { is_expected.to eq STDOUT }
     its(:cpu)           { is_expected.to eq 1 }
-    its(:hmmsearch)     { is_expected.to eq "hmmsearch" }
     its(:tmp_dir)       { is_expected.to eq "./tmp" }
     its(:parallel)      { is_expected.to be_nil }
     its(:reannotation?) { is_expected.to be_falsy }

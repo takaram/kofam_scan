@@ -27,7 +27,6 @@ module KofamScan
       Open3.popen3(*build_command) do |stdin, out, err, thread|
         stdin.puts @inputs if @inputs
         stdin.close
-        thread.join
         @success = thread.value.success?
 
         [out.read, err.read]
