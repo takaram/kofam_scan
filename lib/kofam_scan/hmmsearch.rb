@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 autoload :Shellwords, 'shellwords'
 
 module KofamScan

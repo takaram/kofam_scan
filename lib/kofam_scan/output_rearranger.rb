@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module KofamScan
   class OutputRearranger
     def initialize(from_dir, to_dir)

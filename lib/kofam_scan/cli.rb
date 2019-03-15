@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require 'kofam_scan/cli/option_parser'
 
 module KofamScan

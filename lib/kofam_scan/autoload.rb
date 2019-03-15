@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module KofamScan
   module Autoload
     def autoload(const_name, path = nil)

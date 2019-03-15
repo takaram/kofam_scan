@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 autoload :YAML, 'yaml'
 
 module KofamScan

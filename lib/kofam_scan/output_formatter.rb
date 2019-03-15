@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module KofamScan
   # Base class for output formatter classes.
   # Each formatters shall respond to `#format' with two arguments.

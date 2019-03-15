@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 autoload :OptionParser, 'optparse'
 
 module KofamScan

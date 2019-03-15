@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'kofam_scan/result/hit'
 require 'kofam_scan/result/parser'
 

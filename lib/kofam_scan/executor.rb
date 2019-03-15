@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module KofamScan
   class Executor
     attr_reader :config
