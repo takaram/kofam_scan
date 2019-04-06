@@ -1,5 +1,5 @@
 # KofamScan
-KofamScan is a gene functional annotation tool based on KEGG Orthology and hidden Markov model.
+KofamScan is a gene function annotation tool based on KEGG Orthology and hidden Markov model.
 You need [KOfam database](ftp://ftp.genome.jp/pub/db/kofam) to use this tool.
 Online version is available on https://www.genome.jp/tools/kofamkoala/ .
 
@@ -24,7 +24,7 @@ Each sequence must have a unique name. A name of a sequence is a string between 
 
 ## Profiles
 Specify the path of the profile database you downloaded by giving `--profile` option to the command or writing it to `config.yml`. The path can be a directory, .hmm file, or .hal file.
-If it is a directory, .hmm files below it will be used.
+If it is a directory, .hmm files in the directory will be used.
 If a .hmm file, only the file will be used.
 If a .hal file, files listed in the .hal file will be used. File paths in a .hal file are either absolute or relative to the directory of the file. Lines start with # are ignored.
 
@@ -64,7 +64,7 @@ If you are interested in only several KOs, you can make your original .hal file 
   - Show brief help message.
 
 ## config.yml
-These thing can be set by `config.yml`.
+The following variables can be set by `config.yml`.
 - profile
   - Path to KOfam profiles.
   - `--profile` option takes precedence.
