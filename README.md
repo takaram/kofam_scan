@@ -49,7 +49,7 @@ If you are interested in only several KOs, you can make your original .hal file 
   - `detail`
     - Default format. Gene name, assigned K number, threshold of the KO, hmmsearch score and E-value, and the definition of KO are shown. In addition, an asterisk '*' is added to the head of the line if the score is higher than the threshold.
   - `mapper`
-    - Format which can be used for [KEGG Mapper](https://www.genome.jp/kegg/mapper.html) input. It includes a gene name and an assigned K number separated by a tab.
+    - Format which can be used for [KEGG Mapper](https://www.genome.jp/kegg/mapper.html) input. It includes a gene name and an assigned K number separated by a tab. Here, an assigned K number represents a hit with score above the predefined threshold. Note that for some KOs, predefined score thresholds are not available when they are represented by a very few number of sequences in KEGG GENES.
   - `mapper-oneline`
     - Similar to `mapper`, but when more than one KO are assigned to a gene, all assigned KO are shown in one line separated by tabs.
 - `--[no-]report-unannotated`
