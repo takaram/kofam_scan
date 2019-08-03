@@ -15,6 +15,7 @@ module KofamScan
   autoload :HMMSearch, 'kofam_scan/hmmsearch'
   autoload :OutputFormatter
   autoload :Parallel
+  autoload :ResultWithEvalueThreshold
 
   VERSION = '1.0.0'.freeze
   DEFAULT_CONFIG_FILE = File.expand_path("../config.yml", __dir__).freeze

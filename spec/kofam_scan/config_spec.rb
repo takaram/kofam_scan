@@ -83,7 +83,7 @@ RSpec.describe KofamScan::Config do
       end
     end
 
-    %i[profile ko_list hmmsearch tmp_dir parallel query].each do |attr|
+    %i[profile ko_list hmmsearch tmp_dir parallel query e_value].each do |attr|
       describe "##{attr} and ##{attr}=" do
         it 'can set and get a value' do
           path = "/path/to/file"
