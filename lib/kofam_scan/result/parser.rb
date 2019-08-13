@@ -31,12 +31,12 @@ module KofamScan
 
               raise Error, "Unknown KO: #{data[KO_POSITION]}" unless ko
 
-              if ko.full?
-                score   = data[FULL_SCORE_POSITION].to_f
-                e_value = data[FULL_E_VALUE_POSITION].to_f
-              else
+              if ko.domain?
                 score   = data[DOMAIN_SCORE_POSITION].to_f
                 e_value = data[DOMAIN_E_VALUE_POSITION].to_f
+              else
+                score   = data[FULL_SCORE_POSITION].to_f
+                e_value = data[FULL_E_VALUE_POSITION].to_f
               end
 
               @result << Hit.new(name, ko, score, e_value)

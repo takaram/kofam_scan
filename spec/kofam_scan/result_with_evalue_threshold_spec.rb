@@ -3,11 +3,7 @@ require_relative 'result_examples'
 RSpec.describe KofamScan::ResultWithEvalueThreshold do
   include_context 'result context'
 
-  let(:result) do
-    result = described_class.new(query_list, e_value_threshold)
-    result.parse(hmmsearch_result1, hmmsearch_result2)
-    result
-  end
+  let(:initialize_result) { described_class.new(query_list, e_value_threshold) }
 
   let(:e_value_threshold) { 0.01 }
 
@@ -21,22 +17,24 @@ RSpec.describe KofamScan::ResultWithEvalueThreshold do
     describe '#above_threshold?' do
       subject { hit1.above_threshold? }
 
+      let(:hit1_e_value) { 9.5e-51 }
+
       context 'when the E-value is equal to the threshold' do
-        let(:e_value_threshold) { hit1.e_value }
+        let(:e_value_threshold) { hit1_e_value }
 
         it { is_expected.to be_truthy }
       end
 
       context 'when the E-value is above the threshold' do
-        let(:e_value_threshold) { hit1.e_value * 1.01 }
+        let(:e_value_threshold) { hit1_e_value * 0.99 }
 
-        it { is_expected.to be_truthy }
+        it { is_expected.to be_falsy }
       end
 
       context 'when the E-value is below the threshold' do
-        let(:e_value_threshold) { hit1.e_value * 0.99 }
+        let(:e_value_threshold) { hit1_e_value * 1.01 }
 
-        it { is_expected.to be_falsy }
+        it { is_expected.to be_truthy }
       end
     end
   end

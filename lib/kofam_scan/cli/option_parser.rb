@@ -15,6 +15,7 @@ module KofamScan
             --cpu <num>                Number of CPU to use  [1]
             -c <file>                  Config file
             --tmp-dir <dir>            Temporary directory  [./tmp]
+            -E <e_value>               Use E-value threshold instead of predefined score thresholds
             -f, --format <format>      Format of the output [detail]
                 detail:          Detail for each hits (including hits below threshold)
                 mapper:          KEGG Mapper compatible format
@@ -64,6 +65,7 @@ module KofamScan
         @parser.on("-p d", "--profile")  { |p| @config.profile = p }
         @parser.on("-k f", "--ko-list")  { |t| @config.ko_list = t }
         @parser.on("--cpu n", Integer)   { |c| @config.cpu = c }
+        @parser.on("-E e", Numeric)      { |e| @config.e_value = e }
         @parser.on("--tmp-dir d")        { |d| @config.tmp_dir = d }
         @parser.on("-r", "--reannotate") { |r| @config.reannotation = r }
         @parser.on("-h", "--help")       { puts usage; exit }

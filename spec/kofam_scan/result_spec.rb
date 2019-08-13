@@ -3,11 +3,7 @@ require_relative 'result_examples'
 RSpec.describe KofamScan::Result do
   include_context 'result context'
 
-  let(:result) do
-    result = described_class.new(query_list)
-    result.parse(hmmsearch_result1, hmmsearch_result2)
-    result
-  end
+  let(:initialize_result) { described_class.new(query_list) }
 
   it_behaves_like 'result common'
 

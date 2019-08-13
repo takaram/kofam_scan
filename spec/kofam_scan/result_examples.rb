@@ -3,6 +3,7 @@ require 'stringio'
 RSpec.shared_context 'result context' do
   let(:hmmsearch_result1) { spec_root.join('test_data', 'tabular', 'K00001').open }
   let(:hmmsearch_result2) { spec_root.join('test_data', 'tabular', 'K00004').open }
+  let(:hmmsearch_result3) { spec_root.join('test_data', 'tabular', 'K00002').open }
 
   let(:query_list) do
     [hmmsearch_result1, hmmsearch_result2].flat_map do |f|
@@ -14,15 +15,21 @@ RSpec.shared_context 'result context' do
     end.uniq.sort
   end
 
+  let(:result) do
+    result = initialize_result
+    result.parse(hmmsearch_result1, hmmsearch_result2, hmmsearch_result3)
+    result
+  end
+
   before { KofamScan::KO.parse(StringIO.new(<<~KOLIST)) }
     knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
     K00001	170.20	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
+    K00002	-	-	-	-	1261	-	-	-	-	-	alcohol dehydrogenase (NADP+) [EC:1.1.1.2]
     K00004	277.79	full	all	0.925732	857	652	781	354	3.38	0.590	(R,R)-butanediol dehydrogenase [EC:1.1.1.4 1.1.1.- 1.1.1.303]
-    K01977	-	-	-	-	16376	-	-	-	-	-	glycerol dehydrogenase [EC:1.1.1.6]
   KOLIST
 
   after do
-    [hmmsearch_result1, hmmsearch_result2].each(&:close)
+    [hmmsearch_result1, hmmsearch_result2, hmmsearch_result3].each(&:close)
     KofamScan::KO.instance_variable_set(:@instances, nil)
   end
 end
@@ -62,7 +69,7 @@ RSpec.shared_examples 'result common' do
       before { KofamScan::KO.instance_variable_get(:@instances).delete("K00001") }
 
       it 'raises KofamScan::Error' do
-        result = described_class.new(query_list)
+        result = initialize_result
         expect {
           result.parse(hmmsearch_result1, hmmsearch_result2)
         }.to raise_error KofamScan::Error
@@ -76,7 +83,7 @@ RSpec.shared_context 'hit context' do
   let(:hit1) { hits.find { |hit| hit.ko.name == "K00001" } }
   let(:hit2) { hits.find { |hit| hit.ko.name == "K00004" } }
   let(:hit3) { result.for_gene("apr:Apre_1060").first }
-  let(:hit4) { described_class::Hit.new("gene", "K01977", 100, 1) }
+  let(:hit4) { result.for_ko("K00002").first }
 end
 
 RSpec.shared_examples 'hit common' do
@@ -103,6 +110,12 @@ RSpec.shared_examples 'hit common' do
       expect(hit1.score).to eq 170.2
       expect(hit2.score).to eq 277.8
     end
+
+    context 'when score type is not avaliable' do
+      it 'returns the score of full sequence' do
+        expect(hit4.score).to eq 220.0
+      end
+    end
   end
 
   describe '#e_value' do
@@ -112,7 +125,9 @@ RSpec.shared_examples 'hit common' do
     end
 
     context 'when score type is not avaliable' do
-      it 'returns the E-value of full sequence'
+      it 'returns the E-value of full sequence' do
+        expect(hit4.e_value).to eq 5.4e-66
+      end
     end
   end
 end
