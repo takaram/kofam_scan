@@ -97,11 +97,8 @@ module KofamScan
       files = Dir.entries(tabular_dir).grep_v(/\A\./)
       files.map! { |f| File.join(tabular_dir, f) }
 
-      if config.e_value
-        @result = ResultWithEvalueThreshold.new(query_list, config.e_value)
-      else
-        @result = Result.new(query_list)
-      end
+      result_option = { e_value_threshold: config.e_value }.compact
+      @result = Result.create(query_list, **result_option)
       @result.parse(*files)
     end
 

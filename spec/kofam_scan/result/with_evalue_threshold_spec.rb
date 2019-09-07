@@ -1,9 +1,9 @@
-require_relative 'result_examples'
+require_relative 'shared_examples'
 
-RSpec.describe KofamScan::ResultWithEvalueThreshold do
+RSpec.describe KofamScan::Result::WithEvalueThreshold do
   include_context 'result context'
 
-  let(:initialize_result) { described_class.new(query_list, e_value_threshold) }
+  let(:initialize_result) { KofamScan::Result.create(query_list, e_value_threshold: e_value_threshold) }
 
   let(:e_value_threshold) { 0.01 }
 

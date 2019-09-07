@@ -1,9 +1,9 @@
-require_relative 'result_examples'
+require_relative 'result/shared_examples'
 
 RSpec.describe KofamScan::Result do
   include_context 'result context'
 
-  let(:initialize_result) { described_class.new(query_list) }
+  let(:initialize_result) { described_class.create(query_list) }
 
   it_behaves_like 'result common'
 

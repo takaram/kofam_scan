@@ -83,7 +83,7 @@ RSpec.describe KofamScan::Config do
       end
     end
 
-    %i[profile ko_list hmmsearch tmp_dir parallel query e_value].each do |attr|
+    %i[profile ko_list hmmsearch tmp_dir parallel query].each do |attr|
       describe "##{attr} and ##{attr}=" do
         it 'can set and get a value' do
           path = "/path/to/file"
@@ -92,6 +92,13 @@ RSpec.describe KofamScan::Config do
             expect(config.#{attr}).to eq path
           CODE
         end
+      end
+    end
+
+    describe '#e_value and #e_value=' do
+      it 'can set and get a value' do
+        config.e_value = 1e-5
+        expect(config.e_value).to eq 1e-5
       end
     end
 
