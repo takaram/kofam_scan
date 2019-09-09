@@ -6,6 +6,18 @@ require 'kofam_scan/result/parser'
 # TODO: alignment
 module KofamScan
   class Result
+    extend Autoload
+
+    autoload :WithEvalueThreshold
+
+    def self.create(query_list, e_value_threshold: nil)
+      if e_value_threshold
+        WithEvalueThreshold.new(query_list, e_value_threshold)
+      else
+        Result.new(query_list)
+      end
+    end
+
     attr_reader :query_list
 
     def initialize(query_list)

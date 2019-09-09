@@ -95,6 +95,13 @@ RSpec.describe KofamScan::Config do
       end
     end
 
+    describe '#e_value and #e_value=' do
+      it 'can set and get a value' do
+        config.e_value = 1e-5
+        expect(config.e_value).to eq 1e-5
+      end
+    end
+
     describe '#cpu and #cpu=' do
       it 'can set and get a value' do
         config.cpu = 2

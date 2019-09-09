@@ -93,6 +93,14 @@ RSpec.describe KofamScan::CLI::OptionParser do
     end
   end
 
+  describe '-E option' do
+    it 'calls config.e_value=' do
+      e_value = 0.01
+      expect(config).to receive(:e_value=).with e_value
+      parser.parse!(['-E', e_value.to_s])
+    end
+  end
+
   describe '#parse!' do
     let(:opt_array) { %w[-o file1 -p dir1 -t file2 --cpu=1] }
 
