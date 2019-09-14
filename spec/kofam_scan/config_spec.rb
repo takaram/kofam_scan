@@ -102,6 +102,13 @@ RSpec.describe KofamScan::Config do
       end
     end
 
+    describe '#threshold_scale and #threshold_scale=' do
+      it 'can set and get a value' do
+        config.threshold_scale = 1.1
+        expect(config.threshold_scale).to eq 1.1
+      end
+    end
+
     describe '#cpu and #cpu=' do
       it 'can set and get a value' do
         config.cpu = 2

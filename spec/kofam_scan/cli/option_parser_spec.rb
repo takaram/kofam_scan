@@ -101,8 +101,16 @@ RSpec.describe KofamScan::CLI::OptionParser do
     end
   end
 
+  describe '-T option' do
+    it 'calls config.threshold_scale=' do
+      scale = 1.1
+      expect(config).to receive(:threshold_scale=).with scale
+      parser.parse!(['-T', scale.to_s])
+    end
+  end
+
   describe '#parse!' do
-    let(:opt_array) { %w[-o file1 -p dir1 -t file2 --cpu=1] }
+    let(:opt_array) { %w[-o file1 -p dir1 --tmp-dir file2 --cpu=1] }
 
     context 'without arguments' do
       it 'changes ARGV' do

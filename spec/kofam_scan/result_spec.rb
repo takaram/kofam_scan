@@ -13,26 +13,28 @@ RSpec.describe KofamScan::Result do
     it_behaves_like 'hit common'
 
     describe '#above_threshold?' do
+      subject { hit1.above_threshold? }
+
       context 'when the score is equal to the threshold' do
-        subject { hit1.above_threshold? }
+        let(:ko1_threshold) { "170.20" }
 
         it { is_expected.to be_truthy }
       end
 
       context 'when the score is above the threshold' do
-        subject { hit2.above_threshold? }
+        let(:ko1_threshold) { "170.19" }
 
         it { is_expected.to be_truthy }
       end
 
       context 'when the score is below the threshold' do
-        subject { hit3.above_threshold? }
+        let(:ko1_threshold) { "170.21" }
 
         it { is_expected.to be_falsy }
       end
 
       context 'when the threshold of the KO is unavailable' do
-        subject { hit4.above_threshold? }
+        subject { hit3.above_threshold? }
 
         it { is_expected.to be_falsy }
       end

@@ -21,9 +21,11 @@ RSpec.shared_context 'result context' do
     result
   end
 
+  let(:ko1_threshold) { "170.20" }
+
   before { KofamScan::KO.parse(StringIO.new(<<~KOLIST)) }
     knum	threshold	score_type	profile_type	F-measure	nseq	nseq_used	alen	mlen	eff_nseq	re/pos	definition
-    K00001	170.20	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
+    K00001	#{ko1_threshold}	domain	trim	0.244676	1458	1033	1718	320	10.61	0.590	alcohol dehydrogenase [EC:1.1.1.1]
     K00002	-	-	-	-	1261	-	-	-	-	-	alcohol dehydrogenase (NADP+) [EC:1.1.1.2]
     K00004	277.79	full	all	0.925732	857	652	781	354	3.38	0.590	(R,R)-butanediol dehydrogenase [EC:1.1.1.4 1.1.1.- 1.1.1.303]
   KOLIST
@@ -82,8 +84,7 @@ RSpec.shared_context 'hit context' do
   let(:hits) { result.for_gene("apr:Apre_1614") }
   let(:hit1) { hits.find { |hit| hit.ko.name == "K00001" } }
   let(:hit2) { hits.find { |hit| hit.ko.name == "K00004" } }
-  let(:hit3) { result.for_gene("apr:Apre_1060").first }
-  let(:hit4) { result.for_ko("K00002").first }
+  let(:hit3) { result.for_ko("K00002").first }
 end
 
 RSpec.shared_examples 'hit common' do
@@ -113,7 +114,7 @@ RSpec.shared_examples 'hit common' do
 
     context 'when score type is not avaliable' do
       it 'returns the score of full sequence' do
-        expect(hit4.score).to eq 220.0
+        expect(hit3.score).to eq 220.0
       end
     end
   end
@@ -126,7 +127,7 @@ RSpec.shared_examples 'hit common' do
 
     context 'when score type is not avaliable' do
       it 'returns the E-value of full sequence' do
-        expect(hit4.e_value).to eq 5.4e-66
+        expect(hit3.e_value).to eq 5.4e-66
       end
     end
   end
