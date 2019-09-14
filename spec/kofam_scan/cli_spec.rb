@@ -112,22 +112,54 @@ RSpec.describe KofamScan::CLI do
       end
     end
 
-    context 'with -c option' do
+    context 'with config option' do
       include_context 'uses temp dir'
 
       let(:config_file) { temp_dir_path.join("config.yml").to_s }
-      let(:options) { ["-c", config_file, "query"] }
 
-      it 'uses the given config file' do
+      shared_examples 'config example' do
+        it 'uses the given config file' do
         IO.write(config_file, "cpu: 123")
 
         execute_run
         expect(KofamScan::Executor).to(
           have_received(:execute).with(an_object_having_attributes(cpu: 123))
         )
+        end
+      end
+
+      context 'when "-c file" style option' do
+        let(:options) { ["-c", config_file, "query"] }
+        include_examples 'config example'
+      end
+
+      context 'when "-cfile" style option' do
+        let(:options) { ["-c#{config_file}", "query"] }
+        include_examples 'config example'
+      end
+
+      context 'when "--config file" style option' do
+        let(:options) { ["--config", config_file, "query"] }
+        include_examples 'config example'
+      end
+
+      context 'when "--config=file" style option' do
+        let(:options) { ["--config=#{config_file}", "query"] }
+        include_examples 'config example'
+      end
+
+      context 'when invalid "--configfile" style option' do
+        let(:options) { ["--config#{config_file}", "query"] }
+
+        it 'raises OptionParser::ParseError' do
+          expect { execute_run }.to(
+            output(/invalid option/i).to_stderr.and exit_script.unsuccessfully
+          )
+        end
       end
 
       context 'when config file does not exist' do
+        let(:options) { ["-c", config_file, "query"] }
         let(:config_file) { "/foo/bar/baz" }
 
         it 'shows an error message and exits with error' do

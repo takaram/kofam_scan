@@ -26,13 +26,14 @@ module KofamScan
       private
 
       def config_option(argv)
-        index = argv.index { |i| i.match(/\A-c(.*)/) }
+        index = argv.index { |i| i.match(/\A(?:-c(.+)?|--config(?:=(.*))?)\z/) }
         return nil unless index
 
-        if (conf_file = Regexp.last_match(1)).empty?
-          _c, conf_file = argv.slice!(index, 2)
-        else
+        match = Regexp.last_match
+        if (conf_file = match[1] || match[2])
           argv.delete_at(index)
+        else
+          _c, conf_file = argv.slice!(index, 2)
         end
         abort "File not found: #{conf_file}" unless File.exist?(conf_file)
 
