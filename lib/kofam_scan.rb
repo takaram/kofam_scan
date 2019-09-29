@@ -16,7 +16,7 @@ module KofamScan
   autoload :OutputFormatter
   autoload :Parallel
 
-  VERSION = '1.0.0'.freeze
+  VERSION = '1.1.0'.freeze
   DEFAULT_CONFIG_FILE = File.expand_path("../config.yml", __dir__).freeze
 
   class Error < StandardError; end
