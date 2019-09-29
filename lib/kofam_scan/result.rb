@@ -10,9 +10,12 @@ module KofamScan
 
     autoload :WithEvalueThreshold
     autoload :WithThresholdScale
+    autoload :WithThresholdScaleAndEvalueThreshold
 
     def self.create(query_list, threshold_scale: nil, e_value_threshold: nil)
-      if e_value_threshold
+      if threshold_scale && e_value_threshold
+        WithThresholdScaleAndEvalueThreshold.new(query_list, threshold_scale, e_value_threshold)
+      elsif e_value_threshold
         WithEvalueThreshold.new(query_list, e_value_threshold)
       elsif threshold_scale
         WithThresholdScale.new(query_list, threshold_scale)
