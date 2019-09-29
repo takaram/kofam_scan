@@ -44,6 +44,10 @@ If you are interested in only several KOs, you can make your original .hal file 
   - Use `FILE` as a config file instead of `config.yml` in the same directory as `exec_annotation`.
 - `--tmp-dir=DIR`
   - Use `DIR` as a temporary directory where hmmsearch results are. It will be created if not exist. It defaults to `./tmp`.
+- `-E`, `--e-value=VALUE`
+  - Require E-value to be smaller than or equal to `VALUE`. If not, an asterisk will not be added in `detail` format or the hit will not be reported in other formats.
+- `-T`, `--threshold-scale=VALUE`
+  - The score thresholds are multiplied by `VALUE`. For example, with `-T2` option, the thresholds become twice as strict.
 - `-f`, `--format=FORMAT`
   - Set the format of the output to `FORMAT`. Three formats below are available.
   - `detail`
