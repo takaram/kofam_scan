@@ -17,7 +17,7 @@ module KofamScan
             --tmp-dir <dir>            Temporary directory  [./tmp]
             -E, --e-value <e_value>    Largest E-value required of the hits
             -T, --threshold-scale <scale>
-                                       The score thresholds will be multiplied with this value
+                                       The score thresholds will be multiplied by this value
             -f, --format <format>      Format of the output [detail]
                 detail:          Detail for each hits (including hits below threshold)
                 mapper:          KEGG Mapper compatible format
