@@ -16,7 +16,7 @@ module KofamScan
         end
 
         def above_threshold?
-          e_value <= @threshold
+          e_value <= @threshold && @hit.above_threshold?
         end
       end
     end

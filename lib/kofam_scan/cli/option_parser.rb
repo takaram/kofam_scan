@@ -15,7 +15,7 @@ module KofamScan
             --cpu <num>                Number of CPU to use  [1]
             -c, --config <file>        Config file
             --tmp-dir <dir>            Temporary directory  [./tmp]
-            -E, --e-value <e_value>    Use E-value threshold instead of predefined score thresholds
+            -E, --e-value <e_value>    Largest E-value required of the hits
             -T, --threshold-scale <scale>
                                        The score thresholds will be multiplied with this value
             -f, --format <format>      Format of the output [detail]

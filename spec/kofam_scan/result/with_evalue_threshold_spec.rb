@@ -19,22 +19,51 @@ RSpec.describe KofamScan::Result::WithEvalueThreshold do
 
       let(:hit1_e_value) { 9.5e-51 }
 
+      shared_examples 'with threshold conditions' do
+        context 'when the score is equal to the threshold' do
+          let(:ko1_threshold) { "170.20" }
+
+          it { is_expected.to (e_value_cond_passes ? be_truthy : be_falsy) }
+        end
+
+        context 'when the score is above the threshold' do
+          let(:ko1_threshold) { "106.37" }
+
+          it { is_expected.to (e_value_cond_passes ? be_truthy : be_falsy) }
+        end
+
+        context 'when the score is below the threshold' do
+          let(:ko1_threshold) { "170.21" }
+
+          it { is_expected.to be_falsy }
+        end
+
+        context 'when the threshold of the KO is unavailable' do
+          subject { hit3.above_threshold? }
+
+          it { is_expected.to be_falsy }
+        end
+      end
+
       context 'when the E-value is equal to the threshold' do
         let(:e_value_threshold) { hit1_e_value }
+        let(:e_value_cond_passes) { true }
 
-        it { is_expected.to be_truthy }
+        include_context 'with threshold conditions'
       end
 
       context 'when the E-value is above the threshold' do
         let(:e_value_threshold) { hit1_e_value * 0.99 }
+        let(:e_value_cond_passes) { false }
 
-        it { is_expected.to be_falsy }
+        include_context 'with threshold conditions'
       end
 
       context 'when the E-value is below the threshold' do
         let(:e_value_threshold) { hit1_e_value * 1.01 }
+        let(:e_value_cond_passes) { true }
 
-        it { is_expected.to be_truthy }
+        include_context 'with threshold conditions'
       end
     end
   end
