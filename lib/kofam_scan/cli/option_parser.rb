@@ -30,6 +30,13 @@ module KofamScan
                                        Incompatible with -r
             -r, --reannotate           Skip hmmsearch
                                        Incompatible with --create-alignment
+            --keep-tabular             Neither create tabular.txt nor delete K number files
+                                       By default, all K number files will be combined into
+                                       a tabular.txt and delete them
+            --keep-output              Neither create output.txt nor delete K number files
+                                       By default, all K number files will be combined into
+                                       a output.txt and delete them
+                                       Must be with --create-alignment
             -h, --help                 Show this message and exit
         USAGE
       end
@@ -87,6 +94,14 @@ module KofamScan
 
         @parser.on("--create-alignment") do |b|
           @config.create_alignment = b
+        end
+
+        @parser.on("--keep-output") do |b|
+          @config.keep_output = b
+        end
+
+        @parser.on("--keep-tabular") do |b|
+          @config.keep_tabular = b
         end
       end
     end

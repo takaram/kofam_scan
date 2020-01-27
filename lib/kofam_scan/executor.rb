@@ -38,6 +38,46 @@ module KofamScan
       search_hit_genes
       output_hits
       rearrange_alignments if config.create_alignment?
+
+      unless config.keep_tabular?
+        combine_kofile("tabular","tabular.txt")
+        rm_kofile("tabular")
+      end
+
+      if config.create_alignment?
+        unless config.keep_output?
+          combine_kofile("output","output.txt")
+          rm_kofile("output")
+        end
+      end
+    end
+
+    def rm_kofile(ko_dir)
+      require 'fileutils'
+      list_kofile(ko_dir).each do |rf|
+        FileUtils.rm(rf)
+      end
+    end
+
+    def combine_kofile(ko_dir,outfile)
+      require 'fileutils'
+      save_file = File.join(config.tmp_dir, ko_dir, outfile)
+      FileUtils.rm(save_file) if File.exist?(save_file)
+      File.open(save_file,'a') do |wf|
+        list_kofile(ko_dir).each do |rf|
+          wf << File.basename(rf) + "\n"
+          wf << File.read(rf)
+          wf << "\n"
+        end
+      end
+    end
+
+    def list_kofile(ko_dir)
+      dir = File.join(config.tmp_dir, ko_dir)
+      if File.exist?(dir)
+        output_ko = File.join(dir, "K*")
+        Dir.glob(output_ko)
+      end
     end
 
     def parse_ko
