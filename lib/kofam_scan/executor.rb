@@ -44,37 +44,30 @@ module KofamScan
         rm_kofile("tabular")
       end
 
-      if config.create_alignment?
-        unless config.keep_output?
-          combine_kofile("output","output.txt")
-          rm_kofile("output")
-        end
+      if config.create_alignment? && !config.keep_output?
+        combine_kofile("output","output.txt")
+        rm_kofile("output")
       end
     end
 
     def rm_kofile(ko_dir)
-      require 'fileutils'
-      list_kofile(ko_dir).each do |rf|
-        FileUtils.rm(rf)
-      end
+      File.delete(*list_kofile(ko_dir))
     end
 
-    def combine_kofile(ko_dir,outfile)
-      require 'fileutils'
+    def combine_kofile(ko_dir, outfile)
       save_file = File.join(config.tmp_dir, ko_dir, outfile)
-      FileUtils.rm(save_file) if File.exist?(save_file)
-      File.open(save_file,'a') do |wf|
-        list_kofile(ko_dir).each do |rf|
-          wf << File.basename(rf) + "\n"
-          wf << File.read(rf)
-          wf << "\n"
+      File.open(save_file, 'w') do |dest|
+        list_kofile(ko_dir).each do |src|
+          dest.puts File.basename(src)
+          IO.copy_stream(src, dest)
+          dest.puts
         end
       end
     end
 
     def list_kofile(ko_dir)
       dir = File.join(config.tmp_dir, ko_dir)
-      if File.exist?(dir)
+      if File.directory?(dir)
         output_ko = File.join(dir, "K*")
         Dir.glob(output_ko)
       end
