@@ -18,10 +18,8 @@ module KofamScan
     private
 
     def parse_files
-      Dir.foreach(@from_dir) do |file|
-        next if %w[. ..].include?(file)
-
-        parse(File.join(@from_dir, file))
+      Dir.glob(File.join(@from_dir, "K*")) do |file|
+        parse(file)
       end
     end
 

@@ -126,16 +126,12 @@ module KofamScan
     end
 
     def search_hit_genes
-      tabular_dir = File.join(config.tmp_dir, "tabular")
-      files = Dir.entries(tabular_dir).grep_v(/\A\./)
-      files.map! { |f| File.join(tabular_dir, f) }
-
       result_option = {
         e_value_threshold: config.e_value,
         threshold_scale: config.threshold_scale,
       }.compact
       @result = Result.create(query_list, **result_option)
-      @result.parse(*files)
+      @result.parse(*list_kofile("tabular"))
     end
 
     def output_hits
