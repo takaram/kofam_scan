@@ -48,7 +48,7 @@ module KofamScan
 
       def header_delimiter_line
         lengths = [9,6,7,6,9,13]
-        "#-\t" + lengths.map { |i| '-' * i }.join("\t")
+        "#\t" + lengths.map { |i| '-' * i }.join("\t")
       end
 
       def format_hit(hit)
