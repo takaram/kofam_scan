@@ -130,21 +130,25 @@ RSpec.describe KofamScan::CLI do
 
       context 'when "-c file" style option' do
         let(:options) { ["-c", config_file, "query"] }
+
         include_examples 'config example'
       end
 
       context 'when "-cfile" style option' do
         let(:options) { ["-c#{config_file}", "query"] }
+
         include_examples 'config example'
       end
 
       context 'when "--config file" style option' do
         let(:options) { ["--config", config_file, "query"] }
+
         include_examples 'config example'
       end
 
       context 'when "--config=file" style option' do
         let(:options) { ["--config=#{config_file}", "query"] }
+
         include_examples 'config example'
       end
 

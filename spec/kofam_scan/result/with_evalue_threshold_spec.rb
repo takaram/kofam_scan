@@ -23,13 +23,13 @@ RSpec.describe KofamScan::Result::WithEvalueThreshold do
         context 'when the score is equal to the threshold' do
           let(:ko1_threshold) { "170.20" }
 
-          it { is_expected.to (e_value_cond_passes ? be_truthy : be_falsy) }
+          it { is_expected.to(e_value_cond_passes ? be_truthy : be_falsy) }
         end
 
         context 'when the score is above the threshold' do
           let(:ko1_threshold) { "106.37" }
 
-          it { is_expected.to (e_value_cond_passes ? be_truthy : be_falsy) }
+          it { is_expected.to(e_value_cond_passes ? be_truthy : be_falsy) }
         end
 
         context 'when the score is below the threshold' do

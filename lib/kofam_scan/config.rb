@@ -21,8 +21,8 @@ module KofamScan
         reannotation:     false,
         formatter:        OutputFormatter::HitDetailFormatter.new,
         create_alignment: false,
-        keep_output: false,
-        keep_tabular: false
+        keep_output:      false,
+        keep_tabular:     false
       }.merge(initial_values.map { |k, v| [k.intern, v] }.to_h)
 
       super(*members.map { |k| initial_values[k] })

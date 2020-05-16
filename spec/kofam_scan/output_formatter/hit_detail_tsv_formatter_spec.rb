@@ -99,7 +99,7 @@ RSpec.describe KofamScan::OutputFormatter::HitDetailTsvFormatter do
 
       before do
         ko = KofamScan::KO.new("K00001", 99.52, :full, :all, 0.8, 100, 100, 200, 100,
-                              10, 0.5, "\"alcohol dehydrogenase\" [EC:1.1.1.1]")
+                               10, 0.5, "\"alcohol dehydrogenase\" [EC:1.1.1.1]")
         result << KofamScan::Result::Hit.new("gene1", ko, 1000, 0.1)
       end
 

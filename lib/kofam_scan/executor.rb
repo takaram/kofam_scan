@@ -40,12 +40,12 @@ module KofamScan
       rearrange_alignments if config.create_alignment?
 
       unless config.keep_tabular?
-        combine_kofile("tabular","tabular.txt")
+        combine_kofile("tabular", "tabular.txt")
         rm_kofile("tabular")
       end
 
       if config.create_alignment? && !config.keep_output?
-        combine_kofile("output","output.txt")
+        combine_kofile("output", "output.txt")
         rm_kofile("output")
       end
     end
@@ -128,7 +128,7 @@ module KofamScan
     def search_hit_genes
       result_option = {
         e_value_threshold: config.e_value,
-        threshold_scale: config.threshold_scale,
+        threshold_scale:   config.threshold_scale,
       }.compact
       @result = Result.create(query_list, **result_option)
       @result.parse(*list_kofile("tabular"))

@@ -47,7 +47,7 @@ module KofamScan
       end
 
       def header_delimiter_line
-        lengths = [9,6,7,6,9,13]
+        lengths = [9, 6, 7, 6, 9, 13]
         "#\t" + lengths.map { |i| '-' * i }.join("\t")
       end
 
@@ -65,7 +65,7 @@ module KofamScan
         end
 
         tmpl % [mark, hit.gene_name, hit.ko.name, threshold,
-                hit.score, hit.e_value, hit.ko.definition.gsub(/\"/,'""')]
+                hit.score, hit.e_value, hit.ko.definition.gsub(/\"/, '""')]
       end
 
       def format_empty_hit(query)

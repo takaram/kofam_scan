@@ -5,7 +5,7 @@ RSpec.describe KofamScan::Result::WithThresholdScaleAndEvalueThreshold do
 
   let(:initialize_result) do
     KofamScan::Result.create(query_list,
-                             threshold_scale: threshold_scale,
+                             threshold_scale:   threshold_scale,
                              e_value_threshold: e_value_threshold)
   end
 
@@ -28,7 +28,7 @@ RSpec.describe KofamScan::Result::WithThresholdScaleAndEvalueThreshold do
         context 'when the E-value is equal to the threshold' do
           let(:e_value_threshold) { hit1_e_value }
 
-          it { is_expected.to (threshold_cond_passes ? be_truthy : be_falsy) }
+          it { is_expected.to(threshold_cond_passes ? be_truthy : be_falsy) }
         end
 
         context 'when the E-value is above the threshold' do
@@ -40,7 +40,7 @@ RSpec.describe KofamScan::Result::WithThresholdScaleAndEvalueThreshold do
         context 'when the E-value is below the threshold' do
           let(:e_value_threshold) { hit1_e_value * 1.01 }
 
-          it { is_expected.to (threshold_cond_passes ? be_truthy : be_falsy) }
+          it { is_expected.to(threshold_cond_passes ? be_truthy : be_falsy) }
         end
       end
 
@@ -123,6 +123,7 @@ RSpec.describe KofamScan::Result::WithThresholdScaleAndEvalueThreshold do
 
         context 'when the threshold of the KO is unavailable' do
           subject { hit3.above_threshold? }
+
           let(:threshold_cond_passes) { false }
 
           include_context 'with E-value threshold changes'

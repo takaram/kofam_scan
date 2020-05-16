@@ -18,6 +18,7 @@ module KofamScan
 
         def above_threshold?
           return false if e_value > @threshold
+
           threshold = ko.threshold
           return false unless threshold
 
