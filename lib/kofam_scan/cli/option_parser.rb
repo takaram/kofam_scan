@@ -20,6 +20,7 @@ module KofamScan
                                        The score thresholds will be multiplied by this value
             -f, --format <format>      Format of the output [detail]
                 detail:          Detail for each hits (including hits below threshold)
+                detail-tsv:      Tab separeted values for detail format
                 mapper:          KEGG Mapper compatible format
                 mapper-one-line: Similar to mapper, but all hit KOs are listed in one line
             --[no-]report-unannotated  Sequence name will be shown even if no KOs are assigned
@@ -43,6 +44,7 @@ module KofamScan
 
       OUTPUT_FORMATTER_MAP = {
         "detail"          => -> { OutputFormatter::HitDetailFormatter },
+        "detail-tsv"      => -> { OutputFormatter::HitDetailTsvFormatter },
         "mapper"          => -> { OutputFormatter::SimpleTabularFormatter },
         "mapper-one-line" => -> { OutputFormatter::OneLineTabularFormatter }
       }.freeze

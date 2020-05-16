@@ -9,6 +9,7 @@ module KofamScan
     extend Autoload
 
     autoload :HitDetailFormatter
+    autoload :HitDetailTsvFormatter
     autoload :OneLineTabularFormatter
     autoload :SimpleTabularFormatter
 
