@@ -9,6 +9,9 @@ Online version is available on https://www.genome.jp/tools/kofamkoala/ .
 - HMMER >= 3.1
 - GNU Parallel
 
+If you wish to use Conda for managing dependencies, you can use the bundled environment.yml file to install these dependencies with `conda env create -n kofam_scan -f environment.yml`.
+
+
 ## Usage
 1. Download KOfam database from ftp://ftp.genome.jp/pub/db/kofam/ and decompress it. You will get profile HMMs in `profiles/` directory and `ko_list`.
 2. Create `config.yml` in the same directory as `exec_annotation` script. See below for details.

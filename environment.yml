@@ -1,0 +1,11 @@
+name: kofam_scan
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - ruby>=2.4
+  - hmmer>=3.1
+  - parallel
+
+# This environment can be installed with conda using the following command:
+# conda env create -n kofam_scan -f environment.yml
