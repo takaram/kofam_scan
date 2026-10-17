@@ -85,5 +85,12 @@ The following variables can be set by `config.yml`.
 - parallel
   - Path to `parallel` executable. If not given, it will be searched for PATH.
 
-## License
-This software is released under the MIT License.
+## License and Third-Party Data
+KofamScan source code is released under the MIT License.
+KEGG Orthology (KO) definitions ("ko_list.gz") used by KofamScan are
+provided by KEGG and are copyrighted by Kanehisa Laboratories.
+These data are not covered by the MIT License. Academic and non-academic use
+of KEGG data is subject to the applicable KEGG licensing terms.
+Commercial users are required to obtain appropriate authorization from KEGG.
+For more information, please refer to the KEGG Copyright (https://www.kegg.jp/kegg/legal.html)
+and Disclaimer and KEGG Commercial Licensing.
